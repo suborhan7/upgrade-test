@@ -213,6 +213,7 @@
 #card-smartfill .msg b{color:#fff}
 #card-smartfill .err{color:#ff8a8a}
 #card-smartfill small{color:#8590ad}
+#card-smartfill a{color:#8ab4ff;text-decoration:underline}
 #card-smartfill label.row{flex-wrap:nowrap;align-items:flex-start}`;
 
   function panel() {
@@ -225,8 +226,9 @@
       <header><span>✨ Smart fill</span><small>Gemini</small><button type="button" data-x title="Hide">–</button></header>
       <div class="csf-body">
         <div data-keyrow class="row">
-          <input type="password" data-key placeholder="Gemini API key (aistudio.google.com)" autocomplete="off">
+          <input type="password" data-key placeholder="Paste your Gemini API key" autocomplete="off">
           <label class="row"><input type="checkbox" data-remember checked> <small>remember on this browser</small></label>
+          <small>Get a free key here: <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a></small>
         </div>
         <textarea data-src placeholder="Paste the match info here, e.g.&#10;FC Dhaka 3 - 1 Chittagong Kings&#10;Scorers: Rafi 12', 55', Tamim 80' ; Sakib 33'"></textarea>
         <label class="drop" data-drop>Or drop / pick an eFootball result screenshot<input type="file" accept="image/*" data-img hidden></label>
@@ -284,7 +286,7 @@
 
     $('[data-fill]').addEventListener('click', async () => {
       const key = keyIn.value.trim() || stored();
-      if (!key) return say('Add your Gemini API key first (free at aistudio.google.com/apikey).', true);
+      if (!key) return say('Add your Gemini API key first. Get one free at <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a>', true);
       if (keyIn.value.trim()) {
         try { ($('[data-remember]').checked ? localStorage : sessionStorage).setItem(KEY_STORE, key); } catch {}
         keyIn.value = ''; showKeyRow();
