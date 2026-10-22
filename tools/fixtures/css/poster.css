@@ -1,0 +1,158 @@
+/* Fixtures poster, 1080 × 1350. Three layouts: .clash (slanted rows, big VS), .cal (match-day calendar cards), .line (timeline + pills).
+   Row contents scale with --sz, so 8 matches fit as well as 2. */
+.fx { position: relative; width: 1080px; height: 1350px; overflow: hidden; color: #fff; background: #05070b; }
+.fx * { box-sizing: border-box; margin: 0; padding: 0; }
+.fx svg.full { position: absolute; left: 0; top: 0; width: 1080px; height: 1350px; }
+.fx .upbg { position: absolute; inset: 0; background: center/cover no-repeat; }
+.fx .wash { position: absolute; inset: 0; }
+.fx.up .wash { background: linear-gradient(180deg, rgba(4,6,12,.35), rgba(4,6,12,.62)); }
+.fx .lg { display: block; flex: none; object-fit: contain; }
+.fx .mono { display: flex; flex: none; align-items: center; justify-content: center; border-radius: 50%; font-weight: 700; color: #fff; font-family: 'Exo 2'; }
+.fx .row { position: absolute; }
+.fx .nm { white-space: nowrap; }
+.fx .ph { position: absolute; overflow: hidden; pointer-events: none; }
+.fx .ph img { position: absolute; transform: translateX(-50%); max-width: none; pointer-events: auto; cursor: move; }
+.fx .sp { position: absolute; left: 0; right: 0; top: 1255px; height: 95px; }
+.fx .sp .k { position: absolute; left: 0; right: 0; top: 11px; text-align: center; font: 600 11px/1 'Sora'; letter-spacing: .6em; }
+.fx .sp .sprow { position: absolute; left: 90px; right: 90px; top: 29px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+.fx .sp .sprow div { height: 42px; display: flex; align-items: center; justify-content: center; }
+.fx .sp .sprow img { max-height: 32px; max-width: 90%; object-fit: contain; }
+.fx .sp .w { position: absolute; left: 0; right: 0; bottom: 8px; text-align: center; font: 600 10px/1 'Sora'; letter-spacing: .5em; }
+
+/* ===== Clash Rows: violet + amber, slanted logo tiles, player over a white name plate, VS in the middle ===== */
+.clash { font-family: 'Saira Condensed'; }
+.clash .hd { position: absolute; left: 40px; right: 40px; top: 40px; text-align: center; }
+.clash .ev { display: flex; justify-content: center; align-items: center; gap: 12px; font: 700 21px/1 'Saira Condensed'; letter-spacing: .5em; color: var(--c2); }
+.clash .ev img { height: 34px; }
+.clash .ttl { margin-top: 8px; font: italic 900 122px/1.02 'Kanit'; text-transform: uppercase; white-space: nowrap; letter-spacing: -.01em; padding: 0 20px;
+  background: linear-gradient(180deg, #ffffff 35%, color-mix(in srgb, var(--c1) 55%, #ffffff)); -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 6px 0 color-mix(in srgb, var(--c1) 70%, #000)); }
+.clash .stg { display: inline-block; margin-top: 10px; padding: 9px 30px; background: linear-gradient(90deg, var(--c1), color-mix(in srgb, var(--c1) 60%, var(--c2))); transform: skewX(-14deg); box-shadow: 0 6px 24px color-mix(in srgb, var(--c1) 45%, transparent); }
+.clash .stg span { display: block; transform: skewX(14deg); font: 800 22px/1 'Saira Condensed'; letter-spacing: .3em; text-transform: uppercase; }
+.clash .row { left: 30px; right: 30px; }
+.clash .side { position: absolute; top: 0; bottom: 0; width: 430px; }
+.clash .side.l { left: 0; } .clash .side.r { right: 0; }
+.clash .tile { position: absolute; top: 0; bottom: 0; width: calc(132px * var(--sz)); display: flex; align-items: center; justify-content: center; transform: skewX(-10deg);
+  background: linear-gradient(160deg, color-mix(in srgb, var(--k) 38%, #140a36), rgba(10,6,30,.92)); border: 2px solid color-mix(in srgb, var(--k) 70%, #fff); border-radius: 6px;
+  box-shadow: 0 0 22px color-mix(in srgb, var(--k) 35%, transparent), inset 0 1px 0 rgba(255,255,255,.25); }
+.clash .tile > * { transform: skewX(10deg); filter: drop-shadow(0 4px 8px rgba(0,0,0,.5)); }
+.clash .side.l .tile { left: 8px; } .clash .side.r .tile { right: 8px; }
+.clash .ph { top: calc(-34px * var(--sz)); bottom: calc(14px * var(--sz)); width: calc(170px * var(--sz)); z-index: 1; }
+.clash .ph img { height: 100%; }
+.clash .ph img { filter: drop-shadow(0 6px 12px rgba(0,0,0,.45)); }
+.clash .side.l .ph { right: 0; } .clash .side.r .ph { left: 0; }
+.clash .plate { position: absolute; bottom: calc(14px * var(--sz)); height: calc(66px * var(--sz)); z-index: 2; display: flex; flex-direction: column; justify-content: center;
+  transform: skewX(-10deg); background: linear-gradient(180deg, #ffffff, #e9e4f7); box-shadow: 0 8px 20px rgba(0,0,0,.35); }
+.clash .plate > * { transform: skewX(10deg); }
+.clash .side.l .plate { left: calc(150px * var(--sz)); right: 6px; border-left: 7px solid var(--k); padding: 0 calc(112px * var(--sz)) 0 16px; }
+.clash .side.r .plate { right: calc(150px * var(--sz)); left: 6px; border-right: 7px solid var(--k); padding: 0 16px 0 calc(112px * var(--sz)); text-align: right; }
+.clash .nm { font: 800 calc(32px * var(--sz))/1 'Saira Condensed'; text-transform: uppercase; color: #170c3a; letter-spacing: .01em; }
+.clash .pn { position: absolute; bottom: calc(100% + 8px * var(--sz)); font: 700 max(14px, calc(17px * var(--sz)))/1 'Saira Condensed'; letter-spacing: .26em; text-transform: uppercase; color: #fff; white-space: nowrap; text-shadow: 0 2px 6px rgba(0,0,0,.9), 0 0 2px rgba(0,0,0,.8); z-index: 3; }
+.clash .pn::before { content: ''; display: inline-block; width: 18px; height: 3px; margin: 0 8px 4px 0; background: var(--k); vertical-align: middle; }
+.clash .side.l .pn { left: 16px; } .clash .side.r .pn { right: 16px; }
+.clash .side.r .pn::before { display: none; } .clash .side.r .pn::after { content: ''; display: inline-block; width: 18px; height: 3px; margin: 0 0 4px 8px; background: var(--k); vertical-align: middle; }
+.clash .mid { position: absolute; left: 430px; right: 430px; top: 0; bottom: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.clash .vs { font: italic 900 calc(76px * var(--sz))/.9 'Kanit'; padding: 0 8px; background: linear-gradient(135deg, var(--c3), #ffffff 45%, var(--c2)); -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 4px 0 color-mix(in srgb, var(--c1) 80%, #000)); }
+.clash .lb { font: 700 max(11px, calc(14px * var(--sz)))/1 'Saira Condensed'; letter-spacing: .28em; color: var(--c3); text-transform: uppercase; margin-bottom: 4px; white-space: nowrap; }
+.clash .when { margin-top: 6px; padding: 5px 10px; font: 700 max(13px, calc(16px * var(--sz)))/1 'Saira Condensed'; letter-spacing: .08em; white-space: nowrap; background: rgba(8,4,24,.85); border: 1.5px solid var(--c2); color: var(--c2); transform: skewX(-10deg); }
+.clash .info { position: absolute; left: 40px; right: 40px; top: 1124px; display: flex; flex-direction: column; align-items: center; gap: 9px; }
+.clash .fmt { padding: 8px 24px; border: 1.5px solid color-mix(in srgb, var(--c1) 80%, #fff); background: rgba(10,4,32,.7); font: 700 19px/1 'Saira Condensed'; letter-spacing: .24em; text-transform: uppercase; }
+.clash .st { font: italic 800 34px/1 'Kanit'; text-transform: uppercase; letter-spacing: .02em; color: #fff; }
+.clash .lv { display: flex; align-items: center; gap: 10px; font: 600 16px/1 'Sora'; letter-spacing: .08em; color: #d7d0f2; }
+.clash .lv b { padding: 4px 9px; background: #ff2d55; color: #fff; font: 800 13px/1 'Sora'; letter-spacing: .14em; border-radius: 3px; }
+.clash .sp { background: linear-gradient(90deg, var(--c1), var(--c2)) top / 100% 3px no-repeat, rgba(7,3,22,.92); }
+.clash .sp .k { color: var(--c2); }
+.clash .sp .sprow div { font: 800 21px/1 'Saira Condensed'; letter-spacing: .08em; color: #eae6fb; border: 1.5px solid rgba(255,255,255,.14); transform: skewX(-10deg); }
+.clash .sp .w { color: #8a80b5; }
+
+/* ===== Matchday Calendar: deep teal, coral + mint, tear-off date blocks and light match cards ===== */
+.cal { font-family: 'Sora'; }
+/* title: a = small spaced first word over a big last word, b = one line with a two-colour underline */
+.cal .hd { position: absolute; left: 40px; right: 40px; top: 40px; text-align: center; }
+.cal .hd.hv-b { left: 54px; top: 52px; text-align: left; }
+.cal .t1 { font: 700 34px/1 'Sora'; letter-spacing: .62em; padding-left: .62em; color: var(--c2); text-transform: uppercase; }
+.cal .ttl { padding: 0 6px; font: 800 128px/1 'Sora'; letter-spacing: -.035em; text-transform: uppercase; white-space: nowrap; margin-top: 8px;
+  background: linear-gradient(180deg, #fffaf0 40%, color-mix(in srgb, var(--c1) 45%, #fffaf0)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.cal .hv-b .ttl { margin-top: 0; font-size: 92px; line-height: 1.05; letter-spacing: -.03em; }
+.cal .ul { height: 8px; width: 420px; margin-top: 10px; border-radius: 4px; background: linear-gradient(90deg, var(--c1) 0 50%, var(--c2) 50% 100%); }
+.cal .hd .side { display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: 16px; }
+.cal .hv-b .side { justify-content: flex-start; }
+.cal .ev { display: flex; align-items: center; gap: 10px; font: 700 17px/1.25 'Sora'; letter-spacing: .18em; color: var(--c2); }
+.cal .ev img { height: 32px; }
+.cal .stg { padding: 8px 16px; border-radius: 8px; background: var(--c1); font: 400 26px/1 'Anton'; letter-spacing: .04em; text-transform: uppercase; color: #fff; white-space: nowrap; }
+.cal .row { left: 54px; right: 44px; display: flex; gap: 14px; }
+.cal .date { flex: none; width: calc(118px * var(--sz)); min-width: 92px; display: flex; flex-direction: column; border-radius: 12px; overflow: hidden; background: #f7f2e8; color: #102221; box-shadow: 0 10px 24px rgba(0,0,0,.35); }
+.cal .mo { background: var(--c1); color: #fff; text-align: center; font: 700 max(14px, calc(18px * var(--sz)))/1 'Sora'; letter-spacing: .2em; padding: calc(7px * var(--sz)) 0 calc(6px * var(--sz)); position: relative; }
+.cal .mo::after { content: ''; position: absolute; left: 0; right: 0; bottom: -3px; height: 6px; background: radial-gradient(circle at 5px 0, transparent 3px, #f7f2e8 3.5px) 0 0 / 10px 6px repeat-x; }
+.cal .dd { flex: 1; display: flex; align-items: center; justify-content: center; font: 400 calc(60px * var(--sz))/1 'Anton'; }
+.cal .wd { text-align: center; font: 700 max(10px, calc(13px * var(--sz)))/1 'Sora'; letter-spacing: .3em; color: #6b7d7b; padding-bottom: calc(8px * var(--sz)); }
+.cal .card { flex: 1; min-width: 0; position: relative; display: flex; align-items: center; border-radius: 12px; background: #f7f2e8; color: #0f1f1e; box-shadow: 0 10px 24px rgba(0,0,0,.35);
+  border-left: 9px solid var(--ka); border-right: 9px solid var(--kb); padding: 0 18px; gap: 12px; }
+.cal .tm { flex: 1; min-width: 0; display: flex; align-items: center; gap: 14px; }
+.cal .tm.r { flex-direction: row-reverse; text-align: right; }
+.cal .tm .lg, .cal .tm .mono { filter: drop-shadow(0 3px 5px rgba(0,0,0,.18)); }
+.cal .nmb { flex: 1; min-width: 0; overflow: hidden; }
+.cal .nm { font: 400 calc(36px * var(--sz))/1 'Anton'; text-transform: uppercase; letter-spacing: .01em; }
+.cal .pn { margin-top: 5px; font: 600 max(11px, calc(14px * var(--sz)))/1 'Sora'; letter-spacing: .14em; color: #5d706e; text-transform: uppercase; white-space: nowrap; }
+.cal .ko { flex: none; display: flex; flex-direction: column; align-items: center; gap: 5px; }
+.cal .ko i { font: 700 max(10px, calc(12px * var(--sz)))/1 'Sora'; font-style: normal; letter-spacing: .2em; color: var(--c1); text-transform: uppercase; white-space: nowrap; }
+.cal .ko b { padding: calc(9px * var(--sz)) calc(16px * var(--sz)); border-radius: 999px; background: #0c2928; color: var(--c2); font: 400 calc(28px * var(--sz))/1 'Anton'; letter-spacing: .03em; white-space: nowrap; box-shadow: 0 0 0 3px color-mix(in srgb, var(--c2) 35%, transparent); }
+.cal .info { position: absolute; left: 54px; right: 44px; top: 1146px; min-height: 76px; padding: 10px 20px; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 6px 22px; border-radius: 12px;
+  background: linear-gradient(90deg, var(--c2), color-mix(in srgb, var(--c2) 55%, #ffffff)); color: #062120; font: 700 16px/1 'Sora'; letter-spacing: .05em; white-space: nowrap; }
+.cal .info span { display: flex; align-items: center; gap: 8px; }
+
+.cal .info .st { order: -1; flex-basis: 100%; justify-content: center; font: 400 30px/1 'Anton'; letter-spacing: .03em; text-transform: uppercase; }
+.cal .info b { padding: 4px 8px; background: var(--c1); color: #fff; border-radius: 4px; font-size: 13px; letter-spacing: .14em; }
+.cal .sp { background: #031110; border-top: 3px solid var(--c1); }
+.cal .sp .k { color: var(--c2); }
+.cal .sp .sprow div { font: 400 22px/1 'Anton'; letter-spacing: .06em; color: #e7efe9; border: 1.5px solid rgba(255,255,255,.14); border-radius: 8px; }
+.cal .sp .w { color: #5f7a76; }
+
+/* ===== Timeline: navy, gold + blue, a glowing line with time nodes, each match a pill in the two team colours ===== */
+.line { font-family: 'Exo 2'; }
+.line .hd { position: absolute; left: 40px; right: 40px; top: 48px; text-align: center; }
+.line .ev { display: flex; justify-content: center; align-items: center; gap: 12px; font: 600 18px/1 'Exo 2'; letter-spacing: .5em; color: var(--c1); }
+.line .ev img { height: 34px; }
+.line .ttl { margin-top: 18px; font: 400 70px/1.05 'Michroma'; text-transform: uppercase; white-space: nowrap; color: #fff; letter-spacing: .02em; text-shadow: 0 0 28px color-mix(in srgb, var(--c2) 70%, transparent); }
+.line .bar { width: 380px; height: 5px; margin: 18px auto 0; border-radius: 3px; background: linear-gradient(90deg, var(--c1), var(--c2)); box-shadow: 0 0 16px color-mix(in srgb, var(--c2) 60%, transparent); }
+.line .stg { margin-top: 14px; font: 700 22px/1 'Exo 2'; letter-spacing: .32em; text-transform: uppercase; color: #cfd8f5; }
+.line .axis { position: absolute; left: 227px; width: 4px; border-radius: 2px; background: linear-gradient(180deg, var(--c1), var(--c2)); box-shadow: 0 0 14px color-mix(in srgb, var(--c2) 60%, transparent); }
+.line .row { left: 30px; right: 30px; }
+.line .when { position: absolute; left: 0; top: 0; bottom: 0; width: 170px; display: flex; flex-direction: column; justify-content: center; align-items: flex-end; text-align: right; }
+.line .when b { font: 800 calc(34px * var(--sz))/1 'Exo 2'; white-space: nowrap; max-width: 170px; }
+.line .when span { margin-top: 6px; font: 700 max(12px, calc(15px * var(--sz)))/1 'Exo 2'; letter-spacing: .14em; color: var(--c1); white-space: nowrap; }
+.line .when i { margin-top: 6px; font: 600 max(10px, calc(12px * var(--sz)))/1 'Exo 2'; font-style: normal; letter-spacing: .2em; color: #8f9bc4; text-transform: uppercase; white-space: nowrap; }
+.line .node { position: absolute; left: 187px; top: 50%; width: 22px; height: 22px; margin-top: -11px; border-radius: 50%; background: #0a0f22; border: 4px solid var(--c1); box-shadow: 0 0 0 5px rgba(10,15,34,.9), 0 0 18px var(--c1); }
+.line .pill { position: absolute; left: 236px; right: 0; top: 12%; bottom: 12%; display: flex; align-items: center; isolation: isolate; filter: drop-shadow(0 12px 22px rgba(0,0,0,.5)); }
+/* the bar: slanted ends, the two team colours meeting on a hard diagonal, fine carbon lines, a glossy top half and a gold-to-blue top edge */
+.line .pill::before { content: ''; position: absolute; inset: 0; z-index: -1; clip-path: polygon(26px 0, 100% 0, calc(100% - 26px) 100%, 0 100%);
+  background: linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,0) 48%, rgba(0,0,0,.28)),
+    repeating-linear-gradient(115deg, rgba(255,255,255,.045) 0 2px, transparent 2px 9px),
+    linear-gradient(105deg, color-mix(in srgb, var(--ka) 85%, #000) 0%, color-mix(in srgb, var(--ka) 45%, #0a0f22) 47%, #070a16 47%, #070a16 53%, color-mix(in srgb, var(--kb) 45%, #0a0f22) 53%, color-mix(in srgb, var(--kb) 85%, #000) 100%); }
+.line .pill::after { content: ''; position: absolute; left: 26px; right: 0; top: 0; height: 3px; z-index: -1; background: linear-gradient(90deg, var(--ka), #ffffff 50%, var(--kb)); opacity: .85; }
+.line .end { flex: 1; min-width: 0; height: 100%; display: flex; align-items: center; gap: 14px; }
+.line .end.r { flex-direction: row-reverse; text-align: right; }
+/* photo frame: a slanted panel in the team colour; the cut-out rises out of its top edge */
+.line .badge { flex: none; position: relative; height: 100%; width: calc(118px * var(--sz)); display: flex; align-items: center; justify-content: center; }
+.line .badge::before { content: ''; position: absolute; inset: 0; clip-path: polygon(22% 0, 100% 0, 78% 100%, 0 100%);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--k) 70%, #ffffff), color-mix(in srgb, var(--k) 55%, #070a16) 60%, #070a16); }
+.line .end.l .badge { margin-left: 4px; } .line .end.r .badge { margin-right: 4px; }
+.line .end.r .badge::before { clip-path: polygon(22% 0, 100% 0, 78% 100%, 0 100%); }
+.line .badge > .lg, .line .badge > .mono { position: relative; }
+.line .ph.rd { left: 6%; right: 6%; bottom: 0; top: calc(-30px * var(--sz)); clip-path: polygon(-50% -50%, 150% -50%, 150% 100%, -50% 100%); }
+.line .nmb { flex: 1; min-width: 0; overflow: hidden; }
+.line .mini { display: inline-block; vertical-align: middle; margin-bottom: 4px; }
+.line .mini .lg, .line .mini .mono { display: inline-flex; }
+.line .nm { font: 800 calc(30px * var(--sz))/1.05 'Exo 2'; text-transform: uppercase; letter-spacing: .02em; text-shadow: 0 2px 6px rgba(0,0,0,.5); }
+.line .pn { margin-top: 3px; font: 600 max(11px, calc(14px * var(--sz)))/1 'Exo 2'; letter-spacing: .2em; color: #d9e2ff; opacity: .85; text-transform: uppercase; white-space: nowrap; }
+.line .vs { flex: none; width: calc(56px * var(--sz)); height: calc(56px * var(--sz)); margin: 0 8px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  background: #060914; border: 2px solid var(--c1); color: var(--c1); font: 800 calc(19px * var(--sz))/1 'Exo 2'; letter-spacing: .04em; box-shadow: 0 0 16px color-mix(in srgb, var(--c1) 45%, transparent); }
+.line .info { position: absolute; left: 40px; right: 40px; top: 1158px; display: flex; flex-direction: column; align-items: center; gap: 10px; font: 600 17px/1 'Exo 2'; letter-spacing: .2em; text-transform: uppercase; color: #c8d2f2; }
+.line .info .st { font: 400 28px/1 'Michroma'; letter-spacing: .04em; color: #fff; }
+.line .info .lv b { color: #ff4f6a; letter-spacing: .14em; margin-right: 6px; }
+.line .sp { background: linear-gradient(90deg, var(--c1), var(--c2)) top / 100% 2px no-repeat, rgba(4,6,15,.95); }
+.line .sp .k { color: var(--c1); }
+.line .sp .sprow div { font: 700 19px/1 'Exo 2'; letter-spacing: .1em; color: #e3e8fa; border: 1.5px solid rgba(255,255,255,.14); border-radius: 999px; }
+.line .sp .w { color: #6c78a3; }
+

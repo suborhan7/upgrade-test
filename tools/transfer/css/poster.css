@@ -1,0 +1,110 @@
+/* Transfer poster, 1080 x 1350. Three layouts: arrow (chevron flow from old club to new), contract (signed agreement +
+   DONE DEAL stamp on a pinstripe desk) and news (TV breaking-news broadcast with a stats ticker). */
+.tr{position:relative;width:1080px;height:1350px;overflow:hidden;color:#fff;box-sizing:border-box;font-family:'Archivo';background:#07080e}
+.tr *{box-sizing:border-box;margin:0;padding:0}
+.tr .upbg{position:absolute;inset:0;background-size:cover;background-position:center}
+.tr .wash{position:absolute;inset:0}
+.tr svg.full{position:absolute;left:0;top:0;width:1080px;height:1350px;pointer-events:none}
+.tr .mv{position:absolute;inset:0;pointer-events:none}
+.tr .mv > *{pointer-events:auto;cursor:move}
+.tr .slot{position:absolute;left:0;top:0;width:1080px;height:1200px;overflow:hidden;pointer-events:none}
+.tr .slot img{position:absolute;max-width:none;pointer-events:auto;cursor:grab;filter:drop-shadow(0 20px 30px rgba(0,0,0,.55))}
+.tr .lg{display:block;border-radius:50%;object-fit:cover;flex:none}
+.tr .nolg{background:rgba(255,255,255,.12);border:2px dashed rgba(255,255,255,.35)}
+.tr .brand{position:absolute;left:52px;top:44px;font:800 26px/1 'Archivo';letter-spacing:.14em;padding:9px 14px;background:#fff;color:#111}
+.tr .brand img{display:block;height:34px}
+
+/* partners strip */
+.tr .sp{position:absolute;left:0;right:0;top:1200px;height:150px;background:#07080e;border-top:1px solid rgba(255,255,255,.08)}
+.tr .sp .k{position:absolute;left:0;right:0;top:18px;text-align:center;font:600 14px/1 'Archivo';letter-spacing:.55em;color:#8a8ea8}
+.tr .sp .sprow{position:absolute;left:56px;right:56px;top:44px;display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.tr .sp .sprow div{height:62px;display:flex;align-items:center;justify-content:center;font:800 22px/1 'Archivo';background:rgba(255,255,255,.06);border-radius:8px;color:#e7e9f3}
+.tr .sp .sprow img{max-height:46px;max-width:90%;object-fit:contain}
+.tr .sp .w{position:absolute;left:0;right:0;bottom:12px;text-align:center;font:600 12px/1 'Archivo';letter-spacing:.5em;color:#5c6080}
+
+/* ===== 1. ARROW ===== */
+.tr.arrow .date{position:absolute;right:52px;top:50px;font:700 20px/1 'Archivo';letter-spacing:.3em;text-align:right}
+.tr.arrow .date b{display:block;font:800 13px/1 'Archivo';letter-spacing:.5em;opacity:.7;margin-bottom:8px}
+.tr.arrow .side{position:absolute;left:30px;top:640px;transform:translate(-50%,-50%) rotate(-90deg);transform-origin:50% 50%;margin-left:0;white-space:nowrap;font:800 14px/1 'Archivo';letter-spacing:.6em;color:rgba(255,255,255,.35)}
+.tr.arrow .title{position:absolute;left:0;right:0;top:118px;text-align:center;white-space:nowrap}
+.tr.arrow .title span{display:inline-block;font:400 168px/1 'Archivo Black';letter-spacing:-.02em;background:linear-gradient(90deg,var(--c1),#fff 45%,#fff 55%,var(--c2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tr.arrow .row{position:absolute;left:90px;right:90px;top:800px;height:136px;border-radius:24px;background:rgba(8,9,22,.8)}
+.tr.arrow .row::before{content:'';position:absolute;inset:0;border-radius:24px;padding:3px;background:linear-gradient(90deg,var(--f),var(--c1),var(--c2));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+.tr.arrow .club{position:absolute;top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:20px}
+.tr.arrow .club .lab{font:800 13px/1 'Archivo';letter-spacing:.45em;opacity:.65}
+.tr.arrow .club .nm{font:400 34px/1.1 'Archivo Black';letter-spacing:.02em;margin-top:6px;white-space:nowrap}
+.tr.arrow .from{left:26px}.tr.arrow .to{right:26px;flex-direction:row-reverse;text-align:right}
+.tr.arrow .chev{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;gap:2px}
+.tr.arrow .name{position:absolute;left:0;right:0;top:962px;text-align:center}
+.tr.arrow .name b{display:inline-block;font:400 78px/1 'Archivo Black';letter-spacing:.02em;white-space:nowrap}
+.tr.arrow .name i{display:block;margin:14px auto 0;width:200px;height:6px;border-radius:3px;background:linear-gradient(90deg,var(--c1),var(--c2))}
+.tr.arrow .stats{position:absolute;left:90px;right:90px;top:1078px;height:100px;display:grid;gap:14px}
+.tr.arrow .stats div{border-radius:16px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.tr.arrow .stats small{font:700 13px/1 'Archivo';letter-spacing:.3em;opacity:.7}
+.tr.arrow .stats b{font:400 46px/1 'Archivo Black';margin-top:8px;background:linear-gradient(180deg,#fff,var(--c2));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* ===== 2. CONTRACT ===== */
+.tr.contract .hd{position:absolute;right:52px;top:50px;text-align:right;font:600 16px/1.4 'IBM Plex Mono';letter-spacing:.2em;opacity:.85}
+.tr.contract .title{position:absolute;left:52px;top:128px;width:700px}
+.tr.contract .title i{display:block;margin-left:6px;font:400 italic 46px/1 'DM Serif Display';color:var(--acc)}
+.tr.contract .title b{display:inline-block;margin-top:4px;font:400 132px/1 'DM Serif Display';letter-spacing:-.01em;white-space:nowrap;font-weight:400}
+.tr.contract .title span{display:block;margin:10px 0 0 6px;font:600 14px/1 'IBM Plex Mono';letter-spacing:.45em;color:rgba(255,255,255,.6)}
+.tr.contract .sheet.back{position:absolute;left:70px;top:372px;width:560px;height:790px;border-radius:6px;transform:rotate(2.6deg);background:linear-gradient(160deg,var(--club),#0b0b12 140%);box-shadow:0 20px 40px rgba(0,0,0,.45);opacity:.9}
+.tr.contract .paper{position:absolute;left:52px;top:360px;width:560px;height:790px;background:#f6f1e6;color:#1d1d24;border-radius:6px;transform:rotate(-2.2deg);box-shadow:0 30px 60px rgba(0,0,0,.5);padding:84px 44px 40px;overflow:hidden}
+.tr.contract .paper::before{content:'';position:absolute;inset:14px;border:1.5px solid rgba(0,0,0,.18);border-radius:3px;pointer-events:none}
+.tr.contract .paper .grain{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.tr.contract .paper .lh{position:relative;display:flex;align-items:center;gap:14px}
+.tr.contract .paper .k{font:600 12px/1 'IBM Plex Mono';letter-spacing:.3em;color:#6a6a76}
+.tr.contract .paper h4{font:400 32px/1 'DM Serif Display';margin:8px 0 0;color:#14141a}
+.tr.contract .paper .no{margin-left:auto;align-self:flex-start;font:600 13px/1 'IBM Plex Mono';color:#6a6a76;letter-spacing:.15em}
+.tr.contract .paper .ln{position:relative;height:1px;background:rgba(0,0,0,.18);margin:16px 0}
+.tr.contract .paper .ln.dbl{height:4px;background:none;border-top:2px solid #1d1d24;border-bottom:1px solid #1d1d24}
+.tr.contract .paper .clubs{position:relative;display:grid;grid-template-columns:1fr 70px 1fr;align-items:center}
+.tr.contract .paper .clubs .c{display:flex;flex-direction:column;align-items:center;gap:9px;font:600 15px/1.2 'IBM Plex Mono';letter-spacing:.15em;text-align:center}
+.tr.contract .paper .clubs .c em{font:600 11px/1 'IBM Plex Mono';color:#8a8a96;letter-spacing:.35em;font-style:normal}
+.tr.contract .paper .tbl{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:0 26px}
+.tr.contract .paper .tbl div{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px dashed rgba(0,0,0,.25);padding:11px 0}
+.tr.contract .paper .tbl span{font:600 13px/1 'IBM Plex Mono';letter-spacing:.2em;color:#555}
+.tr.contract .paper .tbl b{font:400 32px/1 'DM Serif Display';color:var(--ink);font-weight:400}
+.tr.contract .paper .cl{position:relative;margin-top:20px;font:400 13px/1.6 'IBM Plex Mono';color:#4a4a55}
+.tr.contract .paper .cl b{color:var(--stamp);margin-right:4px}
+.tr.contract .paper .sig{position:absolute;left:44px;right:44px;bottom:50px}
+.tr.contract .paper .sig .s{font:400 74px/1 'Mrs Saint Delafield';color:#1b2a6b;height:70px;margin-left:10px;white-space:nowrap}
+.tr.contract .paper .sig .l{border-top:1.5px solid #222;margin-top:6px;padding-top:8px;display:flex;justify-content:space-between;font:600 12px/1 'IBM Plex Mono';letter-spacing:.25em;color:#555}
+.tr.contract .clip{position:absolute;left:300px;top:326px;width:43px;height:104px;transform:rotate(-2.2deg);filter:drop-shadow(2px 4px 3px rgba(0,0,0,.35))}
+.tr.contract .stamp{position:absolute;left:356px;top:880px;width:230px;height:230px;transform:rotate(-14deg);color:var(--stamp);opacity:.92}
+.tr.contract .namebox{position:absolute;right:52px;top:930px;width:440px;text-align:right}
+.tr.contract .namebox small{display:block;font:600 15px/1 'IBM Plex Mono';letter-spacing:.4em;color:var(--acc)}
+.tr.contract .namebox b{display:inline-block;font:400 76px/1 'DM Serif Display';margin-top:12px;white-space:nowrap;font-weight:400}
+.tr.contract .namebox .bar{height:4px;margin:18px 0 0 auto;width:180px;background:linear-gradient(90deg,var(--acc2),var(--acc))}
+.tr.contract .namebox .site{display:inline-block;margin-top:18px;font:600 14px/1.5 'IBM Plex Mono';letter-spacing:.08em;opacity:.8;white-space:nowrap}
+
+/* ===== 3. BREAKING NEWS ===== */
+.tr.news .top{position:absolute;left:0;right:0;top:0;height:96px;background:rgba(5,7,18,.85);border-bottom:2px solid rgba(255,255,255,.08)}
+.tr.news .top .brand{top:24px;left:40px}
+.tr.news .live{position:absolute;left:220px;top:30px;display:flex;align-items:center;gap:10px;font:700 26px/1 'Barlow Condensed';letter-spacing:.2em;white-space:nowrap}
+.tr.news .live i{width:16px;height:16px;border-radius:50%;background:#ff2d2d;box-shadow:0 0 12px #ff2d2d}
+.tr.news .clock{position:absolute;right:40px;top:22px;font:600 46px/1 'Teko';letter-spacing:.06em}
+.tr.news .clock small{font:600 22px/1 'Barlow Condensed';letter-spacing:.2em;opacity:.7;margin-right:12px;vertical-align:8px}
+.tr.news .tag{position:absolute;left:52px;top:140px;transform:skewX(-12deg);background:var(--red);padding:12px 26px 8px;font:900 italic 40px/1 'Barlow Condensed';letter-spacing:.08em;box-shadow:8px 8px 0 rgba(0,0,0,.35)}
+.tr.news .tag span{display:inline-block;transform:skewX(12deg)}
+.tr.news .excl{position:absolute;left:388px;top:150px;transform:skewX(-12deg);background:var(--yel);color:#111;padding:8px 14px 5px;font:900 italic 26px/1 'Barlow Condensed';letter-spacing:.1em}
+.tr.news .hwg{position:absolute;left:46px;top:208px;text-transform:uppercase;white-space:nowrap}
+.tr.news .hwg b,.tr.news .hwg span{display:block;width:max-content;font:900 italic 190px/.86 'Barlow Condensed';letter-spacing:-.01em;padding-right:.08em}
+.tr.news .hwg b{color:transparent;-webkit-text-stroke:3px rgba(255,255,255,.95)}
+.tr.news .hwg span{background:linear-gradient(90deg,#fff 0%,#fff 40%,var(--c2) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.tr.news .lower{position:absolute;left:0;right:0;top:850px}
+.tr.news .l1{position:absolute;left:52px;top:0;height:64px;display:flex;align-items:center;gap:14px;background:var(--red);padding:0 40px 0 22px;font:800 italic 34px/1 'Barlow Condensed';letter-spacing:.1em;white-space:nowrap;clip-path:polygon(0 0,100% 0,95% 100%,0 100%)}
+.tr.news .l2{position:absolute;left:52px;right:52px;top:64px;height:132px;background:#fff;color:#0d1020;display:flex;align-items:center;padding:0 30px;gap:24px;overflow:hidden}
+.tr.news .l2::before{content:'';position:absolute;left:0;top:0;bottom:0;width:10px;background:var(--red)}
+.tr.news .l2 .nm{font:800 86px/1 'Barlow Condensed';letter-spacing:.01em;text-transform:uppercase;white-space:nowrap}
+.tr.news .l2 .mvs{margin-left:auto;display:flex;align-items:center;gap:14px}
+.tr.news .l2 .arr{font:900 italic 46px/1 'Barlow Condensed';color:var(--red)}
+.tr.news .l3{position:absolute;left:52px;right:52px;top:196px;height:58px;background:var(--navy);display:flex;align-items:center;padding:0 30px;font:700 26px/1 'Barlow Condensed';letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;overflow:hidden}
+.tr.news .l3 b{color:var(--c2);margin-right:14px}
+.tr.news .ticker{position:absolute;left:0;right:0;top:1120px;height:80px;display:flex;background:#0b0d18;border-top:3px solid var(--red)}
+.tr.news .ticker .lab{flex:0 0 auto;background:var(--yel);color:#111;font:900 italic 34px/77px 'Barlow Condensed';padding:0 26px;letter-spacing:.06em}
+.tr.news .ticker .items{display:flex;align-items:center;flex:1;justify-content:space-around;padding:0 10px}
+.tr.news .ticker .it{font:600 24px/1 'Barlow Condensed';letter-spacing:.16em;color:#c9cbe0;white-space:nowrap}
+.tr.news .ticker .it b{font:600 48px/1 'Teko';color:#fff;margin-left:10px;vertical-align:-6px;letter-spacing:.02em}
+.tr.news .ticker .dot{width:8px;height:8px;background:var(--yel);transform:rotate(45deg)}

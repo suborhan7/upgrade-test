@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>eFCB Admin Studio</title>
+<link rel="manifest" href="manifest.webmanifest">
+<script src="version.js"></script>
+<meta name="theme-color" content="#11141b">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="eFCB Studio">
+<style>
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; background: #11141b; }
+  /* the selected maker fills the page; its left column holds the card list and the form */
+  .main { position: fixed; inset: 0; }
+  .main iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: none; }
+  .main iframe.on { display: block; }
+</style>
+</head>
+<body>
+
+<main class="main" id="main"></main>
+
+<script>
+/* Card types. To add a new card: put its maker in tools/<id>/ and add one line here. */
+const CARD_TYPES = [
+  { id: "comparison", name: "Player Comparison", src: "tools/comparison/index.html" },
+  { id: "mvp",        name: "MVP",               src: "tools/mvp/index.html" },
+  { id: "match-result", name: "Match Result",    src: "tools/match-result/index.html" },
+  { id: "top-4",      name: "Top 4",             src: "tools/top-4/index.html" },
+  { id: "player-vs-player", name: "Player vs Player", src: "tools/player-vs-player/index.html" },
+  { id: "team-vs-team", name: "Team vs Team",    src: "tools/team-vs-team/index.html" },
+  { id: "transfer",   name: "Transfer",          src: "tools/transfer/index.html" },
+  { id: "best-xi",    name: "Best XI",           src: "tools/best-xi/index.html" },
+  { id: "points-table", name: "Points Table",  src: "tools/points-table/index.html" },
+  { id: "fixtures",   name: "Fixtures",          src: "tools/fixtures/index.html" },
+  { id: "lineup",     name: "Lineup",            src: "tools/lineup/index.html" },
+  { id: "team-performance", name: "Team Performance", src: "tools/team-performance/index.html" },
+  { id: "achievement", name: "Achievement",      src: "tools/achievement/index.html" },
+];
+
+const main = document.getElementById("main");
+const frames = {};   // each maker is loaded once and kept, so switching keeps your edits
+
+function select(id) {
+  const t = CARD_TYPES.find(x => x.id === id) || CARD_TYPES[0];
+  if (!frames[t.id]) {
+    const f = document.createElement("iframe");
+    f.src = t.src;
+    f.title = t.name;
+    main.appendChild(f);
+    frames[t.id] = f;
+  }
+  for (const [k, f] of Object.entries(frames)) f.classList.toggle("on", k === t.id);
+  document.title = `${t.name} · eFCB Admin Studio`;
+  if (location.hash.slice(1) !== t.id) history.replaceState(null, "", "#" + t.id);
+}
+
+// each maker draws the card list at the top of its form (js/studio-nav.js) and asks to switch through here
+window.addEventListener("message", e => {
+  const m = e.data || {};
+  const id = Object.keys(frames).find(k => frames[k].contentWindow === e.source);
+  if (m.type === "studio-ready" && id)
+    e.source.postMessage({ type: "studio-cards", cards: CARD_TYPES.map(({ id, name }) => ({ id, name })), current: id, install: installState(), version: self.STUDIO_VERSION }, "*");
+  if (m.type === "studio-select") select(m.id);
+  if (m.type === "studio-install" && installEvent) {
+    installEvent.prompt();
+    installEvent.userChoice.finally(() => { installEvent = null; tellInstall(); });
+  }
+});
+
+/* Install as an app. The browser's install offer arrives here; each card's "Install app" button (js/studio-nav.js) asks for it. */
+let installEvent = null;
+const standalone = matchMedia("(display-mode: standalone)").matches || navigator.standalone;
+function installState() {
+  if (standalone) return null;
+  if (installEvent) return "ready";
+  if (/iphone|ipad/i.test(navigator.userAgent)) return "ios";
+  return null;
+}
+function tellInstall() {
+  for (const f of Object.values(frames)) f.contentWindow && f.contentWindow.postMessage({ type: "studio-install-state", install: installState() }, "*");
+}
+window.addEventListener("beforeinstallprompt", e => { e.preventDefault(); installEvent = e; tellInstall(); });
+window.addEventListener("appinstalled", () => { installEvent = null; tellInstall(); });
+if ("serviceWorker" in navigator && location.protocol === "https:") {
+  // a new version was published: the installed app updates itself. Right after opening it reloads at once;
+  // while someone is working it waits until they leave the app and come back, so nothing they typed is lost mid-edit.
+  const hadWorker = !!navigator.serviceWorker.controller, opened = Date.now();
+  let pending = false;
+  navigator.serviceWorker.addEventListener("controllerchange", () => {
+    if (!hadWorker) return;
+    if (document.hidden || Date.now() - opened < 15000) location.reload(); else pending = true;
+  });
+  navigator.serviceWorker.register("sw.js", { updateViaCache: "none" }).then(r => {
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "visible") { if (pending) location.reload(); else r.update().catch(() => {}); }
+    });
+    setInterval(() => r.update().catch(() => {}), 30 * 60 * 1000);
+  }).catch(() => {});
+}
+
+select(location.hash.slice(1));
+window.addEventListener("hashchange", () => select(location.hash.slice(1)));
+</script>
+</body>
+</html>

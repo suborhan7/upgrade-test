@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Top 4 Poster</title>
+<script src="js/fonts.js"></script>
+<link rel="stylesheet" href="css/poster.css">
+<link rel="stylesheet" href="css/maker.css">
+<link rel="stylesheet" href="css/ui.css">
+</head>
+<body>
+<div class="app">
+  <aside class="form" id="form">
+    <h2>Top 4</h2>
+
+    <section>
+      <h3>Poster</h3>
+      <label>Layout
+        <select data-k="layout">
+          <option value="podium">Podium (steps)</option>
+          <option value="board">Leaderboard</option>
+        </select>
+      </label>
+      <label>Background
+        <select data-k="bgMode">
+          <option value="template">Default template</option>
+          <option value="jersey">Jersey / logo colours (auto)</option>
+          <option value="image">Upload my own</option>
+        </select>
+      </label>
+      <label id="themeRow">Theme
+        <select data-k="theme">
+          <option value="navy">Navy (default)</option>
+          <option value="jewel">Jewel</option>
+          <option value="ocean">Ocean</option>
+          <option value="emerald">Emerald</option>
+          <option value="ember">Ember</option>
+        </select>
+      </label>
+      <label id="bgUploadRow" style="display:none">Background image (1080 × 1350)<input type="file" accept="image/*" data-file="bgImage"></label>
+      <label>Event name<input data-k="event"></label>
+      <label data-only="podium">Line under TOP 4<input data-k="sub"></label>
+      <label data-only="board">Word after TOP 4<input data-k="boardWord"></label>
+      <label data-only="board">Champion prize (khali rakhle dekhabe na)<input data-k="prize"></label>
+      <label>eFCB logo (optional)<input type="file" accept="image/*" data-file="logo"></label>
+    </section>
+
+    <template id="playerTpl">
+      <section class="player-sec">
+        <h3></h3>
+        <div class="two">
+          <label>Player<input data-t="player"></label>
+          <label>Team<input data-t="team"></label>
+        </div>
+        <div class="four">
+          <label>Points<input data-t="pts" inputmode="numeric"></label>
+          <label>W<input data-t="w" inputmode="numeric"></label>
+          <label>D<input data-t="d" inputmode="numeric"></label>
+          <label>L<input data-t="l" inputmode="numeric"></label>
+        </div>
+        <label data-gd data-only="board">Goal difference<input data-t="gd"></label>
+        <label>Player photo<input type="file" accept="image/*" data-photo></label>
+        <label class="check"><input type="checkbox" data-cutout checked> Auto cut-out (background kete dao)</label>
+        <div class="status" data-status></div>
+        <div class="pos">
+          <span>Size</span>
+          <input type="range" min="50" max="200" value="100" data-zoom aria-label="Photo size">
+          <span data-zoom-val>100%</span>
+          <button type="button" data-reset-pos>Reset</button>
+        </div>
+        <label>Team logo (optional)<input type="file" accept="image/*" data-logo></label>
+        <div class="colors">
+          <span>Kit colour</span>
+          <input type="color" data-t="kit" title="Jersey colour (Jersey background e use hoy)">
+          <button type="button" data-auto>Auto from jersey</button>
+        </div>
+      </section>
+    </template>
+    <div id="players"></div>
+    <p class="tip">Poster er upor player er chobi ar sob lekha (title, podium/row, name, points, partners) drag kore shorano jay, mouse wheel e boro-choto hoy, ar niche "Poster e ki ki thakbe" theke je kono ongsho remove kora jay. Head size auto fit hoy.</p>
+    <section>
+      <h3>Poster e ki ki thakbe</h3>
+      <div id="parts" class="parts"></div>
+      <p class="tip">Tick tule dile oi ongsho poster theke shore jay (sudhu ei layout e).</p>
+    </section>
+    <button type="button" id="resetAll" class="reset-all">Reset to default (sob position, sob ongsho)</button>
+
+    <section>
+      <h3>Partners (niche)</h3>
+      <label>Label<input data-k="partnersLabel"></label>
+      <template id="partnerTpl">
+        <div class="prow"><input type="text" data-pname><input type="file" accept="image/*" data-plogo title="Logo"><button type="button" data-pclear title="Remove">✕</button></div>
+      </template>
+      <div id="partners"></div>
+      <label>Website line<input data-k="site"></label>
+    </section>
+
+    <button type="button" id="download" class="primary">Download PNG (HD)</button>
+  </aside>
+
+  <main class="stage">
+    <div class="frame" id="frame"><div id="poster"></div></div>
+  </main>
+</div>
+
+<script src="lib/html-to-image.js"></script>
+<script src="lib/bg-removal.js"></script>
+<script src="js/samples.js"></script>
+<script src="js/colors.js"></script>
+<script src="js/poster.js"></script>
+<script src="js/studio-edit.js"></script>
+<script src="js/maker.js"></script>
+<script src="js/fit.js"></script>
+<script src="js/studio-nav.js"></script>
+<script src="js/ui.js"></script>
+</body>
+</html>

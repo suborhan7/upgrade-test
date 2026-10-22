@@ -1,0 +1,126 @@
+/* Team mode of the Match Result card (js/team.js): Crest Clash, Victory Squad, Torn Poster. */
+.tm { font-family: 'Chakra Petch', sans-serif; background: #070716; }
+.tm .full { position: absolute; left: 0; top: 0; width: 1080px; height: 1350px; overflow: visible; }
+.tm .wash, .tm .speed { position: absolute; inset: 0; }
+.tm .cr { display: block; flex: none; object-fit: contain; filter: drop-shadow(0 10px 24px rgba(0,0,0,.45)); }
+.tm .cr.mono { display: grid; place-items: center; border-radius: 50%; background: var(--c1); color: #fff; font-weight: 700; }
+.tm .cap { position: absolute; transform-origin: 50% 100%; z-index: 1; }
+.tm .ball { display: inline-block; width: 18px; height: 18px; flex: none; border-radius: 50%; vertical-align: -2px;
+  background: radial-gradient(circle at 50% 50%, #111 0 22%, transparent 23%), radial-gradient(circle at 18% 28%, #111 0 13%, transparent 14%),
+    radial-gradient(circle at 82% 28%, #111 0 13%, transparent 14%), radial-gradient(circle at 30% 86%, #111 0 13%, transparent 14%),
+    radial-gradient(circle at 70% 86%, #111 0 13%, transparent 14%), #fff; box-shadow: 0 0 0 2px rgba(0,0,0,.25); }
+.tm .hd { position: absolute; top: 40px; }
+.tm .hd.l { left: 44px; } .tm .hd.r { right: 44px; }
+.tm .brand { font: 700 30px/1 'Chakra Petch'; letter-spacing: .06em; }
+.tm .brand.logo img { height: 56px; display: block; }
+.tm .tag { padding: 9px 18px; font: 700 18px/1 'Chakra Petch'; letter-spacing: .14em; text-transform: uppercase; border: 2px solid rgba(255,255,255,.7); }
+/* partners strip */
+.tm .sp { position: absolute; left: 0; right: 0; top: 1255px; height: 95px; z-index: 7; background: rgba(0,0,0,.45); }
+.tm .sp::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--c1), var(--pop), var(--c2), transparent); }
+.tm .sp .k { position: absolute; left: 0; right: 0; top: 11px; text-align: center; font: 700 11px/1 'Chakra Petch'; letter-spacing: .6em; color: rgba(255,255,255,.55); }
+.tm .sp .sprow { position: absolute; left: 90px; right: 90px; top: 29px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+.tm .sp .sprow div { height: 42px; display: flex; align-items: center; justify-content: center; font: 700 18px/1 'Chakra Petch'; letter-spacing: .08em; color: rgba(255,255,255,.85); }
+.tm .sp .sprow img { max-height: 32px; max-width: 90%; object-fit: contain; }
+.tm .sp .w { position: absolute; left: 0; right: 0; bottom: 8px; text-align: center; font: 600 10px/1 'Chakra Petch'; letter-spacing: .5em; color: rgba(255,255,255,.5); }
+
+/* ---------- Crest Clash ---------- */
+.clash .kick { position: absolute; left: 200px; right: 200px; top: 50px; text-align: center; font: 600 20px/1 'Chakra Petch'; letter-spacing: .3em; text-transform: uppercase; color: rgba(255,255,255,.85); }
+.clash .ghost { position: absolute; left: -40px; right: -40px; top: 92px; text-align: center; white-space: nowrap; font: 900 250px/1 'Big Shoulders Display';
+  text-transform: uppercase; letter-spacing: .02em; color: transparent; -webkit-text-stroke: 3px rgba(255,255,255,.4); }
+.clash .rings { z-index: 2; }
+.clash .crw { position: absolute; z-index: 3; }
+.clash .floor { position: absolute; left: 0; right: 0; top: 620px; bottom: 0; z-index: 1; background: linear-gradient(180deg, rgba(7,7,22,0), rgba(7,7,22,.82) 250px, rgba(7,7,22,.82)); }
+.clash .score { position: absolute; left: 390px; width: 300px; height: 250px; display: flex; align-items: center; justify-content: center; gap: 16px; z-index: 4;
+  font: 900 200px/1 'Big Shoulders Display'; background: linear-gradient(180deg, rgba(7,7,22,.92), rgba(20,16,44,.92));
+  clip-path: polygon(14% 0, 86% 0, 100% 50%, 86% 100%, 14% 100%, 0 50%); }
+.clash .score::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 6px; background: linear-gradient(90deg, var(--c1), var(--pop), var(--c2)); }
+.clash .score::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 6px; background: linear-gradient(90deg, var(--c1), var(--pop), var(--c2)); }
+.clash .score span { background: linear-gradient(180deg, #ffffff 0%, #ffffff 42%, var(--pop) 60%, #ffffff 100%); -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 8px 0 rgba(0,0,0,.45)) drop-shadow(0 0 30px rgba(255,255,255,.25)); }
+.clash .score span.lo { background: linear-gradient(180deg, #d9dbe6, #8d90a6); -webkit-background-clip: text; background-clip: text; }
+.clash .score i { width: 46px; height: 18px; background: var(--pop); transform: skewX(-20deg); box-shadow: 0 0 18px var(--pop); }
+.clash .tn { position: absolute; width: 470px; text-align: center; white-space: nowrap; font: 900 74px/1 'Big Shoulders Display'; text-transform: uppercase; letter-spacing: .02em;
+  text-shadow: 0 6px 0 rgba(0,0,0,.4); z-index: 4; }
+.clash .tn { display: flex; align-items: center; justify-content: center; gap: 14px; height: 80px; }
+.clash .tn .ic { display: block; flex: none; }
+.clash .tn.l { left: 15px; } .clash .tn.r { left: 595px; }
+.clash .rs { position: absolute; width: 470px; text-align: center; z-index: 4; }
+.clash .rs.l { left: 15px; } .clash .rs.r { left: 595px; }
+.clash .res { display: inline-block; padding: 9px 22px; font: 700 22px/1 'Chakra Petch'; letter-spacing: .3em; transform: skewX(-12deg); }
+.clash .res.w { background: var(--pop); color: #111; box-shadow: 0 0 24px var(--pop); }
+.clash .res.l { background: rgba(255,255,255,.12); color: rgba(255,255,255,.75); border: 1px solid rgba(255,255,255,.3); }
+.clash .res.dr { background: #fff; color: #111; }
+.clash .sc { position: absolute; width: 400px; list-style: none; display: flex; flex-direction: column; gap: 10px; z-index: 4; }
+.clash .sc.l { left: 50px; align-items: center; } .clash .sc.r { left: 630px; align-items: center; }
+.clash .sc li { display: flex; align-items: center; gap: 10px; font: 600 26px/1 'Chakra Petch'; color: rgba(255,255,255,.92); }
+.clash .info { position: absolute; left: 290px; width: 500px; top: 1180px; display: flex; align-items: center; justify-content: center; gap: 16px; white-space: nowrap;
+  font: 600 22px/1 'Chakra Petch'; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.85); z-index: 4; }
+.clash .info span { padding: 8px 14px; background: var(--pop); color: #111; font-weight: 700; }
+.clash .info em { width: 8px; height: 8px; background: #fff; transform: rotate(45deg); }
+
+/* ---------- Victory Squad ---------- */
+.victory { background: #05030c; }
+.victory .mark { position: absolute; left: 90px; top: 60px; width: 900px; height: 900px; opacity: .13; transform: rotate(-10deg); }
+.victory .mark img { width: 100%; height: 100%; object-fit: contain; filter: grayscale(.2) brightness(1.4); }
+.victory .speed { opacity: .9; }
+.victory .big { position: absolute; left: 20px; right: 20px; top: 150px; text-align: center; }
+.victory .big b { display: block; white-space: nowrap; font: italic 900 250px/1 'Kanit'; text-transform: uppercase; letter-spacing: -.01em; padding: 0 30px;
+  background: linear-gradient(180deg, #ffffff 0%, #ffffff 40%, var(--l1) 70%, var(--c1) 100%); -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 10px 0 var(--d1)) drop-shadow(0 0 40px var(--g1)); }
+.victory .conf { z-index: 2; }
+.victory .grp { position: absolute; inset: 0; z-index: 3; }
+.victory .grp .sq { position: absolute; }
+.victory .hero { position: absolute; left: 340px; top: 400px; z-index: 3; }
+.victory .vfade { position: absolute; left: 0; right: 0; top: 690px; height: 240px; z-index: 4; background: linear-gradient(180deg, transparent, #05030c); }
+.victory .ntags { position: absolute; inset: 0; z-index: 5; }
+.victory .ntag { position: absolute; transform: translate(-50%, 0) skewX(-12deg); padding: 7px 14px; background: rgba(5,3,12,.8); border-left: 4px solid var(--pop);
+  font: 700 18px/1 'Chakra Petch'; letter-spacing: .14em; white-space: nowrap; }
+.victory .ntag.star { background: var(--c1); border-left-color: #fff; }
+.victory .scr { position: absolute; left: 90px; top: 78px; z-index: 6; font: 400 120px/1 'Mr Dafoe'; color: var(--pop); transform: rotate(-7deg);
+  text-shadow: 0 0 28px rgba(0,0,0,.6), 0 4px 0 rgba(0,0,0,.35); white-space: nowrap; }
+.victory .bar { position: absolute; left: 40px; right: 40px; top: 930px; height: 130px; display: flex; z-index: 6; }
+.victory .pnl { flex: 1; display: flex; align-items: center; gap: 18px; padding: 0 30px; transform: skewX(-12deg); min-width: 0; }
+.victory .pnl > * { transform: skewX(12deg); }
+.victory .pnl > div { min-width: 0; flex: 1; }
+.victory .pnl.a { background: linear-gradient(90deg, var(--d1), var(--c1)); }
+.victory .pnl.b { background: linear-gradient(90deg, #1a1726, #2a2638); justify-content: flex-end; text-align: right; }
+.victory .pnl small { display: block; font: 700 16px/1 'Chakra Petch'; letter-spacing: .3em; opacity: .85; margin-bottom: 6px; }
+.victory .pnl.a small { color: var(--pop); }
+.victory .pnl b { display: block; white-space: nowrap; font: italic 800 42px/1.05 'Kanit'; text-transform: uppercase; }
+.victory .box { width: 230px; flex: none; display: flex; align-items: center; justify-content: center; gap: 10px; background: #05030c; border: 3px solid var(--pop);
+  transform: skewX(-12deg); box-shadow: 0 0 30px rgba(0,0,0,.6), inset 0 0 24px rgba(255,255,255,.06); font: italic 900 92px/1 'Kanit'; }
+.victory .box > * { transform: skewX(12deg); }
+.victory .box span:first-child { color: var(--pop); }
+.victory .box i { font-style: normal; opacity: .6; font-size: 60px; }
+.victory .vsc { position: absolute; top: 1086px; width: 470px; display: flex; align-items: center; gap: 10px; font: 600 21px/1.2 'Chakra Petch'; color: rgba(255,255,255,.85); z-index: 6; }
+.victory .vsc.l { left: 50px; justify-content: flex-end; flex-direction: row-reverse; }
+.victory .vsc.r { left: 560px; justify-content: flex-end; }
+.victory .info { position: absolute; left: 140px; right: 140px; top: 1170px; display: flex; align-items: center; justify-content: center; gap: 16px; white-space: nowrap;
+  font: 600 20px/1 'Chakra Petch'; letter-spacing: .24em; text-transform: uppercase; color: rgba(255,255,255,.75); z-index: 6; }
+.victory .info em { width: 8px; height: 8px; background: var(--pop); transform: rotate(45deg); }
+.victory .tag { border-color: var(--pop); color: var(--pop); }
+
+/* ---------- Torn Poster ---------- */
+.torn { background: #111; }
+.torn .paper { z-index: 2; }
+.torn .cap { z-index: 1; }
+.torn .cap[data-p="3"] { z-index: 3; }
+.torn .tcr { position: absolute; z-index: 4; }
+.torn .tape { position: absolute; right: -36px; top: -8px; padding: 8px 20px; background: var(--pop); color: #111; font: 400 22px/1 'Black Ops One'; letter-spacing: .1em;
+  transform: rotate(14deg); box-shadow: 0 4px 10px rgba(0,0,0,.35); }
+.torn .tn { position: absolute; font: 400 60px/1 'Black Ops One'; text-transform: uppercase; white-space: nowrap; z-index: 4; text-shadow: 4px 4px 0 rgba(0,0,0,.35); }
+.torn .tn.t1 { text-align: center; }
+.torn .tsc { position: absolute; display: flex; flex-wrap: wrap; gap: 8px 18px; z-index: 4; font: 600 21px/1.1 'Chakra Petch'; }
+.torn .tsc.t1 { justify-content: center; }
+.torn .tsc span { display: inline-flex; align-items: center; gap: 8px; }
+.torn .stamp { position: absolute; left: 140px; width: 800px; top: 682px; text-align: center; transform: rotate(-23.96deg); color: #141414; z-index: 3; }
+.torn .stamp .sk { font: 700 20px/1 'Chakra Petch'; letter-spacing: .3em; text-transform: uppercase; color: #555; white-space: nowrap; }
+.torn .stamp .sn { font: 400 118px/1 'Black Ops One'; margin: 2px 0; letter-spacing: .02em; }
+.torn .stamp .sn i { font-style: normal; display: inline-block; margin: 0 22px; color: var(--c1); }
+.torn .stamp .sd { font: 600 20px/1 'Chakra Petch'; letter-spacing: .24em; text-transform: uppercase; color: #333; }
+.torn .stamp .sd b { display: inline-block; margin-right: 14px; padding: 6px 12px; border: 3px solid #c8102e; color: #c8102e; transform: rotate(-3deg); font-family: 'Black Ops One'; font-weight: 400; }
+.torn .tk { position: absolute; left: 44px; top: 88px; font: 600 18px/1 'Chakra Petch'; letter-spacing: .26em; text-transform: uppercase; color: rgba(255,255,255,.85); }
+.tm .pchip { position: absolute; transform: translateX(-50%) skewX(-12deg); padding: 8px 18px; z-index: 5; white-space: nowrap; background: var(--pop); color: #111;
+  font: 700 22px/1 'Chakra Petch'; letter-spacing: .16em; text-transform: uppercase; box-shadow: 0 6px 16px rgba(0,0,0,.35); }
+.torn .pchip { font-family: 'Black Ops One'; font-weight: 400; transform: translateX(-50%) rotate(-3deg); }
+.victory .pnl em { display: block; margin-top: 6px; font: 600 17px/1 'Chakra Petch'; font-style: normal; letter-spacing: .2em; text-transform: uppercase; opacity: .85; white-space: nowrap; }

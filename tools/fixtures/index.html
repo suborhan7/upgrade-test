@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fixtures Poster</title>
+<script src="js/fonts.js"></script>
+<link rel="stylesheet" href="css/poster.css">
+<link rel="stylesheet" href="css/maker.css">
+<link rel="stylesheet" href="css/ui.css">
+</head>
+<body>
+<div class="app">
+  <aside class="form" id="form">
+    <h2>Fixtures</h2>
+
+    <section>
+      <h3>Poster</h3>
+      <label>Layout
+        <select data-k="layout">
+          <option value="clash">Clash Rows (logo + player, majhe VS)</option>
+          <option value="cal">Matchday Calendar</option>
+          <option value="line">Timeline</option>
+        </select>
+      </label>
+      <label id="calHeadRow">Title style (Calendar)
+        <select data-k="calHead">
+          <option value="a">A: choto MATCH, boro SCHEDULE</option>
+          <option value="b">B: ek line + underline</option>
+        </select>
+      </label>
+      <label>Background
+        <select data-k="bgMode">
+          <option value="template">Default template</option>
+          <option value="jersey">Team colours (protiti match er team er rong)</option>
+          <option value="image">Upload my own</option>
+        </select>
+      </label>
+      <label id="bgUploadRow" style="display:none">Background image (1080 × 1350)<input type="file" accept="image/*" data-file="bgImage"></label>
+      <label>Title<input data-k="title"></label>
+      <label>Event<input data-k="event"></label>
+      <label>Round / matchweek<input data-k="stage"></label>
+      <label>Format line<input data-k="format"></label>
+      <label>Start line (boro kore)<input data-k="start"></label>
+      <label>Live on<input data-k="live"></label>
+      <label>eFCB logo (optional)<input type="file" accept="image/*" data-file="logo"></label>
+    </section>
+
+    <section>
+      <h3>Matches</h3>
+      <label>Koto ta match (2 theke 8)<input type="number" min="2" max="8" data-k="count"></label>
+      <label class="check"><input type="checkbox" data-k="showPlayer"> Team er sathe player er nam</label>
+      <label class="check"><input type="checkbox" data-k="showPhotos"> Player er chobi (Clash Rows, Timeline)</label>
+      <label class="check"><input type="checkbox" id="cutout" checked> Auto cut-out (chobir background kete dao)</label>
+      <div class="status" id="phStatus"></div>
+      <template id="matchTpl">
+        <details class="pdet">
+          <summary></summary>
+          <div class="three">
+            <label>Date<input type="date" data-m="date"></label>
+            <label>Time<input data-m="time"></label>
+            <label>Choto lekha<input data-m="label"></label>
+          </div>
+          <div class="teamf" data-side="a">
+            <b>Team 1</b>
+            <div class="two">
+              <label>Team<input data-f="name"></label>
+              <label>Player<input data-f="player"></label>
+            </div>
+            <div class="two">
+              <label>Logo<input type="file" accept="image/*" data-logo></label>
+              <label>Player photo<input type="file" accept="image/*" data-photo></label>
+            </div>
+            <div class="colors"><span>Team colour</span><input type="color" data-f="color"><button type="button" data-auto>Auto from logo</button><button type="button" data-noph title="Remove photo">✕ photo</button></div>
+          </div>
+          <div class="teamf" data-side="b">
+            <b>Team 2</b>
+            <div class="two">
+              <label>Team<input data-f="name"></label>
+              <label>Player<input data-f="player"></label>
+            </div>
+            <div class="two">
+              <label>Logo<input type="file" accept="image/*" data-logo></label>
+              <label>Player photo<input type="file" accept="image/*" data-photo></label>
+            </div>
+            <div class="colors"><span>Team colour</span><input type="color" data-f="color"><button type="button" data-auto>Auto from logo</button><button type="button" data-noph title="Remove photo">✕ photo</button></div>
+          </div>
+        </details>
+      </template>
+      <div id="matches"></div>
+    </section>
+
+    <p class="tip">Poster e jekono match row, title, chobi click kore select koro: drag e shorao, wheel e boro-choto koro.</p>
+    <section>
+      <h3>Poster e ki ki thakbe</h3>
+      <div id="parts" class="parts"></div>
+      <p class="tip">Tick tule dile oi ongsho poster theke shore jay (sudhu ei layout e).</p>
+    </section>
+    <button type="button" id="resetAll" class="reset-all">Reset to default (sob position, sob ongsho)</button>
+
+    <section>
+      <h3>Partners (niche)</h3>
+      <label>Label<input data-k="partnersLabel"></label>
+      <template id="partnerTpl">
+        <div class="prow"><input type="text" data-pname><input type="file" accept="image/*" data-plogo title="Logo"><button type="button" data-pclear title="Remove">✕</button></div>
+      </template>
+      <div id="partners"></div>
+      <label>Website line<input data-k="site"></label>
+    </section>
+
+    <button type="button" id="download" class="primary">Download PNG (HD)</button>
+  </aside>
+
+  <main class="stage">
+    <div class="frame" id="frame"><div id="poster"></div></div>
+  </main>
+</div>
+
+<script src="lib/html-to-image.js"></script>
+<script src="lib/bg-removal.js"></script>
+<script src="js/samples.js"></script>
+<script src="js/colors.js"></script>
+<script src="js/poster.js"></script>
+<script src="js/studio-edit.js"></script>
+<script src="js/maker.js"></script>
+<script src="js/series.js"></script>
+<script src="js/fit.js"></script>
+<script src="js/studio-nav.js"></script>
+<script src="js/ui.js"></script>
+</body>
+</html>

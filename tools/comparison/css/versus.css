@@ -1,0 +1,107 @@
+/* Crest Clash and Torn Poster layouts of the Player Comparison card (js/versus.js). */
+.vsl { position: relative; width: 1080px; height: 1350px; overflow: hidden; isolation: isolate; background: #070716; color: #fff; font-family: 'Chakra Petch', sans-serif; }
+.vsl * { box-sizing: border-box; }
+.vsl .full { position: absolute; left: 0; top: 0; width: 1080px; height: 1350px; overflow: visible; }
+.vsl .wash, .vsl .bgimg { position: absolute; inset: 0; }
+.vsl .bgimg { background-size: cover; background-position: center; }
+.vsl .cap { position: absolute; width: auto; max-width: none; transform-origin: 50% 0; filter: drop-shadow(0 18px 30px rgba(0,0,0,.45)); }
+.vsl .cr { display: block; flex: none; object-fit: contain; filter: drop-shadow(0 8px 18px rgba(0,0,0,.45)); }
+.vsl .hd { position: absolute; top: 40px; }
+.vsl .hd.l { left: 44px; } .vsl .hd.r { right: 44px; }
+.vsl .brand { font: 700 30px/1 'Chakra Petch'; letter-spacing: .06em; }
+.vsl .brand.logo img { height: 56px; display: block; }
+.vsl .tag { padding: 9px 18px; font: 700 18px/1 'Chakra Petch'; letter-spacing: .14em; text-transform: uppercase; border: 2px solid rgba(255,255,255,.7); }
+/* movable sections (js/studio-edit.js): full-poster wrappers, painted in page order */
+.vsl .mv { position: absolute; inset: 0; pointer-events: none; }
+.vsl .mv > * { pointer-events: auto; cursor: move; }
+/* partners strip */
+.vsl .sp { position: absolute; left: 0; right: 0; top: 1255px; height: 95px; background: rgba(0,0,0,.45); }
+.vsl .sp::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--c1), var(--pop), var(--c2), transparent); }
+.vsl .sp .k { position: absolute; left: 0; right: 0; top: 11px; text-align: center; font: 700 11px/1 'Chakra Petch'; letter-spacing: .6em; color: rgba(255,255,255,.55); }
+.vsl .sp .sprow { position: absolute; left: 90px; right: 90px; top: 29px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+.vsl .sp .sprow div { height: 42px; display: flex; align-items: center; justify-content: center; font: 700 18px/1 'Chakra Petch'; letter-spacing: .08em; color: rgba(255,255,255,.85); }
+.vsl .sp .sprow img { max-height: 32px; max-width: 90%; object-fit: contain; }
+.vsl .sp .w { position: absolute; left: 0; right: 0; bottom: 8px; text-align: center; font: 600 10px/1 'Chakra Petch'; letter-spacing: .5em; color: rgba(255,255,255,.5); }
+.vsl .res { display: inline-block; flex: none; padding: 8px 18px; font: 700 19px/1 'Chakra Petch'; letter-spacing: .22em; transform: skewX(-12deg); white-space: nowrap; }
+.vsl .res.w { background: var(--pop); color: #111; box-shadow: 0 0 24px var(--pop); }
+.vsl .res.l { background: rgba(255,255,255,.12); color: rgba(255,255,255,.75); border: 1px solid rgba(255,255,255,.3); }
+
+/* ---------- Crest Clash ---------- */
+.clash .kick { position: absolute; left: 240px; right: 240px; top: 50px; text-align: center; white-space: nowrap; font: 600 20px/1 'Chakra Petch'; letter-spacing: .3em; text-transform: uppercase; color: rgba(255,255,255,.85); }
+.clash .ttl { position: absolute; left: 40px; right: 40px; top: 100px; text-align: center; }
+.clash .ttl b { display: block; white-space: nowrap; font: 900 104px/1.06 'Orbitron'; text-transform: uppercase; letter-spacing: .04em;
+  background: linear-gradient(180deg, #ffffff 0%, #ffffff 48%, var(--pop) 62%, #ffffff 100%); -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 5px 0 rgba(0,0,0,.5)) drop-shadow(0 0 22px rgba(0,0,0,.45)); }
+.clash .ttl b:first-child:not(:last-child) { font-size: 66px; letter-spacing: .3em; padding-left: .3em; }
+.clash .floor { position: absolute; left: 0; right: 0; top: 800px; bottom: 0; background: linear-gradient(180deg, rgba(7,7,22,0), rgba(7,7,22,.88) 230px, rgba(7,7,22,.94)); }
+.clash .vsplate { position: absolute; left: 430px; width: 220px; top: 340px; height: 180px; display: grid; place-items: center;
+  filter: drop-shadow(0 0 22px var(--pop)) drop-shadow(0 10px 20px rgba(0,0,0,.6)); }
+.clash .vsplate::before { content: ''; position: absolute; inset: 0; clip-path: polygon(18% 0, 82% 0, 100% 50%, 82% 100%, 18% 100%, 0 50%);
+  background: linear-gradient(90deg, var(--c1), var(--pop), var(--c2)); }
+.clash .vsplate::after { content: ''; position: absolute; inset: 6px; clip-path: polygon(18% 0, 82% 0, 100% 50%, 82% 100%, 18% 100%, 0 50%);
+  background: linear-gradient(180deg, #1b1838, #07071a 60%, #15112e); }
+.clash .vsplate span { position: relative; z-index: 1; font: 900 132px/1 'Big Shoulders Display'; letter-spacing: .02em;
+  background: linear-gradient(180deg, #ffffff 0%, #ffffff 42%, var(--pop) 60%, #ffffff 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.clash .cstats { position: absolute; left: 375px; width: 330px; top: 560px; padding: 8px 0;
+  background: linear-gradient(90deg, rgba(7,7,22,.9), rgba(18,14,40,.92) 50%, rgba(7,7,22,.9));
+  border-left: 4px solid var(--c1); border-right: 4px solid var(--c2); box-shadow: -10px 0 30px -8px var(--c1), 10px 0 30px -8px var(--c2), 0 24px 60px rgba(0,0,0,.5); }
+.clash .cstats::before, .clash .cstats::after { content: ''; position: absolute; left: -4px; right: -4px; height: 5px; background: linear-gradient(90deg, var(--c1), var(--pop), var(--c2)); }
+.clash .cstats::before { top: -5px; } .clash .cstats::after { bottom: -5px; }
+.clash .crow { display: grid; grid-template-columns: 94px 1fr 94px; align-items: center; height: 60px; padding: 0 6px; }
+.clash .crow + .crow { border-top: 1px solid rgba(255,255,255,.08); }
+.clash .crow em { font: 700 16px/1.1 'Chakra Petch'; font-style: normal; letter-spacing: .1em; text-transform: uppercase; text-align: center; color: rgba(255,255,255,.82); padding: 0 4px; }
+.clash .crow .v { justify-self: center; display: block; }
+.clash .crow .v i { display: block; min-width: 82px; height: 46px; padding: 0 10px; text-align: center; font: normal 900 44px/46px 'Big Shoulders Display'; color: #fff; }
+.clash .crow .v.win.a { filter: drop-shadow(0 0 10px var(--c1)); } .clash .crow .v.win.b { filter: drop-shadow(0 0 10px var(--c2)); }
+.clash .crow .v.win i { clip-path: polygon(14% 0, 86% 0, 100% 50%, 86% 100%, 14% 100%, 0 50%); text-shadow: 0 2px 0 rgba(0,0,0,.35); }
+.clash .crow .v.win.a i { background: linear-gradient(180deg, var(--l1), var(--c1) 55%, var(--d1)); }
+.clash .crow .v.win.b i { background: linear-gradient(180deg, var(--l2), var(--c2) 55%, var(--d2)); }
+/* names in chrome, the club logo right before the name */
+.clash .nrow { position: absolute; top: 1052px; width: 470px; display: flex; align-items: center; justify-content: center; gap: 16px; }
+.clash .nrow.l { left: 15px; } .clash .nrow.r { left: 595px; }
+.clash .nrow .tn { flex: 0 1 auto; min-width: 0; white-space: nowrap; overflow: hidden; font: 900 76px/1.05 'Big Shoulders Display'; text-transform: uppercase; letter-spacing: .02em;
+  background: linear-gradient(180deg, #ffffff 0%, #ffffff 46%, #b9bccb 54%, #ffffff 100%); -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 5px 0 rgba(0,0,0,.45)); }
+.clash .ti { position: absolute; top: 1160px; width: 470px; display: flex; align-items: center; justify-content: center; gap: 14px; }
+.clash .ti.l { left: 15px; } .clash .ti.r { left: 595px; }
+.clash .ti span { min-width: 0; max-width: 200px; white-space: nowrap; overflow: hidden; font: 600 20px/1 'Chakra Petch'; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.85); }
+
+/* ---------- Torn Poster ---------- */
+.torn { background: #111; }
+.torn .tstats { position: absolute; left: -35px; top: 655px; width: 1150px; height: 210px; transform: rotate(-23.96deg); display: flex; padding: 0 80px; color: #1a1a1a; }
+.torn .tcol { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
+.torn .tcol + .tcol { border-left: 2px dashed rgba(0,0,0,.18); }
+.torn .tcol b { font: 400 54px/1 'Black Ops One'; white-space: nowrap; color: #26231f; padding: 4px 10px 2px; }
+/* the better value is stamped in the player's colour; the other stays in dark ink so both read clearly */
+.torn .tcol b.wa, .torn .tcol b.wb { color: #fff; transform: rotate(-3deg); box-shadow: 0 4px 0 rgba(0,0,0,.25); }
+.torn .tcol b.wa { background: var(--pa); } .torn .tcol b.wb { background: var(--pb); }
+.torn .tcol b.lo { color: #26231f; }
+.torn .tcol em { font: 700 17px/1.1 'Chakra Petch'; font-style: normal; letter-spacing: .1em; text-transform: uppercase; color: #111; text-align: center; padding: 4px 4px;
+  border-top: 2px solid #1a1a1a; border-bottom: 2px solid #1a1a1a; max-width: 100%; }
+.torn .tt { position: absolute; right: 44px; top: 100px; width: 620px; text-align: right; }
+.torn .tk { font: 600 18px/1 'Chakra Petch'; letter-spacing: .26em; text-transform: uppercase; color: rgba(255,255,255,.85); white-space: nowrap; }
+.torn .th { margin-top: 10px; }
+.torn .th b { display: block; white-space: nowrap; font: 900 64px/1.08 'Orbitron'; text-transform: uppercase; letter-spacing: .02em; color: #fff; text-shadow: 4px 4px 0 rgba(0,0,0,.35); }
+.torn .th b:first-child:not(:last-child) { font-size: 44px; letter-spacing: .24em; color: var(--pop); }
+.torn .tb { position: absolute; display: flex; align-items: center; gap: 18px; }
+.torn .tb.t1 { left: 560px; width: 480px; top: 300px; flex-direction: row-reverse; text-align: right; }
+.torn .tb.t2 { left: 50px; width: 560px; top: 1088px; }
+.torn .tx { min-width: 0; flex: 1; }
+.torn .tn { font: 400 58px/1 'Black Ops One'; text-transform: uppercase; white-space: nowrap; text-shadow: 4px 4px 0 rgba(0,0,0,.35); }
+.torn .t2 .tn { font-size: 52px; }
+.torn .tm2 { margin-top: 8px; font: 600 21px/1 'Chakra Petch'; letter-spacing: .16em; text-transform: uppercase; white-space: nowrap; overflow: hidden; color: rgba(255,255,255,.88); }
+.torn .tape { position: absolute; top: -34px; padding: 8px 18px; background: var(--pop); color: #111; font: 400 20px/1 'Black Ops One'; letter-spacing: .08em;
+  white-space: nowrap; box-shadow: 0 4px 10px rgba(0,0,0,.35); }
+.torn .t1 .tape { left: 40px; transform: rotate(-8deg); }
+.torn .t2 .tape { right: 10px; transform: rotate(8deg); }
+
+/* soften the flat crop edges of a cut-out: the bottom always, the inner side in Crest Clash */
+.vsl .cap { -webkit-mask-image: linear-gradient(to top, transparent 0, #000 14%); mask-image: linear-gradient(to top, transparent 0, #000 14%); }
+.clash .cap.player-a { -webkit-mask-image: linear-gradient(to left, transparent 0, #000 10%), linear-gradient(to top, transparent 0, #000 16%);
+  mask-image: linear-gradient(to left, transparent 0, #000 10%), linear-gradient(to top, transparent 0, #000 16%); -webkit-mask-composite: source-in; mask-composite: intersect; }
+.clash .cap.player-b { -webkit-mask-image: linear-gradient(to right, transparent 0, #000 10%), linear-gradient(to top, transparent 0, #000 16%);
+  mask-image: linear-gradient(to right, transparent 0, #000 10%), linear-gradient(to top, transparent 0, #000 16%); -webkit-mask-composite: source-in; mask-composite: intersect; }
+/* Torn Poster: both players the same size, every cut edge (sides and bottom) faded so no arm or shoulder ends in a hard line */
+.torn .cap { -webkit-mask-image: linear-gradient(to left, transparent 0, #000 12%), linear-gradient(to right, transparent 0, #000 12%), linear-gradient(to top, transparent 0, #000 18%);
+  mask-image: linear-gradient(to left, transparent 0, #000 12%), linear-gradient(to right, transparent 0, #000 12%), linear-gradient(to top, transparent 0, #000 18%);
+  -webkit-mask-composite: source-in, source-in; mask-composite: intersect; }

@@ -1,0 +1,68 @@
+body { margin: 0; background: #11141b; color: #e8ecf3; font: 14px/1.4 system-ui, -apple-system, 'Segoe UI', sans-serif; }
+/* form on the left (scrolls), poster on the right (always in view) */
+.app { display: grid; grid-template-columns: 340px 1fr; height: 100vh; }
+.form { padding: 20px; background: #181c25; border-right: 1px solid #262b37; overflow-y: auto; max-height: 100vh; box-sizing: border-box; }
+.form h2 { margin: 0 0 12px; font-size: 20px; }
+.form h3 { margin: 0 0 8px; font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: #8f9bb3; }
+.form section { padding: 14px 0; border-top: 1px solid #262b37; }
+.form label { display: block; margin-bottom: 8px; font-size: 12px; color: #aab3c5; }
+.form input:not([type=color]):not([type=file]):not([type=checkbox]), .form select { display: block; width: 100%; box-sizing: border-box; margin-top: 3px;
+  padding: 7px 9px; border: 1px solid #2f3544; border-radius: 6px; background: #0f1218; color: #fff; font: inherit; }
+.form input[type=file] { display: block; margin-top: 4px; font-size: 12px; color: #aab3c5; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.colors { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #aab3c5; }
+.colors input[type=color] { width: 38px; height: 30px; border: 1px solid #2f3544; border-radius: 6px; background: none; padding: 2px; }
+button { padding: 7px 12px; border: 1px solid #2f3544; border-radius: 6px; background: #232836; color: #e8ecf3; font: inherit; cursor: pointer; }
+button:hover { background: #2c3242; }
+button.primary { width: 100%; margin-top: 10px; padding: 12px; background: #19a463; border-color: #19a463; color: #fff; font-weight: 600; }
+.stat-head, .stat { display: grid; grid-template-columns: 58px 1fr 58px 64px 26px; gap: 5px; align-items: center; }
+.stat-head { font-size: 11px; color: #8f9bb3; margin-bottom: 4px; }
+.stat { margin-bottom: 5px; }
+.stat input, .stat select { margin: 0 !important; padding: 6px !important; }
+.stat button { padding: 4px 0; }
+#addStat { margin-top: 4px; }
+.stage { display: flex; align-items: center; justify-content: center; padding: 24px; overflow: hidden; min-width: 0; }
+.frame { width: 540px; height: 675px; position: relative; flex: none; box-shadow: 0 20px 60px rgba(0,0,0,.5); }
+.frame #poster { transform: scale(.5); transform-origin: 0 0; width: 1080px; height: 1350px; }
+/* only very narrow screens (phones) stack the poster above the form */
+@media (max-width: 620px) {
+  .app { grid-template-columns: 1fr; height: auto; }
+  .form { max-height: none; border-right: 0; }
+  .stage { order: -1; padding: 16px; position: sticky; top: 0; z-index: 2; background: #11141b; }
+}
+
+.form label.check { display: flex; align-items: center; gap: 6px; color: #cfd6e4; }
+.status { min-height: 16px; margin: -2px 0 8px; font-size: 12px; color: #6fd3a0; }
+
+.pos { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #aab3c5; margin-bottom: 4px; }
+.pos input[type=range] { flex: 1; min-width: 0; }
+.pos [data-zoom-val] { width: 38px; text-align: right; }
+.tip { margin: 0 0 10px; font-size: 11px; color: #7f8aa0; }
+.frame { cursor: grab; touch-action: none; user-select: none; }
+.frame.dragging { cursor: grabbing; }
+.frame img { -webkit-user-drag: none; }
+.reset-all { width: 100%; margin-bottom: 4px; }
+.form .parts { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 10px; }
+
+/* "Choose card type" dropdown when opened inside the eFCB Admin Studio (js/studio-nav.js) */
+.studio-nav { margin-bottom: 4px; }
+.studio-brand { margin: 0 0 14px; font-size: 19px; font-weight: 800; }
+.card-pick { display: flex; align-items: center; gap: 8px; width: 100%; padding: 11px 12px; border-radius: 8px;
+  background: #19e28a; border-color: #19e28a; color: #04140d; text-align: left; }
+.card-pick:hover { background: #2ff09a; }
+.card-pick span { flex: 1; font-size: 14px; font-weight: 600; }
+.card-pick b { padding: 3px 10px; border-radius: 99px; background: #04140d; color: #19e28a; font-size: 13px; }
+.card-pick i { font-style: normal; opacity: .7; transition: transform .15s; }
+.card-pick[aria-expanded="true"] i { transform: rotate(180deg); }
+.card-list { margin-top: 6px; padding: 4px; border: 1px solid #2f3544; border-radius: 8px; background: #0f1218; }
+.card-opt { display: block; width: 100%; margin: 0; padding: 10px 12px; border: 0; border-radius: 6px; background: none;
+  font-size: 15px; font-weight: 600; text-align: left; }
+.card-opt:hover { background: #232836; }
+.card-opt.on { background: #19e28a; color: #04140d; }
+.in-studio .form > h2 { display: none; }
+
+/* partner rows (name, logo file, clear) for the Crest Clash / Torn Poster layouts */
+.prow { display: grid; grid-template-columns: 1fr 1fr 28px; gap: 6px; align-items: center; margin-bottom: 6px; }
+.prow input[type=text] { margin: 0 !important; }
+.prow input[type=file] { margin: 0; font-size: 11px; min-width: 0; }
+.prow button { padding: 5px 0; }

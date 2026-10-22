@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Match Result Poster</title>
+<script src="js/fonts.js"></script>
+<link rel="stylesheet" href="css/poster.css">
+<link rel="stylesheet" href="css/team.css">
+<link rel="stylesheet" href="css/maker.css">
+<link rel="stylesheet" href="css/ui.css">
+</head>
+<body>
+<div class="app">
+  <aside class="form" id="form">
+    <h2>Match Result</h2>
+
+    <section>
+      <h3>Poster</h3>
+      <label>Mode
+        <select id="modeSel">
+          <option value="player">Player vs Player (1v1)</option>
+          <option value="team">Team vs Team (logo + score)</option>
+        </select>
+      </label>
+      <label>Layout
+        <select data-k="layout">
+          <option value="wave" data-mode="player">Wave Split (winner upore)</option>
+          <option value="ticket" data-mode="player">Match Ticket</option>
+          <option value="clash" data-mode="player team">Crest Clash (logo vs logo, boro score)</option>
+          <option value="victory" data-mode="player team">Victory Squad (jeta team er squad, score bar)</option>
+          <option value="torn" data-mode="player team">Torn Poster (chhera kagoj e score)</option>
+        </select>
+      </label>
+      <label>Background
+        <select data-k="bgMode">
+          <option value="template">Default template</option>
+          <option value="jersey">Jersey / logo colours (auto)</option>
+          <option value="image">Upload my own</option>
+        </select>
+      </label>
+      <label id="bgUploadRow" style="display:none">Background image (1080 × 1350)<input type="file" accept="image/*" data-file="bgImage"></label>
+      <label>Tag (top right)<input data-k="tag"></label>
+      <label>League line<input data-k="kicker"></label>
+      <div class="two">
+        <label>Result label<input data-k="label"></label>
+        <label>Date<input data-k="date"></label>
+      </div>
+      <label>eFCB logo (optional)<input type="file" accept="image/*" data-file="logo"></label>
+    </section>
+
+    <template id="teamTpl">
+      <section class="team-sec">
+        <h3></h3>
+        <label>Team name<input data-t="name"></label>
+        <div class="two">
+          <label>Player<input data-t="player"></label>
+          <label>Goals<input data-t="score" inputmode="numeric"></label>
+        </div>
+        <label>Goal scorers (comma ba new line)<textarea data-t="scorers" rows="2"></textarea></label>
+        <label>Player photo<input type="file" accept="image/*" data-photo></label>
+        <label class="check"><input type="checkbox" data-cutout checked> Auto cut-out (background kete dao)</label>
+        <div class="status" data-status></div>
+        <div class="pos">
+          <span>Size</span>
+          <input type="range" min="50" max="200" value="100" data-zoom aria-label="Photo size">
+          <span data-zoom-val>100%</span>
+          <button type="button" data-reset-pos>Reset</button>
+        </div>
+        <label>Team logo (optional)<input type="file" accept="image/*" data-logo></label>
+        <div class="colors">
+          <span>Colours</span>
+          <input type="color" data-t="primary" title="Main colour">
+          <input type="color" data-t="secondary" title="Second colour">
+        </div>
+        <div class="auto-row">
+          <button type="button" data-auto="jersey">Auto from jersey</button>
+          <button type="button" data-auto="logo">Auto from logo</button>
+        </div>
+      </section>
+    </template>
+    <div id="teams" data-only="player"></div>
+
+    <section data-only="team">
+      <h3>Team mode</h3>
+      <label>Chobi
+        <select data-tm="photoMode">
+          <option value="squad">Squad (jeta team jitse, max 5) + captain</option>
+          <option value="captain">Sudhu captain er chobi</option>
+          <option value="none">Sudhu logo (kono chobi na)</option>
+        </select>
+      </label>
+      <p class="tip">Crest Clash ar Torn Poster e captain der chobi thake; Victory Squad e jeta team er squad (squad na thakle captain, captain na thakle boro logo).</p>
+      <label class="check"><input type="checkbox" data-tm="nameTags"> Player der naam (name tag)</label>
+    </section>
+    <section data-only="tl">
+      <h3>Clash / Victory / Torn</h3>
+      <label>Boro title (Victory)<input data-tm="title"></label>
+      <label class="check"><input type="checkbox" data-tm="confetti"> Confetti (Victory)</label>
+    </section>
+    <template id="tteamTpl">
+      <section class="team-sec">
+        <h3></h3>
+        <div class="two">
+          <label>Team name<input data-tt="name"></label>
+          <label>Short name<input data-tt="short"></label>
+        </div>
+        <div class="two">
+          <label>Goals<input data-tt="score" inputmode="numeric"></label>
+          <label>Captain er naam<input data-tt="captain"></label>
+        </div>
+        <label>Goal scorers (comma ba new line)<textarea data-tt="scorers" rows="2"></textarea></label>
+        <label>Club logo (official crest)<input type="file" accept="image/*" data-tlogo></label>
+        <div class="colors">
+          <span>Colours</span>
+          <input type="color" data-tt="color" title="Main colour">
+          <input type="color" data-tt="color2" title="Second colour">
+          <button type="button" data-tauto>Auto from logo</button>
+        </div>
+        <label>Captain er chobi<input type="file" accept="image/*" data-tphoto></label>
+        <label class="check"><input type="checkbox" data-tcut checked> Auto cut-out (background kete dao)</label>
+        <div class="status" data-tstatus></div>
+        <p class="tip">Squad (max 5, 1 = captain / star, majhe boshe):</p>
+        <div data-squad></div>
+      </section>
+    </template>
+    <template id="squadTpl">
+      <div class="prow"><input type="text" data-sn><input type="file" accept="image/*" data-sp title="Photo"><button type="button" data-sx title="Remove photo">✕</button></div>
+    </template>
+    <div id="tteams" data-only="team"></div>
+    <p class="tip">Poster er upor player er chobi ar sob lekha (logo, team name, score, tag, scorers, partners) drag kore shorano jay, mouse wheel e boro-choto hoy, ar niche "Poster e ki ki thakbe" theke je kono ongsho remove kora jay.</p>
+    <section>
+      <h3>Poster e ki ki thakbe</h3>
+      <div id="parts" class="parts"></div>
+      <p class="tip">Tick tule dile oi ongsho poster theke shore jay (sudhu ei layout e).</p>
+    </section>
+    <button type="button" id="resetAll" class="reset-all">Reset to default (sob position, sob ongsho)</button>
+
+    <section>
+      <h3>Partners (niche)</h3>
+      <label>Label<input data-k="partnersLabel"></label>
+      <template id="partnerTpl">
+        <div class="prow"><input type="text" data-pname><input type="file" accept="image/*" data-plogo title="Logo"><button type="button" data-pclear title="Remove">✕</button></div>
+      </template>
+      <div id="partners"></div>
+      <label>Website line<input data-k="site"></label>
+    </section>
+
+    <button type="button" id="download" class="primary">Download PNG (HD)</button>
+  </aside>
+
+  <main class="stage">
+    <div class="frame" id="frame"><div id="poster"></div></div>
+  </main>
+</div>
+
+<script src="lib/html-to-image.js"></script>
+<script src="lib/bg-removal.js"></script>
+<script src="js/samples.js"></script>
+<script src="js/samples-team.js"></script>
+<script src="js/colors.js"></script>
+<script src="js/poster.js"></script>
+<script src="js/team.js"></script>
+<script src="js/studio-edit.js"></script>
+<script src="js/maker.js"></script>
+<script src="js/fit.js"></script>
+<script src="js/studio-nav.js"></script>
+<script src="js/ui.js"></script>
+</body>
+</html>

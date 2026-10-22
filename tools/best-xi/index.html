@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Best XI Poster</title>
+<script src="js/fonts.js"></script>
+<link rel="stylesheet" href="css/poster.css">
+<link rel="stylesheet" href="css/maker.css">
+<link rel="stylesheet" href="css/ui.css">
+</head>
+<body>
+<div class="app">
+  <aside class="form" id="form">
+    <h2>Best XI</h2>
+
+    <section>
+      <h3>Poster</h3>
+      <label>Layout
+        <select data-k="layout">
+          <option value="board">Tactics Board</option>
+          <option value="pitch">Tactic Pitch</option>
+        </select>
+      </label>
+      <label>Formation
+        <select data-k="formation">
+          <option>4-3-3</option>
+          <option>4-4-2</option>
+          <option>4-2-3-1</option>
+          <option>3-5-2</option>
+          <option>3-4-3</option>
+          <option>5-3-2</option>
+        </select>
+      </label>
+      <label>Background
+        <select data-k="bgMode">
+          <option value="template">Default template</option>
+          <option value="jersey">Jersey / logo colours (star player er team)</option>
+          <option value="image">Upload my own</option>
+        </select>
+      </label>
+      <label id="bgUploadRow" style="display:none">Background image (1080 × 1350)<input type="file" accept="image/*" data-file="bgImage"></label>
+      <label>Title<input data-k="title"></label>
+      <label>Event<input data-k="event"></label>
+      <div class="two">
+        <label>Week / round<input data-k="week"></label>
+        <label data-show="pitch">Choto tag<input data-k="tag"></label>
+      </div>
+      <div class="two">
+        <label>Avg box lekha<input data-k="avgLabel"></label>
+        <label data-show="board">Top box lekha<input data-k="topLabel"></label>
+      </div>
+      <label>eFCB logo (optional)<input type="file" accept="image/*" data-file="logo"></label>
+    </section>
+
+    <section>
+      <h3>Players (formation onujai nijer jaygay boshe)</h3>
+      <label class="check"><input type="checkbox" id="cutout" checked> Auto cut-out (chobir background kete dao)</label>
+      <p class="tip">Ek team er ekjoner logo dile, oi team nam er baki player der o same logo boshe jay.</p>
+      <template id="playerTpl">
+        <details class="pdet">
+          <summary></summary>
+          <div class="two">
+            <label>Name<input data-f="name"></label>
+            <label>Team<input data-f="team"></label>
+          </div>
+          <div class="two">
+            <label>Rating<input data-f="rating"></label>
+            <label class="check star-pick"><input type="radio" name="star" data-star> Week er star</label>
+          </div>
+          <label>Photo<input type="file" accept="image/*" data-photo></label>
+          <div class="status" data-status></div>
+          <label>Team logo<input type="file" accept="image/*" data-logo></label>
+          <div class="colors">
+            <span>Kit colour</span>
+            <input type="color" data-f="kit" title="Kit colour">
+            <button type="button" data-auto>Auto from jersey</button>
+          </div>
+          <div class="pos">
+            <span>Mukh size</span>
+            <input type="range" min="40" max="250" value="100" data-zoom aria-label="Photo size">
+            <span data-zoom-val>100%</span>
+            <button type="button" data-reset-pos>Reset</button>
+          </div>
+        </details>
+      </template>
+      <div id="players"></div>
+    </section>
+
+    <p class="tip">Poster e chobi drag korle chobi ta gol/tile er bhitore shore (mukh adjust), wheel e mukh boro-choto hoy. Nam er plate ba rating dhore drag korle pura player shore jay, wheel e pura player boro-choto hoy. Title, pitch/board, avg box, partners shob drag + wheel kora jay.</p>
+    <section>
+      <h3>Poster e ki ki thakbe</h3>
+      <div id="parts" class="parts"></div>
+      <p class="tip">Tick tule dile oi ongsho poster theke shore jay (sudhu ei layout e).</p>
+    </section>
+    <button type="button" id="resetAll" class="reset-all">Reset to default (sob position, sob ongsho)</button>
+
+    <section>
+      <h3>Partners (niche)</h3>
+      <label>Label<input data-k="partnersLabel"></label>
+      <template id="partnerTpl">
+        <div class="prow"><input type="text" data-pname><input type="file" accept="image/*" data-plogo title="Logo"><button type="button" data-pclear title="Remove">✕</button></div>
+      </template>
+      <div id="partners"></div>
+      <label>Website line<input data-k="site"></label>
+    </section>
+
+    <button type="button" id="download" class="primary">Download PNG (HD)</button>
+  </aside>
+
+  <main class="stage">
+    <div class="frame" id="frame"><div id="poster"></div></div>
+  </main>
+</div>
+
+<script src="lib/html-to-image.js"></script>
+<script src="lib/bg-removal.js"></script>
+<script src="js/samples.js"></script>
+<script src="js/colors.js"></script>
+<script src="js/poster.js"></script>
+<script src="js/studio-edit.js"></script>
+<script src="js/maker.js"></script>
+<script src="js/fit.js"></script>
+<script src="js/studio-nav.js"></script>
+<script src="js/ui.js"></script>
+</body>
+</html>

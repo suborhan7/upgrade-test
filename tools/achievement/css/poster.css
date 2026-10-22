@@ -1,0 +1,125 @@
+/* Achievement poster, 1080 × 1350. Three layouts: .gold (Golden Glory), .neon (Neon Spotlight), .ink (Ink Splash). */
+.ac { position: relative; width: 1080px; height: 1350px; overflow: hidden; color: #fff; background: var(--bgB); }
+.ac * { box-sizing: border-box; margin: 0; padding: 0; }
+.ac svg.full { position: absolute; left: 0; top: 0; width: 1080px; height: 1350px; }
+.ac .upbg { position: absolute; inset: 0; background: center/cover no-repeat; }
+.ac .wash { position: absolute; inset: 0; }
+.ac .lg { display: block; flex: none; object-fit: contain; }
+.ac .mono { display: flex; flex: none; align-items: center; justify-content: center; border-radius: 50%; font: 800 20px/1 'Manrope'; color: #fff; }
+.ac .el { height: 40px; width: auto; display: block; }
+.ac .grp { position: absolute; left: 0; top: 0; width: 1080px; overflow: hidden; pointer-events: none; }
+.ac .grp img { position: absolute; max-width: none; pointer-events: auto; cursor: move; filter: drop-shadow(0 0 1.5px rgba(255,255,255,.5)) drop-shadow(0 0 24px var(--g1)) drop-shadow(0 10px 18px rgba(0,0,0,.45)); }
+.ac .grp img:not(.gimg) { -webkit-mask-image: linear-gradient(180deg, #000 80%, transparent 98%); mask-image: linear-gradient(180deg, #000 80%, transparent 98%); }
+.ac .grp img.gimg { height: auto; }
+.ac svg.pool { pointer-events: none; }   /* confetti, splash and bolts stay clickable: the studio picks only their painted shapes */
+/* name tags on the chests, the MVP badge above one of them */
+.ac .ntags { position: absolute; inset: 0; pointer-events: none; }
+.ac .ntag { position: absolute; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 5px; white-space: nowrap; }
+.ac .ntag b { display: inline-block; padding: 6px 13px 5px; font: italic 800 25px/1 'Kanit'; letter-spacing: .05em; color: #fff; pointer-events: auto; cursor: move;
+  background: linear-gradient(180deg, rgba(8,8,16,.8), rgba(8,8,16,.62)); border-bottom: 4px solid var(--c1); box-shadow: 0 6px 16px rgba(0,0,0,.45); transform: skewX(-8deg); }
+.ac .ntag.bk b { font-size: 20px; padding: 5px 10px 4px; border-bottom-width: 3px; }
+.ac .ntag em { display: inline-block; padding: 5px 11px 4px; font: italic 900 19px/1 'Kanit'; letter-spacing: .08em; font-style: normal; color: #2a1600; pointer-events: auto; cursor: move;
+  background: linear-gradient(180deg, #fff3c4, #f5b829 55%, #c8860f); border-radius: 4px; box-shadow: 0 0 18px rgba(245,184,41,.7), 0 4px 10px rgba(0,0,0,.4); }
+.ac .mv[data-move="tags"], .ac .mv[data-move="crest"], .ac .mv[data-move="season"], .ac .mv[data-move="stats"], .ac .mv[data-move="names"] { z-index: 7; }
+
+/* partners strip */
+.ac .sp { position: absolute; left: 0; right: 0; top: 1255px; height: 95px; z-index: 7; }
+.ac .sp .k { position: absolute; left: 0; right: 0; top: 11px; text-align: center; font: 700 11px/1 'Manrope'; letter-spacing: .6em; color: rgba(255,255,255,.55); }
+.ac .sp .sprow { position: absolute; left: 90px; right: 90px; top: 29px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+.ac .sp .sprow div { height: 42px; display: flex; align-items: center; justify-content: center; font: 800 17px/1 'Manrope'; letter-spacing: .08em; color: rgba(255,255,255,.82); }
+.ac .sp .sprow img { max-height: 32px; max-width: 90%; object-fit: contain; }
+.ac .sp .w { position: absolute; left: 0; right: 0; bottom: 8px; text-align: center; font: 600 10px/1 'Manrope'; letter-spacing: .5em; color: rgba(255,255,255,.5); }
+.ac .mv[data-move="partners"] { z-index: 7; }
+
+/* ===== Golden Glory ===== */
+.gold .hd { position: absolute; left: 0; right: 0; top: 52px; display: flex; align-items: center; justify-content: center; gap: 14px;
+  font: 800 22px/1 'Saira Condensed'; letter-spacing: .42em; color: var(--m0); }
+.gold .sl { position: absolute; right: 64px; top: 64px; width: 150px; height: 150px; z-index: 7; }
+.gold .sl .seal { width: 150px; height: 150px; display: block; filter: drop-shadow(0 8px 18px rgba(0,0,0,.5)); }
+.gold .mv[data-move="seal"] { z-index: 7; }
+.gold .mv[data-move="title"], .gold .mv[data-move="script"] { z-index: 7; }
+.gold .ttl { position: absolute; left: 20px; right: 20px; top: 736px; text-align: center; }
+.gold .ttl b { display: block; width: 100%; white-space: nowrap; overflow: hidden; padding: 0 14px 10px; font: italic 900 196px/1 'Kanit'; letter-spacing: -.015em;
+  background: linear-gradient(180deg, var(--m0) 8%, var(--m1) 46%, var(--m2) 54%, var(--m1) 78%, var(--m0)); -webkit-background-clip: text; background-clip: text; color: transparent;
+  -webkit-text-stroke: 2px rgba(255,255,255,.35); filter: drop-shadow(0 6px 0 rgba(0,0,0,.55)) drop-shadow(0 0 28px rgba(0,0,0,.55)); }
+.gold .scr { position: absolute; left: 400px; right: 50px; top: 812px; text-align: right; white-space: nowrap; overflow: hidden; padding: 0 20px 14px 0;
+  font: 400 76px/1.3 'Kaushan Script'; color: #fff; transform: rotate(-6deg); transform-origin: right center;
+  text-shadow: 0 0 2px var(--c2), 0 4px 0 var(--c2), 0 0 26px var(--g2); }
+.gold .cst { position: absolute; left: 60px; right: 60px; top: 960px; display: flex; align-items: center; justify-content: center; gap: 16px; }
+.gold .cst b { max-width: 760px; white-space: nowrap; overflow: hidden; font: italic 800 50px/1.1 'Kanit'; letter-spacing: .02em; color: #fff; text-shadow: 0 4px 0 var(--d1); }
+.gold .ssn { position: absolute; left: 80px; right: 80px; top: 1046px; display: flex; align-items: center; justify-content: center; gap: 20px; }
+.gold .ssn span { display: block; max-width: 680px; white-space: nowrap; overflow: hidden; font: 700 20px/1 'Manrope'; letter-spacing: .38em; color: rgba(255,255,255,.82); }
+.gold .ssn i { flex: 1; height: 2px; background: linear-gradient(90deg, transparent, var(--m1)); }
+.gold .ssn i:last-child { background: linear-gradient(90deg, var(--m1), transparent); }
+.gold .stats { position: absolute; left: 110px; right: 110px; top: 1092px; display: grid; grid-template-columns: repeat(var(--n), 1fr); gap: 18px; }
+.gold .st { position: relative; padding: 12px 8px 10px; text-align: center; background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+  border: 2px solid var(--m1); border-radius: 6px; box-shadow: 0 0 24px rgba(0,0,0,.4) inset; }
+.gold .st span { display: block; font: 800 20px/1 'Saira Condensed'; letter-spacing: .2em; color: var(--m1); }
+.gold .st b { display: block; margin-top: 6px; white-space: nowrap; font: italic 900 52px/1 'Kanit'; color: #fff; }
+.gold .names { position: absolute; left: 80px; right: 80px; top: 1218px; text-align: center; white-space: nowrap; overflow: hidden; font: 700 17px/1 'Manrope'; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.8); }
+.gold .names em { font-style: normal; color: var(--m1); margin: 0 12px; font-size: 12px; vertical-align: 2px; }
+.gold .ntag b { border-bottom-color: var(--m1); }
+.gold .sp { background: rgba(0,0,0,.35); }
+.gold .sp::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--m1), var(--c2), transparent); }
+
+/* ===== Neon Spotlight ===== */
+.neon .hd { position: absolute; left: 0; right: 0; top: 50px; display: flex; align-items: center; justify-content: center; gap: 14px;
+  font: 700 24px/1 'Rajdhani'; letter-spacing: .4em; color: #fff; }
+.neon .ttl { position: absolute; left: 10px; right: 10px; top: 214px; text-align: center; }
+.neon .ttl b { display: block; width: 100%; white-space: nowrap; overflow: hidden; padding: 0 20px; font: 400 300px/1 'Bebas Neue'; letter-spacing: .01em; color: #fff;
+  transform: skewX(-9deg); text-shadow: 0 0 40px rgba(255,255,255,.25), 0 14px 40px rgba(0,0,0,.5); }
+.neon .mv[data-move="script"] { z-index: 7; }
+.neon .scr { position: absolute; left: 60px; right: 60px; top: 112px; text-align: center; white-space: nowrap; overflow: hidden; padding: 0 20px 20px;
+  font: 400 128px/1.25 'Kaushan Script'; color: var(--l1); transform: rotate(-6deg);
+  text-shadow: 0 0 6px var(--c1), 0 0 18px var(--c1), 0 0 42px var(--c1), 0 0 80px var(--g1); }
+.neon .mv[data-move="bolts"] { z-index: 6; }
+.neon .cst { position: absolute; left: 60px; right: 60px; top: 990px; display: flex; align-items: center; justify-content: center; gap: 16px; }
+.neon .cst .lg, .neon .cst .mono { filter: drop-shadow(0 0 12px var(--c1)); }
+.neon .cst b { max-width: 760px; white-space: nowrap; overflow: hidden; font: 700 56px/1.1 'Rajdhani'; letter-spacing: .12em; text-shadow: 0 0 20px var(--c1); }
+.neon .ssn { position: absolute; left: 80px; right: 80px; top: 1066px; text-align: center; }
+.neon .ssn span { display: block; white-space: nowrap; overflow: hidden; font: 700 24px/1 'Rajdhani'; letter-spacing: .42em; color: var(--c1); }
+.neon .stats { position: absolute; left: 150px; right: 150px; top: 1110px; display: grid; grid-template-columns: repeat(var(--n), 1fr); }
+.neon .st { position: relative; text-align: center; padding: 8px 6px; }
+.neon .st + .st::before { content: ''; position: absolute; left: 0; top: 12px; bottom: 12px; width: 2px; background: var(--c2); box-shadow: 0 0 10px var(--c2); }
+.neon .st span { display: block; font: 700 20px/1 'Rajdhani'; letter-spacing: .3em; color: var(--c2); }
+.neon .st b { display: block; margin-top: 6px; white-space: nowrap; font: 700 58px/1 'Rajdhani'; color: #fff; text-shadow: 0 0 16px var(--g1); }
+.neon .names { position: absolute; left: 80px; right: 80px; top: 1222px; text-align: center; white-space: nowrap; overflow: hidden; font: 700 19px/1 'Rajdhani'; letter-spacing: .26em; text-transform: uppercase; }
+.neon .names em { font-style: normal; color: var(--c2); margin: 0 12px; }
+.neon .ntag b { font-family: 'Rajdhani'; font-style: normal; font-weight: 700; letter-spacing: .14em; transform: none; border: 2px solid var(--c1); border-radius: 4px;
+  background: rgba(4,10,14,.72); box-shadow: 0 0 14px var(--g1); }
+.neon .sp { border-top: 1px solid rgba(255,255,255,.12); background: linear-gradient(180deg, transparent, rgba(0,0,0,.5)); }
+
+/* ===== Ink Splash ===== */
+.ink .hd { position: absolute; left: 50px; top: 52px; display: flex; align-items: center; gap: 12px; font: italic 800 26px/1 'Kanit'; letter-spacing: .04em; color: #15102e; }
+.ink.up .hd { color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,.6); }
+.ink .cst { position: absolute; right: 50px; top: 40px; }
+.ink .cst .lg, .ink .cst .mono { filter: drop-shadow(0 8px 16px rgba(0,0,0,.35)); }
+.ink .grp img { filter: drop-shadow(0 0 1.5px rgba(255,255,255,.7)) drop-shadow(8px 10px 0 rgba(10,8,38,.28)) drop-shadow(0 12px 20px rgba(0,0,0,.35)); }
+.ink svg.pool { z-index: 6; }
+.ink .mv[data-move="title"], .ink .mv[data-move="script"] { z-index: 7; }
+.ink .scr { position: absolute; left: 70px; top: 912px; }
+.ink .scr span { display: inline-block; padding: 9px 20px 8px; background: var(--c2); font: italic 800 28px/1 'Kanit'; letter-spacing: .08em; color: #fff; transform: skewX(-14deg) rotate(-4deg); box-shadow: 6px 6px 0 rgba(0,0,0,.35); }
+.ink .ttl { position: absolute; left: 20px; right: 20px; top: 940px; transform: rotate(-4deg); }
+.ink .ttl b { position: relative; z-index: 1; display: block; width: 100%; white-space: nowrap; overflow: hidden; padding: 0 30px 12px 20px; text-align: center; font: italic 900 178px/1 'Kanit'; letter-spacing: -.02em;
+  background: linear-gradient(180deg, #ffffff 0%, #e9ecf5 40%, var(--l1) 48%, #ffffff 56%, #b9bfd4 80%, #ffffff); -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(5px 6px 0 var(--ink)) drop-shadow(0 12px 22px rgba(0,0,0,.6)); }
+.ink .ttl i { position: absolute; left: 30px; right: 30px; top: 46%; height: 6px; z-index: 2; background: linear-gradient(90deg, transparent, #fff 30%, #fff 60%, transparent);
+  box-shadow: 0 0 16px #fff, 0 0 30px var(--c2); clip-path: polygon(0 50%, 100% 0, 100% 100%); }
+.ink .ssn { position: absolute; left: 70px; right: 70px; top: 1136px; display: flex; align-items: center; justify-content: center; gap: 18px; }
+.ink .ssn b { flex: none; max-width: 520px; white-space: nowrap; overflow: hidden; padding: 7px 18px 6px; background: #fff; color: #15102e; font: italic 800 30px/1 'Kanit'; letter-spacing: .03em; transform: skewX(-12deg); }
+.ink .ssn span { display: block; min-width: 0; white-space: nowrap; overflow: hidden; font: 700 18px/1 'Manrope'; letter-spacing: .3em; color: rgba(255,255,255,.85); }
+.ink .stats { position: absolute; left: 140px; right: 140px; top: 1182px; display: grid; grid-template-columns: repeat(var(--n), 1fr); gap: 14px; }
+.ink .st { display: flex; align-items: baseline; justify-content: center; gap: 10px; padding: 8px 10px 7px; background: rgba(255,255,255,.08); border-left: 5px solid var(--c2); transform: skewX(-12deg); }
+.ink .st span { font: 800 15px/1 'Manrope'; letter-spacing: .18em; color: var(--c2); }
+.ink .st b { white-space: nowrap; font: italic 900 32px/1 'Kanit'; color: #fff; }
+.ink .names { position: absolute; left: 80px; right: 80px; top: 1100px; text-align: center; white-space: nowrap; overflow: hidden; font: italic 700 18px/1 'Kanit'; letter-spacing: .18em; text-transform: uppercase; }
+.ink .names em { font-style: normal; color: var(--c2); margin: 0 12px; }
+.ink .ntag b { background: #fff; color: #15102e; border-bottom-color: var(--c2); }
+.ink .sp { background: rgba(0,0,0,.25); }
+
+/* fades the bottom of the squad into the background (the cut-out edges never show) */
+.ac .fadeb { position: absolute; left: 0; right: 0; z-index: 6; pointer-events: none; background: linear-gradient(180deg, transparent, var(--bgB) 92%); }
+.ink .fadeb { background: linear-gradient(180deg, rgba(244,241,236,0), rgba(244,241,236,.85) 70%, #f4f1ec); }
+.ink.up .fadeb { display: none; }
+.neon svg.haze { position: absolute; left: 0; top: 560px; width: 1080px; height: 520px; opacity: .55; pointer-events: none;
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 40%, #000 70%, transparent); mask-image: linear-gradient(180deg, transparent, #000 40%, #000 70%, transparent); }

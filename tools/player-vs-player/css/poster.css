@@ -1,0 +1,251 @@
+/* Player vs Player poster, 1080 x 1350. Five layouts: bolt (lightning split), neon (neon frames), slash (slash plates),
+   chrome (chrome bar), half (halftone slash). Colours come in as --a/--a2 (team 1) and --b/--b2 (team 2). */
+.tvt{position:relative;width:1080px;height:1350px;overflow:hidden;color:#fff;box-sizing:border-box}
+.tvt *{box-sizing:border-box;margin:0;padding:0}
+.tvt .abs{position:absolute}
+.tvt .upbg{position:absolute;inset:0;background-size:cover;background-position:center}
+.tvt .wash{position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,7,16,.35),rgba(5,7,16,.1) 40%,rgba(5,7,16,.75))}
+.tvt svg.full{position:absolute;left:0;top:0;width:1080px;height:1350px}
+.tvt .sp{position:absolute;left:0;right:0;top:1200px;height:150px}
+.tvt .sp .k{position:absolute;left:0;right:0;top:18px;text-align:center;font:600 14px/1 'Montserrat';letter-spacing:.55em}
+.tvt .sp .row{position:absolute;left:56px;right:56px;top:44px;display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.tvt .sp .row div{height:62px;display:flex;align-items:center;justify-content:center;font:800 22px/1 'Montserrat';letter-spacing:.04em}
+.tvt .sp .w{position:absolute;left:0;right:0;bottom:12px;text-align:center;font:600 12px/1 'Montserrat';letter-spacing:.5em}
+.tvt .hdr .brand{position:absolute;left:52px;top:44px;font:800 26px/1 'Montserrat';letter-spacing:.14em;padding:9px 14px}
+.tvt .hdr .ev{position:absolute;right:52px;top:44px;text-align:right;font:700 19px/1.35 'Montserrat';letter-spacing:.24em;text-transform:uppercase}
+.tvt .hdr .ev b{display:block;font-size:28px;letter-spacing:.12em}
+
+/* big stage title that fills the top */
+.tvt .ttl{position:absolute;left:0;right:0;top:150px;text-align:center}
+.tvt .ttl b{display:block;text-transform:uppercase;white-space:nowrap}
+.tvt .ttl span{display:block;margin-top:12px;font:700 20px/1 'Montserrat';letter-spacing:.42em;text-transform:uppercase}
+.tvt.bolt .ttl b{font:900 italic 100px/1 'Rubik';color:#fff;-webkit-text-stroke:8px #10142a;paint-order:stroke fill;filter:drop-shadow(6px 7px 0 #10142a)}
+.tvt.bolt .ttl span{color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.5)}
+.tvt.neon .ttl{top:160px}.tvt.neon .ttl b{font:400 86px/1 'Graduate';color:#fff;text-shadow:0 0 6px #fff,0 0 18px #b9a4ff,0 0 40px #7b5cff}
+.tvt.neon .ttl span{color:#cfd2ff}
+.tvt.chrome .ttl{top:160px}.tvt.chrome .ttl b{font:900 italic 104px/1 'Exo 2';background:linear-gradient(180deg,#fff 0%,#e8ebf3 45%,#9aa1b6 55%,#eef0f6 100%);-webkit-background-clip:text;color:transparent;filter:drop-shadow(0 6px 14px rgba(0,0,0,.6))}
+.tvt.chrome .ttl span{color:#cfd3ea}
+.tvt.half .ttl{top:140px}.tvt.half .ttl b{font:400 120px/1 'Anton';color:#fff;transform:skewX(-10deg);text-shadow:7px 7px 0 rgba(8,14,40,.75)}
+.tvt.half .ttl span{color:#fff}
+
+/* ===== 1. LIGHTNING SPLIT (ref 2 + 3) ===== */
+.tvt.bolt .sp{background:#0d1020}.tvt.bolt .sp .k{color:#8d93b5}.tvt.bolt .sp .row div{background:rgba(255,255,255,.06);border-radius:8px;color:#eef0fa}.tvt.bolt .sp .w{color:#666c8c}
+.tvt.bolt .lines{position:absolute;inset:0;mix-blend-mode:screen;opacity:.55}
+.tvt.bolt .dots{position:absolute;inset:0;opacity:.22;background-image:radial-gradient(circle,#fff 2.2px,transparent 2.6px);background-size:22px 22px;
+  -webkit-mask:linear-gradient(180deg,transparent 0%,#000 40%,#000 80%,transparent)}
+.tvt.bolt .hdr .brand{background:#fff;color:#111}
+.tvt.bolt .hdr .ev{color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.35)}
+.tvt.bolt .vs{position:absolute;left:340px;top:470px;width:400px;height:260px;display:flex;align-items:center;justify-content:center;gap:0}
+.tvt.bolt .vs span{font:900 italic 210px/1 'Rubik';-webkit-text-stroke:10px #10142a;paint-order:stroke fill;filter:drop-shadow(0 0 0 #fff) drop-shadow(6px 8px 0 #10142a)}
+.tvt.bolt .vs .v{background:linear-gradient(180deg,var(--a2),var(--a));-webkit-background-clip:text;color:transparent;margin-top:-40px}
+.tvt.bolt .vs .s{background:linear-gradient(180deg,var(--b2),var(--b));-webkit-background-clip:text;color:transparent;margin-top:70px;margin-left:-18px}
+.tvt.bolt .vs .o{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.tvt.bolt .vs .o span{color:transparent;-webkit-text-stroke:22px #fff;filter:none;background:none}
+.tvt.bolt .pl{position:absolute;top:1010px;height:96px;width:470px;display:flex;flex-direction:column;justify-content:center;padding:0 28px;transform:skewX(-14deg);box-shadow:0 10px 24px rgba(0,0,0,.35)}
+.tvt.bolt .pl > *{transform:skewX(14deg)}
+.tvt.bolt .plA{left:30px;background:#10142a;border-left:10px solid var(--a)}
+.tvt.bolt .plB{right:30px;background:#10142a;border-right:10px solid var(--b);text-align:right}
+.tvt.bolt .pl b{font:900 italic 46px/1 'Rubik';text-transform:uppercase;white-space:nowrap}
+.tvt.bolt .pl span{font:700 18px/1 'Montserrat';letter-spacing:.24em;margin-top:8px;text-transform:uppercase}
+.tvt.bolt .plA span{color:var(--a2)}.tvt.bolt .plB span{color:var(--b2)}
+.tvt.bolt .info{position:absolute;left:0;right:0;top:1124px;text-align:center}
+.tvt.bolt .info div{display:inline-block;background:#fff;color:#10142a;padding:12px 28px;font:800 26px/1 'Montserrat';letter-spacing:.14em;transform:skewX(-14deg);box-shadow:6px 6px 0 #10142a}
+.tvt.bolt .info div i{font-style:normal;display:inline-block;transform:skewX(14deg)}
+.tvt.bolt .info em{font-style:italic;font-weight:900;font-family:'Rubik';font-size:32px;color:var(--a)}
+
+/* ===== 2. NEON FRAMES (ref 4) ===== */
+.tvt.neon{background:radial-gradient(90% 70% at 50% 45%,#1a1c56 0%,#0d0e33 55%,#06061a 100%);font-family:'Montserrat'}
+.tvt.neon .sp{background:rgba(4,4,18,.85);border-top:1px solid rgba(255,255,255,.08)}.tvt.neon .sp .k{color:#8a8cc4}
+.tvt.neon .sp .row div{border-radius:12px;color:#eef;border:1.5px solid rgba(255,255,255,.18)}.tvt.neon .sp .w{color:#5c5e94}
+.tvt.neon .hdr .brand{border:2px solid #fff;box-shadow:0 0 12px rgba(255,255,255,.5),inset 0 0 8px rgba(255,255,255,.35);text-shadow:0 0 8px #fff}
+.tvt.neon .hdr .ev{color:#fff;text-shadow:0 0 10px rgba(255,255,255,.5)}
+.tvt.neon .hdr .ev b{color:#fff}
+.tvt.neon .glowA{filter:drop-shadow(0 0 4px var(--a2)) drop-shadow(0 0 14px var(--a)) drop-shadow(0 0 30px var(--a))}
+.tvt.neon .glowB{filter:drop-shadow(0 0 4px var(--b2)) drop-shadow(0 0 14px var(--b)) drop-shadow(0 0 30px var(--b))}
+.tvt.neon .vs{position:absolute;left:390px;top:440px;width:300px;height:300px}
+.tvt.neon .vs .v,.tvt.neon .vs .s{position:absolute;font:400 200px/1 'Graduate';color:transparent}
+.tvt.neon .vs .v{left:-20px;top:-20px;-webkit-text-stroke:7px #fff}
+.tvt.neon .vs .s{right:-20px;bottom:-20px;-webkit-text-stroke:7px #fff}
+.tvt.neon .nm{position:absolute;top:1030px;width:470px}
+.tvt.neon .nmA{left:40px}.tvt.neon .nmB{right:40px;text-align:right}
+.tvt.neon .nm b{display:block;font:400 54px/1 'Graduate';text-transform:uppercase;white-space:nowrap;color:#fff}
+.tvt.neon .nmA b{text-shadow:0 0 6px var(--a2),0 0 18px var(--a),0 0 36px var(--a)}
+.tvt.neon .nmB b{text-shadow:0 0 6px var(--b2),0 0 18px var(--b),0 0 36px var(--b)}
+.tvt.neon .nm span{display:block;margin-top:10px;font:700 18px/1 'Montserrat';letter-spacing:.3em;text-transform:uppercase;color:#d8daf6}
+.tvt.neon .info{position:absolute;left:0;right:0;top:1128px;text-align:center;font:700 24px/1 'Montserrat';letter-spacing:.24em;color:#fff}
+.tvt.neon .info b{font:400 40px/1 'Graduate';letter-spacing:.04em;color:#fff;text-shadow:0 0 8px #ffd27a,0 0 22px #ff9a3c;vertical-align:-6px;margin:0 16px}
+
+/* ===== 3. SLASH PLATES (ref 1) ===== */
+.tvt.slash{background:linear-gradient(160deg,#f1f2f5,#dfe1e6);color:#1d1e22;font-family:'Montserrat'}
+.tvt.slash .sp{background:#fff;border-top:1px solid #d6d8de}.tvt.slash .sp .k{color:#8a8d97}.tvt.slash .sp .row div{color:#2a2b31;border:1.5px solid #dcdee4;border-radius:6px}.tvt.slash .sp .w{color:#a2a5ae}
+.tvt.slash .dotsL,.tvt.slash .dotsR{position:absolute;top:120px;width:520px;height:900px;background-image:radial-gradient(circle,#fff 3.4px,transparent 3.9px);background-size:26px 26px}
+.tvt.slash .dotsL{left:-60px;-webkit-mask:radial-gradient(closest-side,transparent 30%,#000 55%,transparent 100%)}
+.tvt.slash .dotsR{right:-60px;-webkit-mask:radial-gradient(closest-side,transparent 30%,#000 55%,transparent 100%)}
+.tvt.slash .tint{position:absolute;inset:0}
+.tvt.slash .hdr .brand{background:#2b2c31;color:#fff}
+.tvt.slash .hdr .ev{color:#2b2c31}.tvt.slash .hdr .ev b{color:#111}
+.tvt.slash .pl{position:absolute;height:150px;display:flex;flex-direction:column;justify-content:center;box-shadow:0 14px 26px rgba(0,0,0,.25)}
+.tvt.slash .plA{left:0;top:790px;width:610px;padding-left:60px;background:#34353b;clip-path:polygon(0 0,100% 0,88% 100%,0 100%)}
+.tvt.slash .plB{right:0;top:940px;width:610px;padding-right:60px;text-align:right;background:#34353b;clip-path:polygon(12% 0,100% 0,100% 100%,0 100%)}
+.tvt.slash .pl:after{content:"";position:absolute;top:0;bottom:0;width:12px}
+.tvt.slash .plA:after{left:0;background:var(--a)} .tvt.slash .plB:after{right:0;background:var(--b)}
+.tvt.slash .pl small{font:500 26px/1 'Montserrat';color:#cfd1d8}
+.tvt.slash .pl b{font:800 56px/1.05 'Montserrat';color:#fff;text-transform:uppercase;white-space:nowrap}
+.tvt.slash .pl span{font:700 17px/1 'Montserrat';letter-spacing:.26em;margin-top:6px;text-transform:uppercase}
+.tvt.slash .plA span{color:var(--a2)}.tvt.slash .plB span{color:var(--b2)}
+.tvt.slash .vs{position:absolute;left:395px;top:790px;font:800 250px/1 'Montserrat';letter-spacing:-.04em;display:flex}
+.tvt.slash .vs .v{color:var(--a);filter:drop-shadow(6px 10px 14px rgba(0,0,0,.3))}
+.tvt.slash .vs .s{color:#fff;margin-left:-26px;filter:drop-shadow(6px 10px 14px rgba(0,0,0,.35))}
+.tvt.slash .info{position:absolute;left:56px;top:1112px;font:600 24px/1 'Montserrat';letter-spacing:.2em;color:#3a3b42}
+.tvt.slash .info b{font:800 54px/1 'Montserrat';color:#1d1e22;letter-spacing:0;margin-right:16px;vertical-align:-10px}
+
+/* light template on a dark uploaded image: switch its dark text to white */
+.tvt.slash.up .info,.tvt.slash.up .info b,.tvt.slash.up .hdr .ev,.tvt.slash.up .hdr .ev b{color:#fff}
+
+/* ===== 4. CHROME BAR (ref 5) ===== */
+.tvt.chrome{background:radial-gradient(45% 32% at 0% 30%,color-mix(in srgb,var(--a) 45%,transparent),transparent),radial-gradient(45% 32% at 100% 30%,color-mix(in srgb,var(--b) 45%,transparent),transparent),radial-gradient(80% 60% at 50% 55%,#0d1033,#05061a 70%);font-family:'Exo 2'}
+.tvt.chrome .sp{background:#04050f;border-top:1px solid rgba(255,255,255,.08)}.tvt.chrome .sp .k{color:#7d81a8}
+.tvt.chrome .sp .row div{color:#1b1e34;background:linear-gradient(180deg,#fff,#cfd3dd);border-radius:6px;font-family:'Exo 2';font-style:italic;font-weight:800}.tvt.chrome .sp .w{color:#555a80}
+.tvt.chrome .hdr .brand{background:linear-gradient(180deg,#fff,#c9cdd8);color:#11142c}
+.tvt.chrome .hdr .ev{color:#e6e8f6}
+.tvt.chrome .stream{position:absolute;top:760px;width:760px;height:620px;filter:blur(50px);opacity:1}
+.tvt.chrome .stA{left:-200px;background:radial-gradient(closest-side,var(--a),transparent)}
+.tvt.chrome .stB{right:-200px;background:radial-gradient(closest-side,var(--b),transparent)}
+.tvt.chrome .bar{position:absolute;left:60px;right:60px;top:900px;height:110px;border-radius:14px;
+  background:linear-gradient(180deg,#ffffff 0%,#eceef3 40%,#c3c8d4 100%);box-shadow:0 18px 40px rgba(0,0,0,.6),inset 0 -3px 0 rgba(0,0,0,.12)}
+.tvt.chrome .lip{position:absolute;left:130px;right:130px;top:990px;height:62px;border-radius:0 0 22px 22px;
+  background:linear-gradient(180deg,#dde0e8,#f4f5f8 60%,#c7cbd6);box-shadow:0 14px 30px rgba(0,0,0,.5)}
+.tvt.chrome .tn{position:absolute;top:928px;width:330px;font:900 italic 46px/1 'Exo 2';text-transform:uppercase;white-space:nowrap}
+.tvt.chrome .tnA{left:100px;color:var(--a)}.tvt.chrome .tnB{right:100px;text-align:right;color:var(--b)}
+.tvt.chrome .pn{position:absolute;top:1006px;width:300px;font:700 18px/1 'Montserrat';letter-spacing:.26em;color:#3a3f58;text-transform:uppercase}
+.tvt.chrome .pnA{left:160px}.tvt.chrome .pnB{right:160px;text-align:right}
+.tvt.chrome .shield{position:absolute;left:430px;top:850px;width:220px;height:220px;
+  clip-path:polygon(50% 0,100% 18%,100% 70%,50% 100%,0 70%,0 18%);background:linear-gradient(160deg,#ffffff,#b9bfcc 55%,#eef0f5)}
+.tvt.chrome .shield2{position:absolute;left:442px;top:864px;width:196px;height:194px;
+  clip-path:polygon(50% 0,100% 18%,100% 70%,50% 100%,0 70%,0 18%);background:linear-gradient(180deg,#f7f8fb,#d4d8e2)}
+.tvt.chrome .vs{position:absolute;left:430px;top:870px;width:220px;height:180px;display:flex;align-items:center;justify-content:center}
+.tvt.chrome .vs span{font:900 italic 140px/1 'Exo 2';letter-spacing:-.06em;-webkit-background-clip:text;color:transparent;filter:drop-shadow(2px 3px 0 rgba(0,0,0,.25))}
+.tvt.chrome .vs .v{background-image:radial-gradient(circle,rgba(255,255,255,.35) 1.5px,transparent 2px),linear-gradient(180deg,var(--a2),var(--a) 60%);background-size:7px 7px,100% 100%}
+.tvt.chrome .vs .s{background-image:radial-gradient(circle,rgba(255,255,255,.35) 1.5px,transparent 2px),linear-gradient(180deg,var(--b2),var(--b) 60%);background-size:7px 7px,100% 100%;margin-left:-6px}
+.tvt.chrome .info{position:absolute;left:0;right:0;top:1100px;text-align:center;font:600 24px/1 'Montserrat';letter-spacing:.3em;color:#dfe2f2}
+.tvt.chrome .info b{font:900 italic 44px/1 'Exo 2';letter-spacing:.02em;color:#fff;margin:0 18px;vertical-align:-6px}
+
+/* ===== 5. HALFTONE SLASH (ref 6) ===== */
+.tvt.half .sp{background:#0b1226}.tvt.half .sp .k{color:#8b93b8}.tvt.half .sp .row div{color:#fff;background:rgba(255,255,255,.06);clip-path:polygon(6% 0,100% 0,94% 100%,0 100%)}.tvt.half .sp .w{color:#5d6588}
+.tvt.half .hdr .brand{background:#fff;color:var(--a)}
+.tvt.half .hdr .ev{color:#fff}
+.tvt.half .vs{position:absolute;left:250px;top:420px;width:580px;height:420px;display:flex;align-items:center;justify-content:center}
+.tvt.half .vs b{font:400 330px/1 'Anton';color:#fff;transform:skewX(-14deg);letter-spacing:-.02em;text-shadow:10px 10px 0 var(--sh),12px 12px 0 var(--sh),14px 14px 0 var(--sh)}
+.tvt.half .tn{position:absolute;top:1030px;width:470px}
+.tvt.half .tnA{left:50px}.tvt.half .tnB{right:50px;text-align:right}
+.tvt.half .tn b{display:block;font:400 64px/1 'Anton';text-transform:uppercase;white-space:nowrap;transform:skewX(-10deg);text-shadow:5px 5px 0 rgba(0,0,0,.35)}
+.tvt.half .tn span{display:inline-block;margin-top:10px;font:700 19px/1 'Montserrat';letter-spacing:.26em;text-transform:uppercase;padding:7px 12px;background:#fff;color:#111}
+.tvt.half .info{position:absolute;left:50%;transform:translateX(-50%);white-space:nowrap;top:1130px;text-align:center;background:rgba(8,12,30,.88);padding:12px 26px;font:700 24px/1 'Montserrat';letter-spacing:.26em}
+.tvt.half .info b{font:400 40px/1 'Anton';letter-spacing:.04em;margin:0 14px;vertical-align:-5px}
+
+/* player photos: placed by head size in poster.js, clipped at the plate/bar line so the cut edge never shows */
+.tvt .slot{position:absolute;left:0;top:0;width:1080px;overflow:hidden;pointer-events:none}
+.tvt .slot img{position:absolute;max-width:none;pointer-events:auto;cursor:grab;image-rendering:auto;filter:drop-shadow(0 18px 24px rgba(0,0,0,.45))}
+.tvt.slash .slot img{filter:drop-shadow(0 16px 22px rgba(0,0,0,.25))}
+.tvt .brand img{display:block;height:34px}
+.tvt .sp .row div img{max-height:44px;max-width:90%;object-fit:contain}
+.tvt .info{text-transform:uppercase}
+
+/* movable sections: each text block sits in a full-poster wrapper that the admin can drag (offset = transform) */
+.tvt .mv{position:absolute;inset:0;pointer-events:none}
+.tvt .mv > *{pointer-events:auto;cursor:move}
+
+/* upor-nich: a raised player whose cut line is in the open fades out instead of ending in a hard edge */
+.tvt .slot.fade{-webkit-mask-image:linear-gradient(#000 calc(100% - 60px),transparent);mask-image:linear-gradient(#000 calc(100% - 60px),transparent)}
+
+/* ===== 6. SMOKE (shared with Team vs Team) ===== */
+.tvt.smoke{background:#050809}
+.tvt.smoke .ttl b{font:900 italic 104px/1 'Rubik';color:#fff;text-shadow:0 0 30px rgba(255,255,255,.25),0 8px 20px rgba(0,0,0,.6)}
+.tvt.smoke .ttl span{color:#dfe6ef}
+.tvt.smoke .vs{position:absolute;left:340px;top:520px;width:400px;height:240px;display:flex;align-items:center;justify-content:center}
+.tvt.smoke .vs b{font:900 italic 190px/1 'Rubik';letter-spacing:-.04em;background:linear-gradient(180deg,#fff7c2 0%,#ffd04a 35%,#ff7a12 75%,#e63a00);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 10px #ffb02e) drop-shadow(0 0 34px #ff5a00);padding:0 .1em}
+.tvt.smoke .nm{top:880px}.tvt.smoke .nmA{left:40px}.tvt.smoke .nmB{left:600px}
+.tvt.smoke .nm b{font:900 italic 44px/1 'Rubik';text-shadow:0 0 22px rgba(0,0,0,.7),0 4px 10px rgba(0,0,0,.8)}
+.tvt.smoke .nm span{text-shadow:0 2px 10px rgba(0,0,0,.9)}
+.tvt.smoke .info{top:1118px;font:800 26px/1 'Montserrat';letter-spacing:.24em}
+.tvt.smoke .info div{display:inline-block;padding:14px 30px;background:rgba(6,10,14,.78);border:1px solid rgba(255,255,255,.18);border-radius:40px}
+.tvt.smoke .info em{font:900 italic 38px/1 'Rubik';color:#ffc23a;margin:0 14px;font-style:normal;vertical-align:-4px}
+
+/* ===== 7. BRUSH (shared with Team vs Team) ===== */
+.tvt.brush{background:#050507}
+.tvt.brush .ttl{top:130px}
+.tvt.brush .ttl b{font:400 104px/1 'Anton';letter-spacing:.03em;color:#fff}
+.tvt.brush .ttl span{color:#a9adbd}
+.tvt.brush .panel{position:absolute;top:290px;width:420px;height:700px;overflow:hidden;border:3px solid;background:#0b0b10}
+.tvt.brush .bigclip{position:absolute;inset:0;pointer-events:none}
+.tvt.brush .big{position:absolute;top:290px;margin-top:-.08em;font:400 300px/.82 'Anton';color:transparent;-webkit-text-stroke:3px rgba(255,255,255,.85);text-transform:uppercase;white-space:nowrap;letter-spacing:-.01em}
+/* VS: cyberpunk Orbitron, chrome face, thin rails and a slight split in the two team colours */
+.tvt.brush .vs{position:absolute;left:390px;top:712px;width:300px;height:110px;display:flex;align-items:center;justify-content:center}
+.tvt.brush .vs::before,.tvt.brush .vs::after{content:'';position:absolute;top:50%;width:46px;height:2px}
+.tvt.brush .vs::before{left:16px;background:linear-gradient(90deg,transparent,var(--a))}
+.tvt.brush .vs::after{right:16px;background:linear-gradient(90deg,var(--b),transparent)}
+.tvt.brush .vs b{font:900 76px/1 'Orbitron';letter-spacing:.08em;padding-left:.08em;background:linear-gradient(180deg,#ffffff 0%,#e9ecf4 46%,#9aa1b4 54%,#f4f6fb 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(-3px 0 0 var(--a)) drop-shadow(3px 0 0 var(--b)) drop-shadow(0 6px 14px rgba(0,0,0,.85))}
+.tvt.brush .nm{top:1012px;width:420px}.tvt.brush .nmA{left:60px}.tvt.brush .nmB{left:600px}
+.tvt.brush .nm b{font:400 46px/1 'Anton';letter-spacing:.05em}
+.tvt.brush .info{top:1110px;font:700 22px/1 'Montserrat';letter-spacing:.3em;color:#cfd1dc}
+.tvt.brush .info em{font:900 30px/1 'Orbitron';color:#fff;margin:0 14px;font-style:normal;letter-spacing:.06em;vertical-align:-3px}
+.tvt.smoke .nm,.tvt.brush .nm{position:absolute;width:440px;text-align:center;text-transform:uppercase}
+.tvt.smoke .nm b,.tvt.brush .nm b{display:block;white-space:nowrap}
+.tvt.smoke .nm span,.tvt.brush .nm span{display:block;margin-top:10px;font:700 20px/1 'Montserrat';letter-spacing:.3em;color:rgba(255,255,255,.8)}
+.tvt.smoke .nm span:empty,.tvt.brush .nm span:empty{display:none}
+.tvt.smoke .info,.tvt.brush .info{position:absolute;left:0;right:0;text-align:center}
+.tvt.smoke .hdr .brand,.tvt.brush .hdr .brand{background:#fff;color:#111}
+.tvt.smoke .hdr .ev,.tvt.brush .hdr .ev{color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.4)}
+.tvt.smoke .sp,.tvt.brush .sp{background:#07080e;border-top:1px solid rgba(255,255,255,.08)}
+.tvt.smoke .sp .k,.tvt.brush .sp .k{color:#8a8ea8}
+.tvt.smoke .sp .row div,.tvt.brush .sp .row div{background:rgba(255,255,255,.06);border-radius:8px;color:#e7e9f3}
+.tvt.smoke .sp .w,.tvt.brush .sp .w{color:#5c6080}
+.tvt.smoke svg.full,.tvt.brush svg.full{pointer-events:none}
+
+/* ---------- Crest Clash and Torn Poster (from the Match Result team mode) ---------- */
+.tvt.clash{background:#070716;font-family:'Chakra Petch'}
+.tvt.torn{background:#111;font-family:'Chakra Petch'}
+.tvt.clash .sp,.tvt.torn .sp{top:1255px;height:95px;background:rgba(5,5,16,.82);z-index:7}
+.tvt.clash .sp::before,.tvt.torn .sp::before{content:'';position:absolute;left:0;right:0;top:0;height:2px;background:linear-gradient(90deg,transparent,var(--a),#ffd23a,var(--b),transparent)}
+.tvt.clash .sp .k,.tvt.torn .sp .k{top:11px;font:700 11px/1 'Chakra Petch';letter-spacing:.6em;color:rgba(255,255,255,.55)}
+.tvt.clash .sp .row,.tvt.torn .sp .row{left:90px;right:90px;top:29px;gap:16px}
+.tvt.clash .sp .row div,.tvt.torn .sp .row div{height:42px;font:700 18px/1 'Chakra Petch';letter-spacing:.08em;color:rgba(255,255,255,.85)}
+.tvt.clash .sp .row img,.tvt.torn .sp .row img{max-height:32px;max-width:90%;object-fit:contain}
+.tvt.clash .sp .w,.tvt.torn .sp .w{bottom:8px;font:600 10px/1 'Chakra Petch';color:rgba(255,255,255,.5)}
+.tvt .cr{display:block;flex:none;object-fit:contain;filter:drop-shadow(0 10px 24px rgba(0,0,0,.45))}
+.tvt .cr.mono{display:grid;place-items:center;border-radius:50%;color:#fff;font-family:'Black Ops One';box-shadow:inset 0 0 0 5px rgba(255,255,255,.85),0 10px 24px rgba(0,0,0,.45)}
+.tvt .thd .tb{position:absolute;left:44px;top:40px;font:700 30px/1 'Chakra Petch';letter-spacing:.06em}
+.tvt .thd .tb img{height:56px;display:block}
+.tvt .thd .ttag{position:absolute;right:44px;top:40px;padding:9px 18px;font:700 18px/1 'Chakra Petch';letter-spacing:.14em;text-transform:uppercase;border:2px solid rgba(255,255,255,.7)}
+.tvt .thd .kick{position:absolute;left:250px;right:250px;top:50px;text-align:center;font:600 20px/1 'Chakra Petch';letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.85);white-space:nowrap}
+/* clash */
+.tvt.clash .ghost{position:absolute;left:-40px;right:-40px;top:96px;text-align:center;white-space:nowrap;font:900 230px/1 'Big Shoulders Display';text-transform:uppercase;letter-spacing:.02em;color:transparent;-webkit-text-stroke:3px rgba(255,255,255,.4)}
+.tvt.clash .slot.fade{-webkit-mask-image:linear-gradient(#000 calc(100% - 170px),transparent);mask-image:linear-gradient(#000 calc(100% - 170px),transparent)}
+.tvt.clash .crw{position:absolute}
+.tvt.clash .hex{position:absolute;left:420px;top:420px;width:240px;height:200px;display:flex;align-items:center;justify-content:center;gap:4px;
+  font:900 170px/1 'Big Shoulders Display';background:linear-gradient(180deg,rgba(7,7,22,.92),rgba(20,16,44,.92));clip-path:polygon(14% 0,86% 0,100% 50%,86% 100%,14% 100%,0 50%)}
+.tvt.clash .hex::before,.tvt.clash .hex::after{content:'';position:absolute;left:0;right:0;height:6px;background:linear-gradient(90deg,var(--a),#ffd23a,var(--b))}
+.tvt.clash .hex::before{top:0}.tvt.clash .hex::after{bottom:0}
+.tvt.clash .hex span{background:linear-gradient(180deg,#fff 0%,#fff 42%,#ffd23a 60%,#fff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 8px 0 rgba(0,0,0,.45))}
+.tvt.clash .cn{position:absolute;top:1012px;width:470px;text-align:center}
+.tvt.clash .cn.l{left:27px}.tvt.clash .cn.r{left:583px}
+.tvt.clash .cn b{display:block;white-space:nowrap;font:900 68px/1 'Big Shoulders Display';text-transform:uppercase;letter-spacing:.02em;text-shadow:0 6px 0 rgba(0,0,0,.4)}
+.tvt.clash .cn span{display:inline-block;margin-top:10px;padding:9px 22px;font:700 20px/1 'Chakra Petch';letter-spacing:.28em;text-transform:uppercase;transform:skewX(-12deg);box-shadow:0 0 22px rgba(0,0,0,.35)}
+.tvt.clash .cinfo{position:absolute;left:200px;width:680px;top:1172px;height:52px;background:rgba(7,7,22,.7);display:flex;align-items:center;justify-content:center;gap:16px;white-space:nowrap;font:600 22px/1 'Chakra Petch';letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.88)}
+.tvt.clash .cinfo span{padding:8px 14px;background:#ffd23a;color:#111;font-weight:700}
+.tvt.clash .cinfo em{width:8px;height:8px;background:#fff;transform:rotate(45deg)}
+/* torn */
+.tvt.torn .front{position:absolute;inset:0;z-index:3;pointer-events:none}
+.tvt.torn .tcr{position:absolute;z-index:4}
+.tvt.torn .tnm{position:absolute;z-index:4}
+.tvt.torn .tnm b{display:block;font:400 60px/1 'Black Ops One';text-transform:uppercase;white-space:nowrap;text-shadow:4px 4px 0 rgba(0,0,0,.35)}
+.tvt.torn .tnm span{display:inline-block;margin-top:10px;padding:7px 14px;background:rgba(0,0,0,.35);font:700 20px/1 'Chakra Petch';letter-spacing:.24em;text-transform:uppercase}
+.tvt.torn .tnm.t1{text-align:center}
+.tvt.torn .stamp{position:absolute;left:80px;width:680px;top:716px;text-align:center;transform:rotate(-23.96deg);color:#141414}
+.tvt.torn .stamp .sk{font:700 27px/1 'Chakra Petch';letter-spacing:.08em;text-transform:uppercase;color:#111;white-space:nowrap}
+.tvt.torn .stamp .sn{font:400 86px/1 'Black Ops One';margin:0;letter-spacing:.04em;color:var(--a);text-shadow:5px 5px 0 rgba(0,0,0,.12)}
+.tvt.torn .stamp .sd{font:700 30px/1 'Chakra Petch';letter-spacing:.08em;text-transform:uppercase;color:#111;white-space:nowrap}
+.tvt.torn .stamp .sd b{display:inline-block;margin-right:12px;padding:3px 10px;background:#141414;color:#ffd23a;letter-spacing:.08em}
+.tvt.torn .stamp .sk b{display:inline-block;margin-right:14px;padding:6px 12px;border:3px solid #c8102e;color:#c8102e;transform:rotate(-3deg);font-family:'Black Ops One';font-weight:400;font-size:24px;letter-spacing:.1em}
+.tvt.torn .tape{position:absolute;left:860px;top:470px;padding:9px 22px;background:#ffd23a;color:#111;font:400 24px/1 'Black Ops One';letter-spacing:.1em;text-transform:uppercase;transform:rotate(14deg);box-shadow:0 4px 10px rgba(0,0,0,.35)}

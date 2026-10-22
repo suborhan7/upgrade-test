@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Achievement Poster</title>
+<script src="js/fonts.js"></script>
+<link rel="stylesheet" href="css/poster.css">
+<link rel="stylesheet" href="css/maker.css">
+<link rel="stylesheet" href="css/ui.css">
+</head>
+<body>
+<div class="app">
+  <aside class="form" id="form">
+    <h2>Achievement</h2>
+
+    <section>
+      <h3>Poster</h3>
+      <label>Layout
+        <select data-k="layout">
+          <option value="gold">Golden Glory (sunburst, gold title shamne, trophy seal)</option>
+          <option value="neon">Neon Spotlight (spotlight, neon script, title player er pichone)</option>
+          <option value="ink">Ink Splash (light paper, brush splash, chrome title)</option>
+        </select>
+      </label>
+      <label>Background
+        <select data-k="bgMode">
+          <option value="template">Default template</option>
+          <option value="jersey">Team colours (logo / jersey er rong)</option>
+          <option value="image">Upload my own</option>
+        </select>
+      </label>
+      <label id="bgUploadRow" style="display:none">Background image (1080 × 1350)<input type="file" accept="image/*" data-file="bgImage"></label>
+      <label>Achievement
+        <select data-k="award">
+          <option value="champ">Champions</option>
+          <option value="runner">Runners Up</option>
+          <option value="third">3rd Place</option>
+          <option value="custom">Nijer lekha (niche likho)</option>
+        </select>
+      </label>
+      <label id="customRow">Nijer title<input data-k="customTitle"></label>
+      <label>Script lekha (title er upor)<input data-k="script"></label>
+      <label>Event<input data-k="event"></label>
+      <label>Season / date line<input data-k="season"></label>
+      <label>eFCB logo (optional)<input type="file" accept="image/*" data-file="logo"></label>
+    </section>
+
+    <section>
+      <h3>Team</h3>
+      <div class="two">
+        <label>Team name<input data-t="name"></label>
+        <label>Short name<input data-t="short"></label>
+      </div>
+      <label>Logo<input type="file" accept="image/*" id="teamLogo"></label>
+      <div class="colors"><span>Team colours</span><input type="color" data-t="color"><input type="color" data-t="color2"><button type="button" id="autoLogo">Auto from logo</button><button type="button" id="autoKit">Auto from jersey</button></div>
+    </section>
+
+    <section>
+      <h3>Highlights (khali rakhle dekhabe na)</h3>
+      <p class="tip">Jemon: Final 3-1, Prize money, Record.</p>
+      <template id="statTpl">
+        <div class="two"><label>Label<input data-s="label"></label><label>Value<input data-s="value"></label></div>
+      </template>
+      <div id="stats"></div>
+    </section>
+
+    <section>
+      <h3>Team er chobi</h3>
+      <label>Chobi kivabe
+        <select data-k="photoMode">
+          <option value="players">Alada alada player (max 7, nijei group banabe)</option>
+          <option value="group">Ekta group photo</option>
+        </select>
+      </label>
+      <label class="check"><input type="checkbox" id="cutout" checked> Auto cut-out (chobir background kete dao)</label>
+      <div class="status" id="phStatus"></div>
+      <div id="groupRow">
+        <label>Group photo<input type="file" accept="image/*" id="groupPhoto"></label>
+      </div>
+      <div id="playersRow">
+        <p class="tip">Player 1 = captain / star, shamne majhe boshe.</p>
+        <template id="playerTpl">
+          <div class="prow"><input type="text" data-pn><input type="file" accept="image/*" data-pp title="Photo"><button type="button" data-px title="Remove photo">✕</button></div>
+        </template>
+        <div id="players"></div>
+        <label>MVP badge<select id="mvpSel"></select></label>
+      </div>
+      <label class="check"><input type="checkbox" data-k="nameTags"> Protiti player er buke naam (name tag)</label>
+      <label class="check"><input type="checkbox" data-k="showNames"> Player der naam (niche ek line e, name tag off thakle)</label>
+      <label class="check"><input type="checkbox" data-k="confetti"> Confetti</label>
+    </section>
+
+    <p class="tip">Poster e jekono lekha, box, chobi click kore select koro: drag e shorao, wheel e boro-choto koro.</p>
+    <section>
+      <h3>Poster e ki ki thakbe</h3>
+      <div id="parts" class="parts"></div>
+      <p class="tip">Tick tule dile oi ongsho poster theke shore jay (sudhu ei layout e).</p>
+    </section>
+    <button type="button" id="resetAll" class="reset-all">Reset to default (sob position, sob ongsho)</button>
+
+    <section>
+      <h3>Partners (niche)</h3>
+      <label>Label<input data-k="partnersLabel"></label>
+      <template id="partnerTpl">
+        <div class="prow"><input type="text" data-pname><input type="file" accept="image/*" data-plogo title="Logo"><button type="button" data-pclear title="Remove">✕</button></div>
+      </template>
+      <div id="partners"></div>
+      <label>Website line<input data-k="site"></label>
+    </section>
+
+    <button type="button" id="download" class="primary">Download PNG (HD)</button>
+  </aside>
+
+  <main class="stage">
+    <div class="frame" id="frame"><div id="poster"></div></div>
+  </main>
+</div>
+
+<script src="lib/html-to-image.js"></script>
+<script src="lib/bg-removal.js"></script>
+<script src="js/samples.js"></script>
+<script src="js/colors.js"></script>
+<script src="js/poster.js"></script>
+<script src="js/studio-edit.js"></script>
+<script src="js/maker.js"></script>
+<script src="js/fit.js"></script>
+<script src="js/studio-nav.js"></script>
+<script src="js/ui.js"></script>
+</body>
+</html>

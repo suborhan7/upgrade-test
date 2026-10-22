@@ -1,0 +1,285 @@
+/* Studio look: one polish layer shared by every maker (same file in every tools/<id>/css/). Loaded after maker.css. */
+:root { --ui-bg: #11141b; --ui-panel: #171b24; --ui-field: #0f1218; --ui-line: #262b37; --ui-line2: #323949;
+  --ui-text: #e8ecf3; --ui-mute: #8f9bb3; --ui-accent: #19e28a; --ui-accent-ink: #04140d; }
+body { -webkit-font-smoothing: antialiased; accent-color: var(--ui-accent); }
+
+/* left column */
+.form { background: var(--ui-panel); scrollbar-width: thin; scrollbar-color: #2f3544 transparent; }
+.form::-webkit-scrollbar { width: 8px; }
+.form::-webkit-scrollbar-thumb { background: #2f3544; border-radius: 8px; }
+.form section { padding: 16px 0 10px; }
+.form h3 { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 6px; margin-bottom: 10px; font-size: 12px; color: var(--ui-mute); }
+.form h3 .sub { font-size: 11px; font-weight: 500; letter-spacing: 0; text-transform: none; color: #6b768d; }
+.form label { margin-bottom: 10px; }
+
+/* inputs, selects, textareas: one height, one focus ring */
+.form input:not([type=color]):not([type=file]):not([type=checkbox]):not([type=radio]):not([type=range]), .form select, .form textarea {
+  min-height: 34px; border-color: var(--ui-line2); background-color: var(--ui-field); transition: border-color .12s, box-shadow .12s; }
+.form input:hover, .form select:hover, .form textarea:hover { border-color: #414a5e; }
+.form input:focus, .form select:focus, .form textarea:focus, .form button:focus-visible {
+  outline: none; border-color: var(--ui-accent); box-shadow: 0 0 0 3px rgba(25, 226, 138, .18); }
+.form select { appearance: none; -webkit-appearance: none; padding-right: 28px; text-overflow: ellipsis; cursor: pointer;
+  background-image: linear-gradient(45deg, transparent 50%, #8f9bb3 50%), linear-gradient(135deg, #8f9bb3 50%, transparent 50%);
+  background-position: calc(100% - 15px) 50%, calc(100% - 10px) 50%; background-size: 5px 5px; background-repeat: no-repeat; }
+.form .hint { display: block; margin-top: 4px; font-size: 11px; line-height: 1.35; color: #6b768d; }
+.form input[type=range] { height: 18px; }
+.form input[type=checkbox], .form input[type=radio], .form input[type=radio]:not([type=color]):not([type=file]):not([type=checkbox]) {
+  display: inline-block; width: 15px; height: 15px; min-height: 0; margin: 0; padding: 0; flex: none; box-shadow: none; }
+.form label.check { align-items: flex-start; gap: 8px; line-height: 1.35; }
+.form label.check input { margin-top: 1px; }
+
+/* buttons: same size and font everywhere */
+button { min-height: 32px; font-size: 13px; line-height: 1.2; transition: background .12s, border-color .12s; }
+button:hover { border-color: #414a5e; }
+button:disabled { opacity: .4; cursor: default; }
+.colors { flex-wrap: wrap; row-gap: 6px; }
+.colors button, .auto-row button, .pdet .colors button { padding: 6px 10px; font-size: 12px; white-space: nowrap; min-height: 30px; }
+.auto-row button { min-height: 34px; }
+.pos button { min-height: 28px; padding: 4px 10px; font-size: 12px; }
+.reset-all { margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* file inputs: a dark button + the chosen file name instead of the browser's grey "Choose File / No file chosen" */
+.form input[type=file] { font-size: 0; color: transparent; max-width: 100%; cursor: pointer; margin-top: 5px; }
+.form input[type=file]::file-selector-button { margin: 0; padding: 6px 11px; min-height: 30px; border: 1px dashed #3a4256; border-radius: 6px;
+  background: #1d2230; color: #cfd6e4; font: 600 12px system-ui, -apple-system, 'Segoe UI', sans-serif; cursor: pointer; }
+.form input[type=file]:hover::file-selector-button { border-color: var(--ui-accent); color: #fff; }
+.form .fname { display: block; margin-top: 3px; font-size: 11px; color: #6fd3a0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.form .fname:empty { display: none; }
+.prow input[type=file] { margin: 0; width: 100%; }
+.prow input[type=file]::file-selector-button { width: 100%; }
+.prow .fname { display: none; }
+.prow input[type=file].has-file::file-selector-button { border-style: solid; border-color: #2f7d58; color: #6fd3a0; }
+
+/* empty status lines take no room (the gap under "Auto cut-out") */
+.status:empty { min-height: 0; margin: 0; }
+
+/* card picker: card name never breaks onto two lines */
+.card-pick span { white-space: nowrap; }
+.card-pick b { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 62%; }
+.studio-brand { display: flex; align-items: center; gap: 8px; font-size: 17px; letter-spacing: .01em; }
+.studio-brand::before { content: ""; width: 10px; height: 10px; border-radius: 3px; background: var(--ui-accent); box-shadow: 0 0 12px rgba(25, 226, 138, .6); }
+
+/* editor toolbar (js/studio-edit.js, rebuilt by js/ui.js): grouped icon buttons + a selection panel */
+.se-bar.pro { padding: 12px 20px 10px; background: rgba(23, 27, 36, .96); backdrop-filter: blur(6px); }
+.se-bar.pro .se-row { gap: 8px; margin: 0; }
+.se-bar.pro > .se-row:first-child { justify-content: space-between; }
+.se-tag { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ui-mute); }
+.se-tag + .se-group { margin-right: auto; }
+.se-group { display: inline-flex; align-items: stretch; border: 1px solid var(--ui-line2); border-radius: 8px; background: var(--ui-field); overflow: hidden; }
+.se-group > * + * { border-left: 1px solid var(--ui-line2) !important; }
+.se-bar .se-ic { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 30px; min-width: 32px; padding: 0 9px;
+  border: 0; border-radius: 0; background: transparent; color: #cfd6e4; font-size: 12px; font-weight: 600; }
+.se-bar .se-ic:hover:not(:disabled) { background: #232a38; color: #fff; }
+.se-bar .se-ic:active:not(:disabled) { background: #2b3445; }
+.se-bar .se-ic svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+.se-bar .se-ic:disabled { opacity: .35; }
+.se-bar .se-help { min-width: 30px; width: 30px; height: 30px; padding: 0; border: 1px solid var(--ui-line2); border-radius: 99px; background: var(--ui-field); }
+.se-bar.show-help .se-help { background: var(--ui-accent); border-color: var(--ui-accent); color: var(--ui-accent-ink); }
+.se-bar .tip { display: none; margin: 10px 0 0; padding: 8px 10px; border-radius: 8px; background: var(--ui-field); border: 1px solid var(--ui-line); }
+.se-bar.show-help .tip { display: block; }
+
+.se-panel { margin-top: 10px; border: 1px solid var(--ui-line); border-radius: 10px; background: #12151d; overflow: hidden; }
+.se-head { display: flex; align-items: center; gap: 8px; padding: 8px 8px 8px 10px; }
+.se-head i { display: inline-flex; color: #6b768d; }
+.se-head i svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linejoin: round; }
+.se-title { flex: 1; min-width: 0; font-size: 12px; font-weight: 500; color: #7f8aa0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.se-close { display: none !important; }
+.se-bar.has-sel .se-panel { border-color: rgba(25, 226, 138, .45); box-shadow: 0 0 0 3px rgba(25, 226, 138, .08); }
+.se-bar.has-sel .se-head { border-bottom: 1px solid var(--ui-line); background: rgba(25, 226, 138, .06); }
+.se-bar.has-sel .se-head i { color: var(--ui-accent); }
+.se-bar.has-sel .se-title { font-weight: 700; color: #fff; }
+.se-bar.has-sel .se-close { display: inline-flex !important; min-height: 24px; min-width: 24px; padding: 0; border-radius: 6px; }
+.se-panel .se-row:not([hidden]) { padding: 10px 10px 0; }
+.se-panel .se-row.se-actions { padding-bottom: 10px; }
+.se-field { display: flex; flex-direction: column; gap: 4px; }
+.se-field small { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #6b768d; }
+.se-panel .se-row:not(.se-actions) { display: flex; justify-content: space-between; }
+.se-size .se-pct { display: inline-flex; align-items: center; justify-content: center; min-width: 52px; font-size: 12px; font-weight: 700; color: #fff; font-variant-numeric: tabular-nums; }
+.se-actions { display: grid !important; grid-template-columns: repeat(3, 1fr); gap: 6px !important; }
+.se-panel .se-row[hidden] { display: none !important; }
+.se-actions .se-ic { border: 1px solid var(--ui-line2); border-radius: 8px; background: var(--ui-field); min-height: 32px; }
+.se-bar .se-actions .se-hide { color: #ff8a9a; }
+.se-bar .se-actions .se-hide:hover { background: rgba(255, 77, 109, .12); border-color: rgba(255, 77, 109, .5); color: #ffb3c0; }
+
+/* Best XI: star radio sits on the same line as Rating */
+.form label.star-pick { margin-top: 0; align-self: end; align-items: center; min-height: 34px; margin-bottom: 10px; white-space: nowrap; }
+.form label.star-pick input { margin-top: 0; }
+
+/* poster area */
+.stage { background: radial-gradient(ellipse at 50% 40%, #1a1f2b 0%, var(--ui-bg) 70%); }
+.frame { box-shadow: 0 24px 70px rgba(0, 0, 0, .55), 0 0 0 1px rgba(255, 255, 255, .04); }
+
+@media (max-width: 620px) {
+  .form { overflow: visible; }
+  .stage { box-shadow: 0 8px 20px rgba(0, 0, 0, .5); }
+}
+
+/* phones: the poster sticks at the top, so the editor must never sit over it.
+   Nothing selected = one slim row stuck just under the poster (--stage-h is set by js/ui.js).
+   Something selected = the same bar becomes a compact sheet at the bottom of the screen. */
+@media (max-width: 620px) {
+  .se-bar.pro { top: var(--stage-h, 0px); display: grid; grid-template-columns: auto auto minmax(0, 1fr) auto; align-items: center; gap: 8px;
+    margin: 0 -20px 8px; padding: 8px 16px; border-bottom: 1px solid var(--ui-line); }
+  .se-bar.pro > .se-row:first-child, .se-bar.pro .se-panel { display: contents; }
+  .se-bar.pro .se-help { order: 1; }
+  .se-bar.pro .se-head { padding: 0; min-width: 0; background: none !important; border: 0 !important; }
+  .se-bar.pro .se-head i { display: none; }
+  .se-bar.pro .se-title { font-size: 11px; }
+  .se-bar.pro .tip { grid-column: 1 / -1; order: 2; margin: 0; }
+  .se-bar.pro .se-group .se-ic span { display: none; }
+
+  .se-bar.pro.has-sel { position: fixed; top: auto; left: 0; right: 0; bottom: 0; z-index: 30; margin: 0;
+    grid-template-columns: auto minmax(0, 1fr); row-gap: 8px; padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+    border: 1px solid rgba(25, 226, 138, .45); border-bottom: 0; border-radius: 14px 14px 0 0;
+    background: #171b24; box-shadow: 0 -12px 30px rgba(0, 0, 0, .6); }
+  .se-bar.pro.has-sel .se-tag, .se-bar.pro.has-sel .se-help, .se-bar.pro.has-sel .tip { display: none; }
+  .se-bar.pro.has-sel .se-head { gap: 6px; padding: 0 0 0 4px; }
+  .se-bar.pro.has-sel .se-head i { display: inline-flex; }
+  .se-bar.pro.has-sel .se-title { font-size: 13px; }
+  .se-bar.pro.has-sel .se-close { min-height: 30px; min-width: 30px; border: 1px solid var(--ui-line2); }
+  .se-bar.pro .se-panel .se-row:not([hidden]) { grid-column: 1 / -1; padding: 0; gap: 8px; }
+  .se-bar.pro .se-field small { display: none; }
+  .se-bar.pro.has-sel .se-ic { min-height: 36px; min-width: 36px; }
+  .se-bar.pro.has-sel .se-size .se-pct { min-width: 46px; }
+  body:has(.se-bar.has-sel) .form { padding-bottom: 150px; }
+}
+
+/* ---------- v2: bigger, easier form; section cards; poster action bar ---------- */
+.form, .form button, .form input, .form select, .form textarea, .act-bar button, .act-note { font-family: 'Barlow', system-ui, -apple-system, 'Segoe UI', sans-serif; }
+@media (min-width: 621px) { .app { grid-template-columns: clamp(360px, 31vw, 460px) 1fr; } }
+.form { padding: 18px 18px 28px; font-size: 15px; }
+.form label { font-size: 13.5px; font-weight: 500; color: #b4bdd0; margin-bottom: 12px; }
+.form input:not([type=color]):not([type=file]):not([type=checkbox]):not([type=radio]):not([type=range]), .form select, .form textarea {
+  min-height: 42px; margin-top: 5px; padding: 9px 12px; border-radius: 9px; font-size: 15.5px; font-weight: 500; }
+.form select { padding-right: 32px; }
+.form .hint { font-size: 12.5px; }
+.form .tip { font-size: 13px; line-height: 1.45; color: #8590a6; }
+.form label.check { font-size: 14px; color: #d3d9e6; }
+.form input[type=checkbox], .form input[type=radio], .form input[type=radio]:not([type=color]):not([type=file]):not([type=checkbox]) { width: 17px; height: 17px; }
+.colors { font-size: 13.5px; }
+.colors input[type=color] { width: 42px; height: 36px; border-radius: 8px; }
+button { font-size: 14px; }
+.form input[type=file]::file-selector-button { padding: 8px 14px; min-height: 38px; font: 600 13.5px 'Barlow', system-ui, sans-serif; }
+.form .fname { font-size: 12.5px; }
+
+/* each section is its own card; tap the heading to fold it */
+.form section.ui-card { margin: 14px 0; padding: 4px 16px 6px; border: 1px solid var(--ui-line); border-top: 1px solid var(--ui-line); border-radius: 12px; background: #1b202b; }
+.form section.ui-card > h3 { margin: 0 -16px; padding: 14px 16px 12px; cursor: pointer; user-select: none; font-size: 13px; letter-spacing: .12em; color: #9aa5bb; }
+.form section.ui-card > h3::after { content: ''; margin-left: auto; align-self: center; width: 8px; height: 8px; border-right: 2px solid #6b768d; border-bottom: 2px solid #6b768d;
+  transform: rotate(45deg) translate(-2px, -2px); transition: transform .15s; }
+.form section.ui-card > h3:hover { color: #fff; }
+.form section.ui-card.folded > h3::after { transform: rotate(-45deg); }
+.form section.ui-card.folded > :not(h3) { display: none !important; }
+.form section.ui-card.folded { padding-bottom: 0; }
+.form section.ui-card .pdet { background: #161a23; }
+.form > .tip { margin: 8px 2px; }
+.reset-all { min-height: 40px; border-radius: 10px; }
+
+/* Download / Share / Copy right under the poster */
+.stage { flex-direction: column; gap: 12px; }
+.act-bar { display: flex; gap: 8px; flex: none; }
+.act-bar button { display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-height: 40px; padding: 0 16px; border-radius: 10px;
+  border: 1px solid var(--ui-line2); background: #1b202b; color: #e8ecf3; font-size: 14px; font-weight: 700; letter-spacing: .02em; white-space: nowrap; }
+.act-bar button:hover:not(:disabled) { background: #252b38; border-color: #445069; }
+.act-bar button svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.act-bar button.primary, .act-bar #download { width: auto; margin: 0; padding: 0 22px; border-color: var(--ui-accent); background: var(--ui-accent); color: var(--ui-accent-ink); }
+.act-bar #download:hover:not(:disabled) { background: #3df0a0; }
+.act-bar button:disabled { opacity: .6; cursor: progress; }
+.act-note { position: fixed; left: 50%; bottom: 24px; z-index: 50; transform: translateX(-50%); padding: 10px 16px; border-radius: 10px; background: #0c0f15;
+  border: 1px solid var(--ui-line2); color: #e8ecf3; font-size: 14px; box-shadow: 0 10px 30px rgba(0,0,0,.5); }
+@media (max-width: 620px) {
+  .stage { gap: 8px; }
+  .act-bar { width: 100%; max-width: 420px; }
+  .act-bar button { flex: 1; min-height: 38px; padding: 0 10px; font-size: 13px; }
+  .act-bar #download { flex: 1.4; }
+}
+/* header sizes to match the bigger form */
+.studio-brand { font-size: 19px; }
+.card-pick span { font-size: 15.5px; }
+.card-pick b { font-size: 14px; }
+.card-opt { font-size: 16px; }
+.se-tag { font-size: 12px; }
+.se-bar .se-ic { font-size: 13.5px; min-height: 34px; }
+.se-title { font-size: 13.5px; }
+.se-field small { font-size: 11px; }
+.se-size .se-pct { font-size: 13.5px; }
+.se-bar .tip { font-size: 13px; }
+
+/* Caption & hashtags box */
+.cap-sec .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 12px; }
+.cap-sec .chips button { min-height: 36px; padding: 0 16px; border-radius: 99px; border: 1px solid var(--ui-line2); background: #232836; font-weight: 600; font-size: 14.5px; }
+.cap-sec .chips button.on { background: var(--ui-accent); border-color: var(--ui-accent); color: var(--ui-accent-ink); }
+.cap-sec textarea { min-height: 220px; line-height: 1.5; font-size: 15px !important; }
+.cap-actions { display: grid; grid-template-columns: 1fr auto; gap: 8px; margin: 10px 0 8px; }
+.cap-actions button { min-height: 44px; border-radius: 10px; font-weight: 700; }
+.cap-actions .cap-copy { background: var(--ui-accent); border-color: var(--ui-accent); color: var(--ui-accent-ink); letter-spacing: .04em; text-transform: uppercase; }
+.cap-actions .cap-copy:hover { background: #3df0a0; }
+.cap-actions .cap-again { padding: 0 18px; }
+
+/* phones: one slim row under the poster. Undo / redo / help sit in the Download row (js/ui.js dockEdit);
+   the EDIT row only shows while something is selected (bottom sheet) or the help is open */
+.act-edit { display: none; }
+@media (max-width: 620px) { .act-edit { display: flex; gap: 6px; margin-left: 2px; padding-left: 8px; border-left: 1px solid var(--ui-line2); } }
+@media (max-width: 620px) {
+  .stage { gap: 6px; }
+  .act-bar { max-width: 460px; gap: 6px; }
+  .act-bar button { min-height: 34px; padding: 0 8px; font-size: 13px; border-radius: 9px; }
+  .act-bar button svg { width: 15px; height: 15px; }
+  .act-edit .se-ic, .act-edit .se-help { flex: none; min-height: 34px; min-width: 34px; width: 34px; height: 34px; padding: 0;
+    border: 1px solid var(--ui-line2); border-radius: 9px; background: #1b202b; color: #e8ecf3; }
+  .act-bar .act-edit .se-help.on { background: var(--ui-accent); border-color: var(--ui-accent); color: var(--ui-accent-ink); }
+  .se-bar.pro:not(.has-sel):not(.show-help) { display: none; }
+  .se-bar.pro.show-help:not(.has-sel) > .se-row:first-child { display: none; }
+}
+
+/* caption box: its own full style (MVP and Comparison have no textarea rule, so the browser default showed dark text) */
+.form .cap-sec textarea { display: block; width: 100%; box-sizing: border-box; margin: 0; padding: 12px 14px; resize: vertical;
+  border: 1px solid var(--ui-line2); border-radius: 10px; background: #10131a; color: #eef1f7; caret-color: var(--ui-accent);
+  font: 500 15px/1.55 'Barlow', system-ui, -apple-system, 'Segoe UI', sans-serif; }
+.form .cap-sec textarea:focus { outline: none; border-color: var(--ui-accent); box-shadow: 0 0 0 3px rgba(25, 226, 138, .15); }
+
+/* PC: caption box in its own column right of the poster (js/ui.js moves it there at 1280px and wider) */
+@media (min-width: 1280px) {
+  .app.has-cap { grid-template-columns: clamp(360px, 28vw, 440px) minmax(0, 1fr) clamp(320px, 24vw, 400px); }
+  .cap-aside { height: 100vh; overflow-y: auto; box-sizing: border-box; padding: 18px; border-left: 1px solid var(--ui-line); background: #161a23;
+    font-family: 'Barlow', system-ui, -apple-system, 'Segoe UI', sans-serif; color: #e8ecf3; }
+  .cap-aside .cap-sec { margin: 0; padding: 0; border: 0; }
+  .cap-aside .cap-sec h3 { margin: 4px 0 8px; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: #9aa5bb; }
+  .cap-aside .cap-sec .tip { font-size: 13px; line-height: 1.45; color: #8590a6; margin: 0 0 10px; }
+  .cap-aside .cap-sec button { font-family: inherit; }
+  .cap-aside .cap-sec textarea { display: block; width: 100%; box-sizing: border-box; min-height: 52vh; padding: 12px 14px; resize: vertical;
+    border: 1px solid var(--ui-line2); border-radius: 10px; background: #10131a; color: #eef1f7; caret-color: var(--ui-accent);
+    font: 500 15px/1.55 'Barlow', system-ui, -apple-system, 'Segoe UI', sans-serif; }
+  .cap-aside .cap-sec textarea:focus { outline: none; border-color: var(--ui-accent); box-shadow: 0 0 0 3px rgba(25, 226, 138, .15); }
+}
+
+/* phones: Share / Copy become icon buttons so Download + Share + Copy + Undo / Redo / ? always fit in one row */
+@media (max-width: 620px) {
+  .act-bar > button:not(#download) { flex: none; width: 38px; min-width: 38px; padding: 0; }
+  .act-bar > button:not(#download) span { display: none; }
+  .act-bar #download { flex: 1 1 auto; min-width: 0; }
+  .act-edit { margin-left: 0; padding-left: 6px; }
+  .act-edit .se-ic, .act-edit .se-help { width: 38px; min-width: 38px; }
+}
+
+/* section starts and field names stand out: green dot + green heading, labels in a soft green */
+.form section.ui-card > h3, .form .cap-sec > h3, .cap-aside .cap-sec h3 { display: flex; align-items: center; gap: 9px; color: var(--ui-accent); }
+.form section.ui-card > h3::before, .form .cap-sec > h3::before, .cap-aside .cap-sec h3::before { content: ""; flex: none; width: 9px; height: 9px; border-radius: 3px;
+  background: var(--ui-accent); box-shadow: 0 0 10px rgba(25, 226, 138, .6); }
+.form section.ui-card > h3:hover { color: #5ef0b0; }
+.form section.ui-card.folded > h3 { color: #7fdcb0; }
+.form label:not(.check):not(.star-pick), .form .colors > span:first-child, .form .pos > span:first-child { color: #8fe3bd; }
+.form .pdet > summary { color: #e8ecf3; }
+
+/* "+ Add partner" under the partners list */
+.form .p-add { display: block; width: 100%; margin: 4px 0 12px; min-height: 40px; border: 1px dashed rgba(25, 226, 138, .55); border-radius: 10px;
+  background: rgba(25, 226, 138, .06); color: var(--ui-accent); font-weight: 700; font-size: 14.5px; }
+.form .p-add:hover { background: rgba(25, 226, 138, .14); }
+
+/* poster partners strip: any number of partners on one line (the cards' own CSS was a fixed 5-column grid) */
+#poster .sprow, #poster .sp .row { grid-template-columns: none !important; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); }
+#poster .sprow > div, #poster .sp .row > div { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#poster .sprow:has(> :nth-child(6)), #poster .sp .row:has(> :nth-child(6)) { gap: 10px !important; }
+#poster .sprow:has(> :nth-child(6)) > div, #poster .sp .row:has(> :nth-child(6)) > div { font-size: 15px !important; letter-spacing: .03em !important; }
+#poster .sprow:has(> :nth-child(8)) > div, #poster .sp .row:has(> :nth-child(8)) > div { font-size: 12.5px !important; letter-spacing: .01em !important; }
+#poster .sprow:has(> :nth-child(8)), #poster .sp .row:has(> :nth-child(8)) { gap: 7px !important; }

@@ -1,0 +1,384 @@
+/* MVP poster, 1080 x 1350 (Instagram portrait).
+   The background takes its colours from the player's jersey: --k-* variables are set by poster.js. */
+
+.mvp {
+  position: relative;
+  width: 1080px;
+  height: 1350px;
+  overflow: hidden;
+  background: #07090d;
+  font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  color: #fff;
+  isolation: isolate;
+}
+.mvp * { box-sizing: border-box; }
+
+/* ---------- jersey-coloured background ---------- */
+.mvp .bg { position: absolute; inset: 0; background:
+  radial-gradient(60% 45% at 66% 50%, var(--k-base) 0%, transparent 72%),
+  linear-gradient(160deg, var(--k-mid) 0%, var(--k-base) 36%, var(--k-mid) 64%, var(--k-deep) 100%); }
+
+/* jersey-style diagonal stripes in the secondary kit colour, strongest on the left */
+.mvp .stripes { position: absolute; inset: -20%; opacity: .5;
+  background: repeating-linear-gradient(118deg, transparent 0 70px, var(--k-stripe) 70px 96px, transparent 96px 118px, var(--k-stripe) 118px 126px);
+  -webkit-mask-image: linear-gradient(100deg, #000 0%, rgba(0,0,0,.35) 30%, transparent 55%);
+          mask-image: linear-gradient(100deg, #000 0%, rgba(0,0,0,.35) 30%, transparent 55%); }
+
+.mvp .dots { position: absolute; inset: 0; opacity: .26;
+  background-image: radial-gradient(circle, #fff 1.6px, transparent 2.2px); background-size: 16px 16px;
+  -webkit-mask-image: radial-gradient(55% 38% at 100% 8%, #000, transparent);
+          mask-image: radial-gradient(55% 38% at 100% 8%, #000, transparent); }
+
+/* light burst + rings behind the player */
+.mvp .glow { position: absolute; width: 900px; height: 900px; left: 265px; top: 300px; border-radius: 50%; opacity: .6;
+  filter: blur(30px); background: radial-gradient(circle, var(--k-glow) 0%, transparent 62%); }
+.mvp .rings { position: absolute; left: 715px; top: 690px; width: 0; height: 0; }
+.mvp .rings::before, .mvp .rings::after { content: ''; position: absolute; border-radius: 50%; transform: translate(-50%, -50%);
+  border: 2px solid rgba(255,255,255,.22); }
+.mvp .rings::before { width: 640px; height: 640px; }
+.mvp .rings::after { width: 820px; height: 820px; border-color: rgba(255,255,255,.12); }
+
+.mvp .streaks { position: absolute; inset: 0; mix-blend-mode: screen; background:
+  linear-gradient(118deg, transparent 22%, rgba(255,255,255,.2) 22.4%, transparent 23.2%),
+  linear-gradient(118deg, transparent 37%, rgba(255,255,255,.1) 37.2%, transparent 39.5%); }
+
+/* ---------- player ---------- */
+.mvp .player { position: absolute; left: 720px; top: 290px; height: 860px; width: auto; max-width: none; z-index: 2;
+  transform: translateX(-50%); transform-origin: 50% 0; filter: drop-shadow(0 18px 30px rgba(0,0,0,.45));
+  -webkit-mask-image: linear-gradient(to top, transparent 0, #000 8%), linear-gradient(to right, transparent 0, #000 12%);
+          mask-image: linear-gradient(to top, transparent 0, #000 8%), linear-gradient(to right, transparent 0, #000 12%);
+  -webkit-mask-composite: source-in; mask-composite: intersect; }
+.mvp .player.empty { display: none; }
+
+.mvp .floor { pointer-events: none; position: absolute; left: 0; right: 0; bottom: 0; height: 380px; z-index: 3;
+  background: linear-gradient(to bottom, transparent, rgba(5,6,10,.5) 45%, rgba(5,6,10,.9) 80%); }
+.mvp .top-shade { pointer-events: none; position: absolute; left: 0; right: 0; top: 0; height: 340px; z-index: 3;
+  background: linear-gradient(to bottom, rgba(5,6,10,.78), rgba(5,6,10,.3) 60%, transparent); }
+
+/* ---------- header ---------- */
+.mvp header { position: absolute; top: 0; left: 0; right: 0; z-index: 5; text-align: center; }
+.mvp .brand { position: absolute; left: 48px; top: 40px; height: 76px; display: flex; align-items: center; }
+.mvp .brand img { max-height: 76px; max-width: 200px; }
+.mvp .brand .wordmark { font-family: 'Anton', Impact, sans-serif; font-size: 40px; letter-spacing: 1px; line-height: 1;
+  padding: 10px 14px 12px; border: 3px solid #fff; }
+.mvp .tag { position: absolute; right: 48px; top: 52px; font-weight: 800; font-size: 24px; letter-spacing: .14em;
+  text-transform: uppercase; padding: 8px 18px; color: #0b0d12; background: #fff;
+  clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%); }
+.mvp .kicker { margin-top: 156px;   /* 44 + 112: the header's old top padding, now the kicker sits in its own .mv wrapper */
+  font-weight: 800; font-style: italic; font-size: 30px; letter-spacing: .22em; opacity: .92; }
+.mvp .kicker::before, .mvp .kicker::after { content: ''; display: inline-block; width: 60px; height: 3px; vertical-align: middle;
+  margin: 0 18px 6px; background: currentColor; }
+.mvp h1 { margin: 2px 0 0; font-family: 'Anton', Impact, sans-serif; font-weight: 400; font-size: 118px; line-height: .95;
+  text-transform: uppercase; letter-spacing: 1px; text-shadow: 0 5px 0 rgba(0,0,0,.35), 0 0 40px rgba(0,0,0,.35); }
+.mvp h1.long { font-size: 92px; }
+
+/* ---------- stat column (left, clear of the player) ---------- */
+.mvp .stats { position: absolute; z-index: 6; left: 48px; top: 340px; width: 270px; display: flex; flex-direction: column; gap: 12px; }
+.mvp .stat { position: relative; padding: 10px 20px 12px; background: rgba(9,11,18,.8);
+  border: 1px solid rgba(255,255,255,.14); border-left: 6px solid var(--k-accent); box-shadow: 0 18px 40px rgba(0,0,0,.35); }
+.mvp .stat .v { font-family: 'Anton', Impact, sans-serif; font-size: 60px; line-height: 1; white-space: nowrap; }
+.mvp .stat .l { margin-top: 6px; font-weight: 700; font-size: 21px; letter-spacing: .12em; text-transform: uppercase;
+  color: rgba(235,240,250,.78); white-space: nowrap; overflow: hidden; }
+/* the first stat is the headline number (match rating) */
+.mvp .stat.hero { background: var(--k-accent); color: var(--k-on); border: 0; padding: 18px 22px 20px;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 22px), calc(100% - 22px) 100%, 0 100%); }
+.mvp .stat.hero .v { font-size: 104px; }
+.mvp .stat.hero .l { color: inherit; opacity: .85; }
+
+/* ---------- name plate + match box ---------- */
+.mvp .plate { position: absolute; z-index: 7; left: 0; bottom: 102px; width: 690px; height: 148px; padding: 18px 48px 0;
+  background: var(--k-accent); color: var(--k-on); clip-path: polygon(0 0, 100% 0, 94% 100%, 0 100%); }
+.mvp .plate::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 10px; background: var(--k-stripe); }
+.mvp .plate .name { font-family: 'Anton', Impact, sans-serif; font-size: 72px; line-height: 1.1; text-transform: uppercase;
+  white-space: nowrap; overflow: hidden; }
+.mvp .plate .name.long { font-size: 54px; margin-top: 10px; }
+.mvp .plate .team { font-weight: 800; font-size: 26px; letter-spacing: .12em; text-transform: uppercase; opacity: .85;
+  white-space: nowrap; overflow: hidden; padding-right: 50px; }
+
+.mvp .match { position: absolute; z-index: 7; right: 0; bottom: 102px; width: 410px; height: 148px; padding: 14px 48px 0 70px;
+  text-align: right; background: rgba(5,6,10,.92); clip-path: polygon(10% 0, 100% 0, 100% 100%, 0 100%); }
+.mvp .match .lbl { font-weight: 800; font-size: 20px; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.6); }
+.mvp .match .score { font-family: 'Anton', Impact, sans-serif; font-size: 62px; line-height: 1.05; white-space: nowrap; }
+.mvp .match .vs { font-weight: 700; font-size: 22px; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.8);
+  white-space: nowrap; overflow: hidden; }
+
+/* ---------- footer ---------- */
+.mvp footer { position: absolute; z-index: 7; left: 0; right: 0; bottom: 0; height: 74px; display: flex; align-items: center;
+  justify-content: space-between; padding: 0 48px; background: #05060a; font-weight: 700; font-size: 24px; letter-spacing: .14em;
+  text-transform: uppercase; color: rgba(255,255,255,.8); }
+.mvp footer::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 4px; background: var(--k-accent); }
+.mvp footer b { color: #fff; font-weight: 800; }
+
+/* ======================= shared bits for the option layouts ======================= */
+.mvp .plate .sub { margin-top: 4px; font-weight: 800; font-size: 26px; letter-spacing: .12em; text-transform: uppercase; opacity: .85;
+  white-space: nowrap; overflow: hidden; }
+.mvp .plate .sub i { font-style: normal; margin: 0 14px; opacity: .6; }
+.mvp .bigword, .mvp .rating, .mvp .grid, .mvp .info { display: none; }
+
+/* ======================= Option 1 · BIG MVP ======================= */
+.mvp.layout-big .bigword { display: block; position: absolute; z-index: 1; left: 0; right: 0; top: 118px; text-align: center;
+  font-family: 'Anton', Impact, sans-serif; font-size: 470px; line-height: .9; letter-spacing: 6px; color: #fff; opacity: .95;
+  text-shadow: 0 14px 0 rgba(0,0,0,.22), 0 0 60px rgba(0,0,0,.25); }
+.mvp.layout-big .glow { left: 90px; top: 260px; }
+.mvp.layout-big .rings { left: 540px; top: 700px; }
+.mvp.layout-big .player { left: 540px; top: 250px; height: 880px; }
+.mvp.layout-big .top-shade { height: 200px; }
+.mvp.layout-big .kicker { margin-top: 84px; font-size: 26px; }
+.mvp.layout-big .stats { left: 48px; right: 48px; top: auto; bottom: 262px; width: auto; flex-direction: row; gap: 10px; }
+.mvp.layout-big .stat { flex: 1; text-align: center; padding: 10px 8px 12px; border-left: 0; border-top: 5px solid var(--k-accent); }
+.mvp.layout-big .stat .v { font-size: 56px; }
+.mvp.layout-big .stat .l { font-size: 18px; }
+.mvp.layout-big .stat.hero { clip-path: none; padding: 10px 8px 12px; }
+.mvp.layout-big .stat.hero .v { font-size: 56px; }
+.mvp.layout-big .plate { left: 0; width: 100%; height: 150px; text-align: center; padding: 16px 48px 0; clip-path: none; }
+.mvp.layout-big .plate .name { font-size: 80px; line-height: 1.05; }
+.mvp.layout-big .plate .name.long { font-size: 60px; margin-top: 8px; }
+
+/* ======================= Option 2 · RATING ======================= */
+.mvp.layout-rating header { text-align: left; }
+.mvp.layout-rating header .mv[data-move="title"] { padding-left: 48px; }   /* was the header's padding */
+.mvp.layout-rating .kicker { margin-top: 162px; font-size: 26px; letter-spacing: .18em; }
+.mvp.layout-rating .kicker::before { display: none; }
+.mvp.layout-rating .kicker::after { width: 90px; }
+.mvp.layout-rating h1 { font-size: 132px; line-height: .92; max-width: 560px; }
+.mvp.layout-rating .player { left: 740px; top: 250px; height: 900px; }
+.mvp.layout-rating .glow { left: 300px; }
+.mvp.layout-rating .rings { left: 740px; }
+.mvp.layout-rating .rating { display: block; position: absolute; z-index: 6; left: 48px; top: 470px; }
+.mvp.layout-rating .rating .v { font-family: 'Anton', Impact, sans-serif; font-size: 230px; line-height: .9; color: #fff;
+  text-shadow: 0 8px 0 rgba(0,0,0,.3), 0 10px 40px rgba(0,0,0,.45); }
+.mvp.layout-rating .rating .l { display: inline-block; margin-top: 8px; padding: 6px 14px; font-weight: 800; font-size: 24px; letter-spacing: .16em;
+  text-transform: uppercase; background: #fff; color: #0b0d12; }
+.mvp.layout-rating .grid { display: grid; position: absolute; z-index: 6; left: 48px; top: 820px; width: 380px;
+  grid-template-columns: 1fr 1fr; gap: 10px; }
+.mvp.layout-rating .cell { padding: 10px 16px 12px; background: rgba(9,11,18,.82); border: 1px solid rgba(255,255,255,.14);
+  border-top: 4px solid var(--k-accent); }
+.mvp.layout-rating .cell .v { font-family: 'Anton', Impact, sans-serif; font-size: 50px; line-height: 1; }
+.mvp.layout-rating .cell .l { margin-top: 4px; font-weight: 700; font-size: 17px; letter-spacing: .12em; text-transform: uppercase;
+  color: rgba(235,240,250,.78); white-space: nowrap; overflow: hidden; }
+.mvp.layout-rating .plate { left: 0; width: 100%; height: 132px; padding: 14px 48px 0; clip-path: none; }
+.mvp.layout-rating .plate .name { font-size: 70px; line-height: 1.05; }
+.mvp.layout-rating .plate .name.long { font-size: 56px; margin-top: 6px; }
+.mvp.layout-rating .plate .sub { font-size: 24px; margin-top: 2px; }
+
+/* ======================= Option 3 · SPLIT ======================= */
+.mvp.layout-split .player { left: 300px; top: 300px; height: 860px; }
+.mvp.layout-split .glow { left: -120px; top: 260px; }
+.mvp.layout-split .rings { left: 330px; top: 640px; }
+.mvp.layout-split .floor { height: 300px; }
+.mvp.layout-split .info { display: flex; flex-direction: column; position: absolute; z-index: 6; top: 0; right: 0; bottom: 74px; width: 470px;
+  padding: 52px 48px 40px 64px; background: linear-gradient(to bottom, rgba(7,9,14,.94), rgba(7,9,14,.98));
+  clip-path: polygon(64px 0, 100% 0, 100% 100%, 0 100%); }
+.mvp.layout-split .info::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 64px;
+  background: var(--k-accent); clip-path: polygon(64px 0, 76px 0, 12px 100%, 0 100%); }
+.mvp.layout-split .info .tag { position: static; align-self: flex-start; font-size: 20px; }
+.mvp.layout-split .info .kicker { margin-top: 34px; white-space: nowrap; font-size: 18px; font-style: normal; letter-spacing: .2em; color: rgba(255,255,255,.7); }
+.mvp.layout-split .info .kicker::before, .mvp.layout-split .info .kicker::after { display: none; }
+.mvp.layout-split .mvpword { font-family: 'Anton', Impact, sans-serif; font-size: 190px; line-height: .95; color: var(--k-accent); margin-top: 4px; }
+.mvp.layout-split .info .name { font-family: 'Anton', Impact, sans-serif; font-size: 66px; line-height: 1.05; text-transform: uppercase;
+  white-space: nowrap; overflow: hidden; }
+.mvp.layout-split .info .name.long { font-size: 46px; }
+.mvp.layout-split .info .team { font-weight: 800; font-size: 22px; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.7); }
+.mvp.layout-split .table { margin-top: 30px; border-top: 2px solid rgba(255,255,255,.15); }
+.mvp.layout-split .trow { display: flex; justify-content: space-between; align-items: baseline; padding: 14px 0;
+  border-bottom: 1px solid rgba(255,255,255,.1); }
+.mvp.layout-split .trow span { font-weight: 700; font-size: 21px; letter-spacing: .12em; text-transform: uppercase; color: rgba(235,240,250,.75); }
+.mvp.layout-split .trow b { font-family: 'Anton', Impact, sans-serif; font-weight: 400; font-size: 46px; line-height: 1; }
+.mvp.layout-split .trow.hero b { font-size: 72px; color: var(--k-accent); }
+.mvp.layout-split .result { margin-top: auto; display: flex; flex-direction: column; padding: 18px 22px; background: var(--k-accent); color: var(--k-on); }
+.mvp.layout-split .result span { font-weight: 800; font-size: 20px; letter-spacing: .14em; text-transform: uppercase; opacity: .8; white-space: nowrap; }
+.mvp.layout-split .result b { font-family: 'Anton', Impact, sans-serif; font-weight: 400; font-size: 64px; line-height: 1.05; }
+
+/* ======================= Colourful theme (CS-style): dark base + jersey colour + 2 contrast pops ======================= */
+.mvp.vivid { background: #090b14; }
+.mvp.vivid .bg { background:
+  radial-gradient(48% 38% at 92% 6%, color-mix(in srgb, var(--k-pop2) 70%, transparent), transparent 70%),
+  radial-gradient(55% 40% at 0% 100%, color-mix(in srgb, var(--k-pop) 75%, transparent), transparent 70%),
+  linear-gradient(125deg, transparent 0 34%, var(--k-base) 34% 70%, transparent 70%),
+  linear-gradient(160deg, #141833, #090b14 70%); }
+/* bold diagonal colour bars */
+.mvp.vivid .stripes { inset: 0; opacity: 1; -webkit-mask-image: none; mask-image: none; background:
+  linear-gradient(125deg, transparent 0 31%, var(--k-pop) 31% 32.4%, transparent 32.4% 33.2%, var(--k-pop2) 33.2% 34%, transparent 34%),
+  linear-gradient(125deg, transparent 0 70%, var(--k-pop2) 70% 70.8%, transparent 70.8% 72%, var(--k-pop) 72% 72.6%, transparent 72.6%); }
+.mvp.vivid .dots { opacity: .35; }
+.mvp.vivid .glow { background: radial-gradient(circle, var(--k-glow) 0%, transparent 60%); opacity: .45; }
+.mvp.vivid .streaks { background:
+  linear-gradient(125deg, transparent 12%, rgba(255,255,255,.14) 12.3%, transparent 13%),
+  linear-gradient(125deg, transparent 84%, rgba(255,255,255,.16) 84.3%, transparent 85%); }
+/* fine grain for a printed look */
+.mvp.vivid .rings::after { border-color: color-mix(in srgb, var(--k-pop) 45%, transparent); }
+.mvp.vivid .rings::before { border-color: color-mix(in srgb, var(--k-pop2) 45%, transparent); }
+
+.mvp.vivid .kicker { color: var(--k-pop); opacity: 1; }
+.mvp.vivid .tag { background: var(--k-pop2); color: #fff; }
+.mvp.vivid h1 { background: linear-gradient(90deg, #fff 0 55%, var(--k-pop) 100%); -webkit-background-clip: text; background-clip: text; color: transparent;
+  text-shadow: none; filter: drop-shadow(0 5px 0 rgba(0,0,0,.35)); }
+
+/* stats: values in the contrast colour, coloured top edges */
+.mvp.vivid .stat { background: rgba(9,11,20,.82); border-color: rgba(255,255,255,.12); }
+.mvp.vivid .stat:nth-child(2) { border-left-color: var(--k-pop); }
+.mvp.vivid .stat:nth-child(3) { border-left-color: var(--k-pop2); }
+.mvp.vivid .stat:nth-child(4) { border-left-color: var(--k-accent); }
+.mvp.vivid .stat:nth-child(5) { border-left-color: var(--k-pop); }
+.mvp.vivid.layout-big .stat:nth-child(2) { border-top-color: var(--k-pop); }
+.mvp.vivid.layout-big .stat:nth-child(3) { border-top-color: var(--k-pop2); }
+.mvp.vivid.layout-big .stat:nth-child(4) { border-top-color: var(--k-accent); }
+.mvp.vivid.layout-big .stat:nth-child(5) { border-top-color: var(--k-pop); }
+.mvp.vivid .stat.hero { background: linear-gradient(135deg, var(--k-accent) 40%, var(--k-ana)); color: var(--k-on); }
+.mvp.vivid .stat.hero .v { text-shadow: 0 4px 0 rgba(0,0,0,.25); }
+
+/* name plate: jersey colour fading into the second pop colour, contrast stripe on top */
+.mvp.vivid .plate { background: linear-gradient(90deg, var(--k-accent) 0%, var(--k-accent) 50%, var(--k-ana) 100%); color: var(--k-on); }
+.mvp.vivid .plate::before { background: var(--k-pop); }
+.mvp.vivid footer::before { background: linear-gradient(90deg, var(--k-accent), var(--k-pop) 50%, var(--k-pop2)); }
+
+/* Option 1: MVP letters with a gradient fill + offset colour shadow */
+.mvp.vivid.layout-big .bigword { color: transparent; opacity: 1;
+  background: linear-gradient(180deg, #fff 0%, #fff 30%, var(--k-mvp) 100%); -webkit-background-clip: text; background-clip: text;
+  text-shadow: none; filter: drop-shadow(14px 14px 0 var(--k-mvp-sh)); }
+
+/* Option 2: rating number with a colour offset shadow, grid cells with coloured tops */
+.mvp.vivid.layout-rating .rating .v { text-shadow: 8px 8px 0 var(--k-ana), 0 10px 40px rgba(0,0,0,.45); }
+.mvp.vivid.layout-rating .rating .l { background: var(--k-pop); color: #0b0d12; }
+.mvp.vivid.layout-rating .cell:nth-child(1) { border-top-color: var(--k-pop); }
+.mvp.vivid.layout-rating .cell:nth-child(2) { border-top-color: var(--k-pop2); }
+.mvp.vivid.layout-rating .cell:nth-child(3) { border-top-color: var(--k-accent); }
+.mvp.vivid.layout-rating .cell .v { color: #fff; }
+
+/* Option 3: coloured panel edge, MVP gradient, coloured stat values */
+.mvp.vivid.layout-split .info::before { background: linear-gradient(180deg, var(--k-accent), var(--k-ana)); }
+.mvp.vivid.layout-split .mvpword { filter: drop-shadow(8px 8px 0 var(--k-mvp-sh)); background: linear-gradient(180deg, #fff 25%, var(--k-mvp)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.mvp.vivid.layout-split .info .team { color: var(--k-pop); }
+.mvp.vivid.layout-split .trow.hero b { color: var(--k-pop); }
+.mvp.vivid.layout-split .trow:nth-child(3) b { color: var(--k-pop2); }
+.mvp.vivid.layout-split .result { background: linear-gradient(135deg, var(--k-accent) 40%, var(--k-ana)); color: var(--k-on); }
+
+/* ======================= Dark premium (plain black/white kits): deep black, gloss, one accent ======================= */
+.mvp.vivid.premium { background: #040406; }
+.mvp.vivid.premium .bg { background:
+  radial-gradient(60% 42% at 50% 46%, rgba(255,255,255,.10), transparent 70%),
+  radial-gradient(40% 30% at 85% 0%, color-mix(in srgb, var(--k-accent) 22%, transparent), transparent 70%),
+  linear-gradient(160deg, #15161b 0%, #08080b 45%, #020203 100%); }
+/* fine carbon-fibre weave */
+.mvp.vivid.premium .stripes { inset: 0; opacity: .5; -webkit-mask-image: radial-gradient(70% 60% at 50% 45%, #000, transparent);
+  mask-image: radial-gradient(70% 60% at 50% 45%, #000, transparent); background:
+  repeating-linear-gradient(45deg, rgba(255,255,255,.035) 0 4px, transparent 4px 8px),
+  repeating-linear-gradient(-45deg, rgba(255,255,255,.03) 0 4px, transparent 4px 8px); }
+.mvp.vivid.premium .dots { display: none; }
+/* glossy light sweeps */
+.mvp.vivid.premium .streaks { mix-blend-mode: screen; background:
+  linear-gradient(115deg, transparent 18%, rgba(255,255,255,.07) 24%, transparent 30%),
+  linear-gradient(115deg, transparent 72%, rgba(255,255,255,.05) 76%, transparent 80%),
+  linear-gradient(115deg, transparent 0 63%, var(--k-accent) 63% 63.25%, transparent 63.25%); }
+/* white rim light behind the player */
+.mvp.vivid.premium .glow { background: radial-gradient(circle, rgba(255,255,255,.55) 0%, rgba(255,255,255,.12) 35%, transparent 62%); opacity: .5; }
+.mvp.vivid.premium .rings::before { border-color: color-mix(in srgb, var(--k-accent) 35%, transparent); }
+.mvp.vivid.premium .rings::after { border-color: rgba(255,255,255,.08); }
+.mvp.vivid.premium .kicker { color: var(--k-accent); }
+.mvp.vivid.premium .tag { background: var(--k-accent); color: #0b0d12; }
+/* chrome MVP lettering */
+.mvp.vivid.premium.layout-big .bigword, .mvp.vivid.premium.layout-split .mvpword {
+  background: linear-gradient(180deg, #ffffff 0%, #d9dde4 38%, #8a909c 52%, #f4f5f8 64%, #b5bac4 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 0 1px rgba(255,255,255,.6)) drop-shadow(10px 10px 0 color-mix(in srgb, var(--k-accent) 70%, #000)); }
+/* stats: glossy black tiles, accent only on the headline number */
+.mvp.vivid.premium .stat { background: linear-gradient(180deg, #1a1b21, #0b0b0e); border: 1px solid rgba(255,255,255,.1); }
+.mvp.vivid.premium .stat:nth-child(n) { border-left-color: rgba(255,255,255,.1); border-top-color: rgba(255,255,255,.1); }
+.mvp.vivid.premium .stat.hero { background: linear-gradient(180deg, #1a1b21, #0b0b0e); color: var(--k-accent);
+  border: 1px solid var(--k-accent); box-shadow: inset 0 0 24px color-mix(in srgb, var(--k-accent) 25%, transparent); }
+.mvp.vivid.premium .stat.hero .l { color: rgba(255,255,255,.75); }
+/* name plate: glossy black with an accent line */
+.mvp.vivid.premium .plate { background: linear-gradient(180deg, #1c1d23 0%, #0a0a0d 55%, #050507 100%); color: #fff; }
+.mvp.vivid.premium .plate::before { height: 4px; background: linear-gradient(90deg, transparent, var(--k-accent) 20%, var(--k-accent) 80%, transparent); }
+.mvp.vivid.premium .plate .sub { color: var(--k-accent); opacity: 1; }
+.mvp.vivid.premium footer::before { background: linear-gradient(90deg, transparent, var(--k-accent), transparent); }
+/* split layout panel */
+.mvp.vivid.premium.layout-split .info::before { background: var(--k-accent); }
+.mvp.vivid.premium.layout-split .info .team, .mvp.vivid.premium.layout-split .trow.hero b { color: var(--k-accent); }
+.mvp.vivid.premium.layout-split .trow b { color: #fff !important; }
+.mvp.vivid.premium.layout-split .trow.hero b { color: var(--k-accent) !important; }
+.mvp.vivid.premium.layout-split .result { background: linear-gradient(180deg, #1c1d23, #0a0a0d); color: #fff; border: 1px solid var(--k-accent); }
+.mvp.vivid.premium.layout-split .result b { color: var(--k-accent); }
+.mvp.vivid.premium .player { filter: drop-shadow(0 0 1.5px rgba(255,255,255,.45)) drop-shadow(0 0 26px rgba(255,255,255,.14)); }
+
+/* ---- Dark premium v2: same black base, plus two colours (accent + --k-c2) ---- */
+.mvp.vivid.premium .bg { background:
+  radial-gradient(45% 32% at 100% 4%, color-mix(in srgb, var(--k-c2) 55%, transparent), transparent 72%),
+  radial-gradient(50% 34% at 0% 96%, color-mix(in srgb, var(--k-accent) 40%, transparent), transparent 72%),
+  radial-gradient(60% 42% at 50% 46%, rgba(255,255,255,.08), transparent 70%),
+  linear-gradient(160deg, #15161b 0%, #08080b 45%, #020203 100%); }
+.mvp.vivid.premium .streaks { mix-blend-mode: normal; background:
+  linear-gradient(125deg, transparent 0 27%, var(--k-accent) 27% 27.7%, transparent 27.7% 28.6%, var(--k-c2) 28.6% 29.1%, transparent 29.1%),
+  linear-gradient(125deg, transparent 0 72%, var(--k-c2) 72% 72.7%, transparent 72.7% 73.6%, var(--k-accent) 73.6% 74%, transparent 74%),
+  linear-gradient(115deg, transparent 18%, rgba(255,255,255,.06) 24%, transparent 30%); }
+.mvp.vivid.premium .glow { background: radial-gradient(circle, color-mix(in srgb, var(--k-c2) 45%, #fff) 0%, color-mix(in srgb, var(--k-c2) 18%, transparent) 38%, transparent 62%); opacity: .45; }
+.mvp.vivid.premium .rings::before { border-color: color-mix(in srgb, var(--k-c2) 50%, transparent); }
+.mvp.vivid.premium .tag { background: var(--k-c2); color: #fff; }
+/* MVP: white fading into the second colour, shadow in the accent */
+.mvp.vivid.premium.layout-big .bigword, .mvp.vivid.premium.layout-split .mvpword {
+  background: linear-gradient(180deg, #fff 0%, #fff 32%, color-mix(in srgb, var(--k-c2) 70%, #fff) 70%, var(--k-c2) 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(12px 12px 0 var(--k-accent)); }
+.mvp.vivid.premium.layout-split .mvpword { filter: drop-shadow(7px 7px 0 var(--k-accent)); }
+/* stats: coloured top edges alternate between the two colours, headline tile is a two-colour gradient */
+.mvp.vivid.premium .stat:nth-child(2n) { border-top: 4px solid var(--k-c2); }
+.mvp.vivid.premium .stat:nth-child(2n+3) { border-top: 4px solid var(--k-accent); }
+.mvp.vivid.premium .stat.hero { background: linear-gradient(135deg, var(--k-accent) 35%, var(--k-c2)); color: #fff; border: 0; box-shadow: none; }
+.mvp.vivid.premium .stat.hero .v { text-shadow: 0 4px 0 rgba(0,0,0,.3); }
+.mvp.vivid.premium .stat.hero .l { color: #fff; }
+/* name plate: glossy black, two-colour line on top */
+.mvp.vivid.premium .plate::before { height: 6px; background: linear-gradient(90deg, var(--k-accent), var(--k-c2)); }
+.mvp.vivid.premium footer::before { background: linear-gradient(90deg, var(--k-accent), var(--k-c2)); }
+.mvp.vivid.premium.layout-split .info::before { background: linear-gradient(180deg, var(--k-accent), var(--k-c2)); }
+.mvp.vivid.premium.layout-split .trow:nth-child(3) b { color: var(--k-c2) !important; }
+.mvp.vivid.premium.layout-split .result { background: linear-gradient(135deg, var(--k-accent) 35%, var(--k-c2)); border: 0; }
+.mvp.vivid.premium.layout-split .result b { color: #fff; }
+.mvp.vivid.premium .stat.hero { background: linear-gradient(160deg, var(--k-accent) 55%, var(--k-c2)); color: #0b0d12; }
+.mvp.vivid.premium .stat.hero .v { text-shadow: none; }
+.mvp.vivid.premium .stat.hero .l { color: #0b0d12; }
+
+/* ---- admin's own background image: replaces the drawn background layers ---- */
+.mvp .bgimg { position: absolute; inset: 0; background-size: cover; background-position: center; }
+.mvp.custom-bg .top-shade { opacity: .6; }
+
+/* ======================= Fixed templates (Background = Default template) ======================= */
+
+
+/* Neon: synthwave purple with a cyan/magenta floor grid */
+.mvp.vivid.premium.tpl-neon .bg { background:
+  radial-gradient(42% 26% at 50% 60%, rgba(255,70,200,.6), transparent 72%),
+  radial-gradient(60% 30% at 50% 0%, rgba(34,211,238,.25), transparent 70%),
+  linear-gradient(180deg, #0d0221 0%, #2a0845 58%, #12032a 100%); }
+.mvp.vivid.premium.tpl-neon .stripes { inset: auto -50% 300px -50%; height: 520px; opacity: .9;
+  background: linear-gradient(#22d3ee 3px, transparent 3px) 0 0 / 100% 64px, linear-gradient(90deg, #e040fb 3px, transparent 3px) 0 0 / 90px 100%;
+  transform: perspective(520px) rotateX(64deg); transform-origin: 50% 100%;
+  -webkit-mask-image: linear-gradient(to top, #000 35%, transparent); mask-image: linear-gradient(to top, #000 35%, transparent); }
+.mvp.vivid.premium.tpl-neon .glow { background: radial-gradient(circle, rgba(255,140,60,.7) 0%, rgba(224,64,251,.35) 35%, transparent 62%); opacity: .55; }
+
+
+/* Shatter: dark base cut by orange and blue shards */
+.mvp.vivid.premium.tpl-shatter .bg { background:
+  radial-gradient(50% 36% at 50% 45%, rgba(255,255,255,.1), transparent 70%),
+  linear-gradient(132deg, transparent 0 24%, rgba(255,122,26,.9) 24% 31%, transparent 31%),
+  linear-gradient(48deg, transparent 0 66%, rgba(59,130,246,.9) 66% 73%, transparent 73%),
+  linear-gradient(160deg, transparent 0 72%, rgba(255,122,26,.4) 72% 82%, transparent 82%),
+  linear-gradient(18deg, transparent 0 16%, rgba(59,130,246,.4) 16% 25%, transparent 25%),
+  linear-gradient(170deg, #121828 0%, #0a0d16 60%, #05070c 100%); }
+.mvp.vivid.premium.tpl-shatter .stripes { opacity: .35; }
+
+/* ---------- movable sections (js/studio-edit.js) ----------
+   each wrapper is full-poster and gets a transform, so it carries its block's stacking level */
+.mvp .mv { position: absolute; inset: 0; pointer-events: none; }
+.mvp .mv > *, .mvp .info [data-move] { pointer-events: auto; cursor: move; }
+.mvp > .mv[data-move="bigword"] { z-index: 1; }
+.mvp > .mv[data-move="stats"], .mvp > .mv[data-move="rating"], .mvp > .mv[data-move="grid"], .mvp > .mv[data-move="info"] { z-index: 6; }
+.mvp > .mv[data-move="name"], .mvp > .mv[data-move="score"], .mvp > .mv[data-move="footer"] { z-index: 7; }
+
+/* ---------- partners strip (took the footer's place) ---------- */
+.mvp footer.spf { display: block; height: 95px; padding: 0; font-size: 0; letter-spacing: 0; }
+.mvp .spf .k { position: absolute; left: 0; right: 0; top: 13px; text-align: center; font-size: 12px; font-weight: 700; letter-spacing: .6em; color: rgba(255,255,255,.55); }
+.mvp .spf .sprow { position: absolute; left: 80px; right: 80px; top: 31px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+.mvp .spf .sprow div { height: 40px; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 800; letter-spacing: .08em; color: rgba(255,255,255,.9); white-space: nowrap; overflow: hidden; }
+.mvp .spf .sprow img { max-height: 34px; max-width: 90%; object-fit: contain; }
+.mvp .spf .w { position: absolute; left: 0; right: 0; bottom: 8px; text-align: center; font-size: 11px; font-weight: 700; letter-spacing: .5em; color: rgba(255,255,255,.5); }
+.mvp > .mv[data-move="partners"] { z-index: 7; }

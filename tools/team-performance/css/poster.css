@@ -1,0 +1,102 @@
+/* Team Performance poster, 1080 × 1350. Three layouts: .arena (Arena Ribbon), .neon (Neon Stage), .roster (Diagonal Roster). */
+.tp { position: relative; width: 1080px; height: 1350px; overflow: hidden; color: #fff; background: var(--bgB); }
+.tp * { box-sizing: border-box; margin: 0; padding: 0; }
+.tp svg.full { position: absolute; left: 0; top: 0; width: 1080px; height: 1350px; }
+.tp .upbg { position: absolute; inset: 0; background: center/cover no-repeat; }
+.tp .wash { position: absolute; inset: 0; }
+.tp.up .wash { background: linear-gradient(180deg, rgba(4,5,12,.25), rgba(4,5,12,.35) 45%, rgba(4,5,12,.88) 72%, rgba(4,5,12,.94)); }
+.tp .lg { display: block; flex: none; object-fit: contain; }
+.tp .mono { display: flex; flex: none; align-items: center; justify-content: center; border-radius: 50%; font: 800 20px/1 'Manrope'; color: #fff; }
+.tp .el { height: 40px; width: auto; display: block; }
+.tp .grp { position: absolute; left: 0; top: 0; width: 1080px; overflow: hidden; pointer-events: none; }
+.tp .grp img { position: absolute; max-width: none; pointer-events: auto; cursor: move; filter: drop-shadow(0 0 1.5px rgba(255,255,255,.55)) drop-shadow(0 0 26px var(--g1)) drop-shadow(0 10px 18px rgba(0,0,0,.45)); }
+/* a name tag on each player's chest (reference posters: KISHU, FERO…) */
+.tp .ntags { position: absolute; inset: 0; pointer-events: none; }
+.tp .ntag { position: absolute; transform: translateX(-50%); text-align: center; white-space: nowrap; }
+.tp .ntag b { display: inline-block; padding: 6px 12px 5px; font: italic 800 26px/1 'Kanit'; letter-spacing: .05em; color: #fff;
+  background: linear-gradient(180deg, rgba(8,8,16,.78), rgba(8,8,16,.6)); border-bottom: 4px solid var(--c1); box-shadow: 0 6px 16px rgba(0,0,0,.45);
+  transform: skewX(-8deg); }
+.tp .ntag.bk b { font-size: 21px; padding: 5px 10px 4px; border-bottom-width: 3px; }
+.tp svg.conf { pointer-events: none; }
+/* parts that sit in front of the squad (the cut-outs are z-index 1-4) */
+.tp .mv[data-move="tags"], .tp .mv[data-move="team"], .tp .mv[data-move="crest"] { z-index: 6; }
+.tp .ntag b { pointer-events: auto; cursor: move; }
+.tp .grp img:not(.gimg) { -webkit-mask-image: linear-gradient(180deg, #000 80%, transparent 98%); mask-image: linear-gradient(180deg, #000 80%, transparent 98%); }
+.tp .grp img.gimg { height: auto; }
+.tp .sp { position: absolute; left: 0; right: 0; top: 1255px; height: 95px; }
+.tp .sp .k { position: absolute; left: 0; right: 0; top: 11px; text-align: center; font: 700 11px/1 'Manrope'; letter-spacing: .6em; color: rgba(255,255,255,.55); }
+.tp .sp .sprow { position: absolute; left: 90px; right: 90px; top: 29px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+.tp .sp .sprow div { height: 42px; display: flex; align-items: center; justify-content: center; font: 800 17px/1 'Manrope'; letter-spacing: .08em; color: rgba(255,255,255,.82); }
+.tp .sp .sprow img { max-height: 32px; max-width: 90%; object-fit: contain; }
+.tp .sp .w { position: absolute; left: 0; right: 0; bottom: 8px; text-align: center; font: 600 10px/1 'Manrope'; letter-spacing: .5em; color: rgba(255,255,255,.5); }
+
+/* ===== Arena Ribbon: stadium tiers, slanted ribbon, huge italic numbers ===== */
+.arena .hd { position: absolute; left: 50px; top: 46px; display: flex; align-items: center; gap: 14px; font: italic 800 28px/1 'Kanit'; letter-spacing: .03em; }
+.arena .tag { position: absolute; right: 50px; top: 38px; max-width: 250px; padding: 8px 14px 9px; border: 3px solid var(--c2); color: var(--c2);
+  font: italic 800 26px/1 'Kanit'; text-align: center; letter-spacing: .02em; box-shadow: 0 0 22px rgba(0,0,0,.4) inset; }
+.arena .floor { position: absolute; left: 0; right: 0; top: 690px; height: 220px; background: linear-gradient(180deg, transparent, var(--bgB) 92%); pointer-events: none; }
+.arena .hero { position: absolute; left: 30px; right: 30px; top: 730px; display: flex; align-items: center; justify-content: center; gap: 14px; }
+.arena .hero .tn { max-width: 860px; white-space: nowrap; overflow: hidden; padding: 0 12px 8px 0; font: italic 900 132px/1.05 'Kanit'; letter-spacing: -.01em; text-transform: uppercase;
+  color: #fff; text-shadow: 0 7px 0 var(--d1), 0 0 34px var(--g1), 0 14px 30px rgba(0,0,0,.7); }
+.arena .rib { position: absolute; left: 0; right: 0; top: 884px; display: flex; align-items: center; justify-content: center; gap: 22px; }
+.arena .rib b { display: block; max-width: 760px; white-space: nowrap; overflow: hidden; padding: 12px 54px 14px; font: italic 800 36px/1 'Kanit'; letter-spacing: .05em;
+  background: linear-gradient(90deg, var(--d1), var(--c1) 30%, var(--c1) 70%, var(--d1)); clip-path: polygon(22px 0, 100% 0, calc(100% - 22px) 100%, 0 100%);
+  text-shadow: 0 2px 0 rgba(0,0,0,.35); }
+.arena .rib i { flex: none; width: 90px; height: 4px; background: linear-gradient(90deg, transparent, var(--c2)); transform: skewX(-30deg); }
+.arena .rib i:last-child { background: linear-gradient(90deg, var(--c2), transparent); }
+.arena .stats { position: absolute; left: 50px; right: 50px; top: 970px; display: grid; grid-template-columns: repeat(var(--n), 1fr); }
+.arena .st { position: relative; text-align: center; padding-top: 6px; }
+.arena .st + .st::before { content: ''; position: absolute; left: 0; top: 10px; bottom: 6px; width: 3px; background: linear-gradient(180deg, transparent, var(--c1), transparent); transform: skewX(-14deg); }
+.arena .st span { display: block; font: 800 30px/1 'Saira Condensed'; letter-spacing: .06em; color: var(--c2); }
+.arena .st b { display: block; margin-top: 4px; font: italic 900 122px/1.05 'Kanit'; letter-spacing: -.01em; text-shadow: 0 6px 0 var(--d1), 0 0 40px rgba(0,0,0,.5); }
+.arena .names { position: absolute; left: 80px; right: 80px; top: 1180px; text-align: center; white-space: nowrap; overflow: hidden; font: 700 19px/1 'Manrope'; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.85); }
+.arena .names em { font-style: normal; color: var(--c1); margin: 0 14px; font-size: 13px; vertical-align: 3px; }
+.arena .sp { background: rgba(0,0,0,.35); }
+.arena .sp::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--c1), var(--c2), transparent); }
+
+/* ===== Neon Stage: squad behind a glowing platform, huge outlined position number, angled HUD tiles ===== */
+.neon .big { position: absolute; left: 20px; right: 20px; top: 200px; white-space: nowrap; overflow: hidden; text-align: center; font: 700 330px/1 'Rajdhani'; letter-spacing: .02em;
+  color: rgba(255,255,255,.94); text-shadow: 0 8px 0 var(--c1), 0 0 50px var(--g1); }
+.neon .hd { position: absolute; left: 60px; right: 60px; top: 44px; text-align: center; }
+.neon .ev { display: inline-flex; align-items: center; gap: 12px; padding: 7px 18px; border: 2px solid var(--c2); border-radius: 40px; font: 700 21px/1 'Rajdhani'; letter-spacing: .22em; color: var(--c2); }
+.neon .ev .el { height: 26px; }
+.neon .tn { width: 100%; margin-top: 16px; white-space: nowrap; overflow: hidden; font: 700 92px/1 'Rajdhani'; letter-spacing: .04em; text-shadow: 0 0 26px var(--c1), 0 0 2px #fff; }
+.neon .sub { margin-top: 22px; font: 700 34px/1 'Rajdhani'; letter-spacing: .32em; color: var(--c2); }
+.neon .plat { position: absolute; left: 0; top: 836px; width: 1080px; height: 200px; pointer-events: none; z-index: 1; }
+.neon .cst { position: absolute; left: 0; right: 0; top: 872px; z-index: 2; display: flex; align-items: center; justify-content: center; gap: 14px; }
+.neon .cst .lg, .neon .cst .mono { width: 64px !important; height: 64px !important; filter: drop-shadow(0 0 14px var(--c1)); }
+.neon .cst b { font: 700 46px/1 'Rajdhani'; letter-spacing: .08em; text-shadow: 0 0 18px var(--c1); }
+.neon .stats { position: absolute; left: 44px; right: 44px; top: 1004px; display: grid; grid-template-columns: repeat(var(--n), 1fr); gap: 18px; }
+.neon .st { position: relative; height: 160px; padding: 20px 12px 0; text-align: center;
+  background: linear-gradient(160deg, rgba(255,255,255,.1), rgba(255,255,255,.02)); clip-path: polygon(22px 0, 100% 0, 100% calc(100% - 22px), calc(100% - 22px) 100%, 0 100%, 0 22px); }
+.neon .st::before { content: ''; position: absolute; inset: 0; padding: 2px; background: linear-gradient(160deg, var(--c1), transparent 45%, var(--c2));
+  clip-path: inherit; -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; }
+.neon .st span { display: block; font: 700 23px/1 'Rajdhani'; letter-spacing: .14em; color: var(--c2); }
+.neon .st b { display: block; margin-top: 6px; font: 700 100px/1 'Rajdhani'; text-shadow: 0 0 22px var(--c1); }
+.neon .names { position: absolute; left: 60px; right: 60px; top: 1190px; text-align: center; white-space: nowrap; overflow: hidden; font: 700 22px/1 'Rajdhani'; letter-spacing: .24em; text-transform: uppercase; color: rgba(255,255,255,.88); }
+.neon .names em { font-style: normal; color: var(--c2); margin: 0 14px; }
+.neon .sp { background: linear-gradient(180deg, transparent, rgba(0,0,0,.5)); border-top: 1px solid rgba(255,255,255,.12); }
+
+/* ===== Diagonal Roster: team-colour band with speed stripes, one row of players, slanted title, skewed stat boxes ===== */
+.roster .hd { position: absolute; left: 50px; top: 46px; display: flex; align-items: center; gap: 12px; font: italic 800 24px/1 'Kanit'; letter-spacing: .06em; }
+.roster .tt { position: absolute; left: 40px; top: 96px; width: 760px; transform: rotate(-6deg); transform-origin: left top; }
+.roster .tt i { position: relative; z-index: 2; display: block; margin-left: 20px; margin-bottom: -40px; white-space: nowrap; overflow: hidden; font: 400 76px/1.35 'Kaushan Script'; color: var(--c2); text-shadow: 0 4px 0 rgba(0,0,0,.4); }
+.roster .tt b { display: block; white-space: nowrap; overflow: hidden; padding: 0 16px 6px 0; font: italic 900 170px/1 'Kanit'; letter-spacing: -.02em; color: #fff;
+  text-shadow: 6px 6px 0 var(--c1), 12px 12px 0 rgba(0,0,0,.35); }
+.roster .tt span { display: inline-block; margin-top: 8px; padding: 8px 18px; background: #fff; color: #0b1030; font: italic 800 26px/1 'Kanit'; letter-spacing: .06em; transform: skewX(-12deg); }
+.roster .cst { position: absolute; right: 50px; top: 40px; }
+.roster .cst .lg, .roster .cst .mono { filter: drop-shadow(0 8px 20px rgba(0,0,0,.5)); }
+/* the band stays clickable: the studio picker grabs it only where it is painted */
+.roster .grp img { filter: drop-shadow(0 0 1.5px rgba(255,255,255,.5)) drop-shadow(10px 12px 0 rgba(0,0,0,.35)) drop-shadow(0 10px 18px rgba(0,0,0,.45)); }
+.roster .stats { position: absolute; left: 60px; right: 60px; top: 1060px; display: grid; grid-template-columns: repeat(var(--n), 1fr); gap: 14px; }
+.roster .st { height: 150px; padding-top: 16px; text-align: center; background: #fff; color: #0b1030; transform: skewX(-12deg); box-shadow: 8px 8px 0 rgba(0,0,0,.4); }
+.roster .st:first-child { background: var(--c2); color: #fff; }
+.roster .st b, .roster .st span { transform: skewX(12deg); }
+.roster .st b { display: block; font: italic 900 82px/1 'Kanit'; }
+.roster .st span { display: block; margin-top: 4px; font: italic 800 19px/1 'Kanit'; letter-spacing: .08em; opacity: .8; }
+.roster .names { position: absolute; left: 60px; right: 60px; top: 1226px; text-align: center; white-space: nowrap; overflow: hidden; font: italic 700 17px/1 'Kanit'; letter-spacing: .18em; text-transform: uppercase; }
+.roster .names em { font-style: normal; color: var(--c2); margin: 0 12px; }
+.roster .sp { background: #070a1f; }
+.roster .ntag b { background: #fff; color: #0b1030; border-bottom-color: var(--c2); }
+
+.tp .mv[data-move="title"] { z-index: 6; }
