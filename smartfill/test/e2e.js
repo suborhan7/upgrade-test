@@ -44,10 +44,14 @@ const check = (ok, what) => { console.log((ok ? 'ok   ' : 'FAIL ') + what); if (
   const base = `http://localhost:${server.address().port}/`;
   const browser = await chromium.launch();
   const page = await browser.newPage({ viewport: { width: 1400, height: 900 } });
-  let calls = 0, shotCalls = 0;
+  let calls = 0, shotCalls = 0, retired = 0;
   await page.route('https://generativelanguage.googleapis.com/**', async route => {
-    calls++;
     const req = route.request();
+    if (req.method() === 'GET')                  // ListModels still lists only the retired model
+      return route.fulfill({ contentType: 'application/json', body: JSON.stringify({ models: ['gemini-2.5-flash'].map(n => ({ name: 'models/' + n, supportedGenerationMethods: ['generateContent'] })) }) });
+    if (req.url().includes('gemini-2.5-flash:')) { retired++;
+      return route.fulfill({ status: 400, contentType: 'application/json', body: JSON.stringify({ error: { code: 400, message: 'This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.8-flash.' } }) }); }
+    calls++;
     const parts = JSON.parse(req.postData()).contents[0].parts;
     if (parts[1] && parts[1].inlineData) {       // phase 2: the screenshot is read to plain text first
       shotCalls++;
@@ -85,7 +89,8 @@ const check = (ok, what) => { console.log((ok ? 'ok   ' : 'FAIL ') + what); if (
   const dateBefore = await f.$eval('[data-k="date"]', i => i.defaultValue || '');
   const poster = await f.$eval('#poster', el => el.textContent);
 
-  check(calls === 1, 'one Gemini call');
+  check(calls === 1 && retired === 1, `retired model skipped, one working Gemini call (${retired} retired, ${calls} ok)`);
+  check(/Model: gemini-3\.8-flash/.test(msg), 'panel shows the model that worked');
   check(vals[0].name === 'Dhaka Dynamos' && vals[0].player === 'Rafi Ahmed' && vals[0].score === '3', 'team 1 filled from source');
   check(vals[1].player === 'Sakib Hasan' && vals[1].score === '1' && vals[1].scorers === "Nayeem 33'", 'team 2 filled from source');
   check(vals[1].name === '', `invented "Sylhet Strikers FC" thrown away and the sample name "${before[1]}" emptied`);

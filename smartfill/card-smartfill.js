@@ -13,9 +13,12 @@
 (function (root) {
   'use strict';
 
-  const MODEL = 'gemini-2.5-flash';
-  const ENDPOINT = m => `https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent`;
+  // tried in this order after the models the key itself lists; Google retires old ones, so none is hard-wired
+  const FALLBACK_MODELS = ['gemini-flash-latest', 'gemini-3.8-flash', 'gemini-3-flash', 'gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-flash-lite-latest'];
+  const API = 'https://generativelanguage.googleapis.com/v1beta';
+  const ENDPOINT = m => `${API}/models/${m}:generateContent`;
   const KEY_STORE = 'cardSmartfill.key';
+  const MODEL_STORE = 'cardSmartfill.model';
 
   /* ---------- grounding: the part that stops made-up data ---------- */
 
@@ -28,9 +31,16 @@
 
   const tokens = s => norm(s).split(' ').filter(Boolean);
 
-  // true when every piece of `value` (split on commas, semicolons and new lines) is written in
-  // `source` word for word, so "Chittagong Kings FC" fails when the source only says "Chittagong Kings"
-  function grounded(value, source) {
+  // true when `value` is made only of words and numbers written in `quote` (a span the model copied from the
+  // source, checked separately). "Chittagong Kings FC" fails against the quote "Chittagong Kings", while
+  // "Mbappe 23', 27'" passes against "mbappe at 23 and 27". Without a quote, each comma-separated piece of
+  // the value must be written in the source word for word.
+  function grounded(value, source, quote) {
+    if (quote != null) {
+      const words = new Set(tokens(quote));
+      const vt = tokens(value);
+      return vt.length > 0 && vt.every(t => words.has(t));
+    }
     const src = ' ' + norm(source) + ' ';
     const pieces = String(value).split(/[,;\n]+/).map(norm).filter(Boolean);
     return pieces.length > 0 && pieces.every(p => src.includes(' ' + p + ' '));
@@ -46,7 +56,7 @@
       const value = f && typeof f.value === 'string' ? f.value.trim() : f && typeof f.value === 'number' ? String(f.value) : '';
       if (!field || !value) continue;
       const quoteOk = typeof f.quote === 'string' && norm(f.quote) && src.includes(' ' + norm(f.quote) + ' ');
-      if (!quoteOk || !grounded(value, source)) { rejected.push({ field, value, why: quoteOk ? 'not in source' : 'no matching quote' }); continue; }
+      if (!quoteOk || !grounded(value, source, f.quote)) { rejected.push({ field, value, why: quoteOk ? 'not in source' : 'no matching quote' }); continue; }
       if (field.numeric && !/^\d+$/.test(value)) { rejected.push({ field, value, why: 'not a number' }); continue; }
       if (ok.some(o => o.field === field)) continue;
       ok.push({ field, value });
@@ -145,21 +155,89 @@
     'Format: one fact per line, like "Home team: X", "Away team: Y", "Score: 2 - 1", "Home scorers: A 12\', B 80\'", "Possession: 55 - 45".',
   ].join('\n');
 
-  async function gemini(key, parts, opts = {}) {
-    const body = {
-      contents: [{ role: 'user', parts }],
-      generationConfig: Object.assign({ temperature: 0 }, opts.schema ? { responseMimeType: 'application/json', responseSchema: opts.schema } : {}),
-    };
-    const res = await fetch(ENDPOINT(opts.model || MODEL), {
+  /* ---------- picking a model that works for this key ---------- */
+
+  // "models/gemini-3.8-flash" -> [3.8]; used to put the newest flash first
+  const versionOf = id => { const m = id.match(/gemini-(\d+(?:\.\d+)?)/); return m ? parseFloat(m[1]) : 0; };
+
+  // ListModels names -> usable text models, newest stable flash first, then pro, then lite / preview
+  function rankModels(models) {
+    const ok = (models || [])
+      .filter(m => (m.supportedGenerationMethods || []).includes('generateContent'))
+      .map(m => String(m.name || '').replace(/^models\//, ''))
+      .filter(id => /^gemini-/.test(id) && !/(tts|image|audio|live|embed|vision|thinking|robotics|computer|learnlm|gemma|aqa|exp)/i.test(id));
+    const score = id => (/flash/.test(id) && !/lite/.test(id) ? 0 : /pro/.test(id) ? 1 : 2) * 10 + (/preview/.test(id) ? 5 : 0);
+    return [...new Set(ok)].sort((a, b) => score(a) - score(b) || versionOf(b) - versionOf(a) || a.length - b.length);
+  }
+
+  async function listModels(key) {
+    try {
+      const res = await fetch(`${API}/models?pageSize=200`, { headers: { 'x-goog-api-key': key } });
+      if (!res.ok) return [];
+      return rankModels((await res.json()).models);
+    } catch { return []; }
+  }
+
+  const store = {
+    get: k => { try { return localStorage.getItem(k) || ''; } catch { return ''; } },
+    set: (k, v) => { try { localStorage.setItem(k, v); } catch {} },
+  };
+
+  // errors where another model may work (retired, not found, quota, overloaded); a bad key is not one of them
+  const tryNext = (status, msg) => !/api.key|API_KEY|permission.denied.*key|unregistered callers/i.test(msg)
+    && (status === 404 || status === 429 || status >= 500 || /no longer available|not found|not supported|deprecated|quota|overloaded|unavailable|update your code/i.test(msg));
+
+  let candidates = null;   // worked out once per page load
+
+  async function modelsFor(key) {
+    if (!candidates) candidates = [store.get(MODEL_STORE), ...await listModels(key), ...FALLBACK_MODELS].filter(Boolean);
+    return [...new Set(candidates)];
+  }
+
+  async function callModel(key, model, body) {
+    const res = await fetch(ENDPOINT(model), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'x-goog-api-key': key },
       body: JSON.stringify(body),
     });
     const data = await res.json().catch(() => ({}));
-    if (!res.ok) throw new Error((data.error && data.error.message) || `Gemini error ${res.status}`);
+    if (!res.ok) {
+      const e = new Error((data.error && data.error.message) || `Gemini error ${res.status}`);
+      e.status = res.status;
+      throw e;
+    }
     const text = (((data.candidates || [])[0] || {}).content || { parts: [] }).parts.map(p => p.text || '').join('');
     if (!text) throw new Error('Gemini returned nothing (blocked or empty).');
     return text;
+  }
+
+  async function gemini(key, parts, opts = {}) {
+    const body = {
+      contents: [{ role: 'user', parts }],
+      generationConfig: Object.assign({ temperature: 0 }, opts.schema ? { responseMimeType: 'application/json', responseSchema: opts.schema } : {}),
+    };
+    const queue = await modelsFor(key), tried = [];
+    let last;
+    while (queue.length) {
+      const model = queue.shift();
+      tried.push(model);
+      try {
+        const text = await callModel(key, model, body);
+        store.set(MODEL_STORE, model);
+        candidates = [model, ...candidates.filter(m => m !== model)];
+        api.lastModel = model;
+        return text;
+      } catch (e) {
+        last = e;
+        if (!e.status || !tryNext(e.status, e.message)) throw e;
+        candidates = candidates.filter(m => m !== model);
+        if (store.get(MODEL_STORE) === model) store.set(MODEL_STORE, '');
+        // Google often names the replacement: "...use models/gemini-3.8-flash..."
+        const hint = (e.message.match(/models\/(gemini-[\w.-]+)/g) || []).map(h => h.slice(7).replace(/[.-]+$/, '')).find(m => m !== model && !tried.includes(m));
+        if (hint) { const i = queue.indexOf(hint); if (i >= 0) queue.splice(i, 1); queue.unshift(hint); }
+      }
+    }
+    throw new Error(`No Gemini model worked for this key (tried ${tried.join(', ')}). Last error: ${last ? last.message : 'none'}`);
   }
 
   async function aiFills(key, fields, source) {
@@ -322,7 +400,7 @@
         ok.forEach(({ field, value }) => { setValue(field.el, value); field.el.classList.add('csf-filled'); });
         blank.forEach(f => setValue(f.el, ''));
         $('[data-undo]').disabled = !undo.length;
-        let html = `<b>Filled ${ok.length}</b> of ${fields.length} fields (green outline).`;
+        let html = `<b>Filled ${ok.length}</b> of ${fields.length} fields (green outline). <small>Model: ${esc(api.lastModel)}</small>`;
         if (image) html += '\n<small>Read from the screenshot: check the text above, it is what was filled from.</small>';
         if (rejected.length) html += `\n<b>Thrown away ${rejected.length}</b> (not in your source):\n` + rejected.map(r => `• ${esc(r.field.label)}: "${esc(r.value)}" (${r.why})`).join('\n');
         if (blank.length) html += `\n<b>Emptied ${blank.length}</b> (same section, not in source).`;
@@ -334,7 +412,7 @@
     });
   }
 
-  const api = { norm, grounded, checkFills, readFields, fillPrompt, setValue, transcribe, aiFills, mount, MODEL };
+  const api = { norm, grounded, checkFills, readFields, fillPrompt, setValue, transcribe, aiFills, mount, rankModels, tryNext, gemini, FALLBACK_MODELS, lastModel: '' };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else {
     root.CardSmartfill = api;

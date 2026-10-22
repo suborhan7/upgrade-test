@@ -40,4 +40,5 @@ The key is kept only in your browser (localStorage, or this tab only if you unti
 - `node --test smartfill/test/grounding.test.js`: the "no invented data" checks.
 - `node smartfill/test/e2e.js [studio folder]`: fills the Match Result card in a real browser with a fake Gemini
   (no key, no network), from text and from a screenshot. Needs playwright.
-- Model: `gemini-2.5-flash` (free tier), temperature 0.
+- Model: picked per key. It asks Google which models the key can use (newest Flash first), remembers the one that
+  worked, and moves to the next one when a model is retired, missing, out of quota or overloaded. Temperature 0.
