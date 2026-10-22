@@ -70,6 +70,9 @@ The Player Stats Card is not in the studio; it lives on the client side of efcb.
 
 Each maker also works on its own: open `tools/<name>/index.html` directly.
 
+**Smart fill (AI):** `smartfill/` holds an add-on that fills any card from a match report or an eFootball result
+screenshot with Gemini, and never invents teams or numbers. See `smartfill/README.md`.
+
 ## Editing (every card)
 Every card loads `js/studio-edit.js` (the same file in each tool folder). Click any text block, panel or photo on the
 poster to select it, then:
