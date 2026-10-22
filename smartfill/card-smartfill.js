@@ -195,7 +195,8 @@
 
   const CSS_TEXT = `
 #card-smartfill{position:fixed;right:16px;bottom:16px;z-index:2147483000;width:340px;max-width:calc(100vw - 32px);font:13px/1.4 system-ui,sans-serif;color:#e8ebf2;background:#1b2030;border:1px solid #333b52;border-radius:12px;box-shadow:0 10px 30px #0008}
-#card-smartfill.min .csf-body{display:none}
+#card-smartfill.min{width:auto}
+#card-smartfill.min .csf-body,#card-smartfill.min header small{display:none}
 #card-smartfill header{display:flex;align-items:center;gap:8px;padding:10px 12px;cursor:pointer;font-weight:600}
 #card-smartfill header span{flex:1}
 #card-smartfill .csf-body{padding:0 12px 12px;display:grid;gap:8px}
@@ -240,10 +241,11 @@
     return box;
   }
 
-  function mount() {
+  function mount(opts = {}) {
     const open = document.getElementById('card-smartfill');
     if (open) { open.classList.remove('min'); return; }   // clicked the bookmark again
     const box = panel();
+    if (opts.minimized) box.classList.add('min');
     const $ = s => box.querySelector(s);
     const keyIn = $('[data-key]'), msg = $('[data-msg]'), imgIn = $('[data-img]'), drop = $('[data-drop]');
     let image = null, undo = [];
@@ -333,6 +335,8 @@
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else {
     root.CardSmartfill = api;
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mount); else mount();
+    // <script src="card-smartfill.js" data-start="min"> shows just the small "Smart fill" button until clicked
+    const opts = { minimized: !!(document.currentScript && document.currentScript.dataset.start === 'min') };
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => mount(opts)); else mount(opts);
   }
 })(typeof window !== 'undefined' ? window : globalThis);

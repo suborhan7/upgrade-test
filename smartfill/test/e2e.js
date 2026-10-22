@@ -65,7 +65,10 @@ const check = (ok, what) => { console.log((ok ? 'ok   ' : 'FAIL ') + what); if (
   await page.waitForFunction(() => document.querySelector('iframe.on'));
   await page.waitForTimeout(1500);
   const before = await frame().$eval('#teams', el => [...el.querySelectorAll('input[data-t="name"]')].map(i => i.value));
-  await page.addScriptTag({ path: ADDON });                // what the bookmarklet does
+  if (await page.$('#card-smartfill')) {                   // built into the studio: open the small button
+    check(await page.$eval('#card-smartfill', b => b.classList.contains('min')), 'built in: starts as the small Smart fill button');
+    await page.click('#card-smartfill header span');
+  } else await page.addScriptTag({ path: ADDON });         // what the bookmarklet does
 
   await page.fill('#card-smartfill [data-key]', 'test-key');
   await page.fill('#card-smartfill [data-src]', SOURCE);

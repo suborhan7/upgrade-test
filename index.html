@@ -106,5 +106,7 @@ if ("serviceWorker" in navigator && location.protocol === "https:") {
 select(location.hash.slice(1));
 window.addEventListener("hashchange", () => select(location.hash.slice(1)));
 </script>
+<!-- AI smart fill for the open card (smartfill/README.md) -->
+<script src="smartfill/card-smartfill.js" data-start="min"></script>
 </body>
 </html>

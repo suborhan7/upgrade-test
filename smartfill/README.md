@@ -20,11 +20,16 @@ text it can see; that text appears in the box so you can check it, and the same 
 
 ## Use it
 
+In **eFCB studio** it is built in: the **✨ Smart fill** button sits at the bottom right of the studio page.
+Click it, paste your free key once (https://aistudio.google.com/apikey), then paste the match info or a screenshot.
+
+On any other studio (like efcob-studio), use the bookmark instead:
+
 1. Open `smartfill/dist/install.html` and drag the **✨ Smart fill** button to your bookmarks bar.
 2. Get a free key at https://aistudio.google.com/apikey.
 3. Open the studio, pick a card, click the bookmark, paste the key once.
 
-Or add one line to a studio page: `<script src="smartfill/card-smartfill.js"></script>`.
+To build it into another studio, add one line to its `index.html`: `<script src="smartfill/card-smartfill.js" data-start="min"></script>`.
 
 The key is kept only in your browser (localStorage, or this tab only if you untick "remember").
 **Forget key** removes it. It is never in this repo; please never commit it.
