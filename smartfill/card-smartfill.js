@@ -194,9 +194,10 @@
   /* ---------- panel ---------- */
 
   const CSS_TEXT = `
-#card-smartfill{position:fixed;right:16px;bottom:16px;z-index:2147483000;width:340px;max-width:calc(100vw - 32px);font:13px/1.4 system-ui,sans-serif;color:#e8ebf2;background:#1b2030;border:1px solid #333b52;border-radius:12px;box-shadow:0 10px 30px #0008}
-#card-smartfill.min{width:auto}
-#card-smartfill.min .csf-body,#card-smartfill.min header small{display:none}
+#card-smartfill{position:fixed;right:16px;bottom:96px;max-height:calc(100vh - 112px);overflow:auto;z-index:2147483000;width:340px;max-width:calc(100vw - 32px);font:13px/1.4 system-ui,sans-serif;color:#e8ebf2;background:#1b2030;border:1px solid #333b52;border-radius:12px;box-shadow:0 10px 30px #0008}
+#card-smartfill.min{width:auto;background:#22c55e;border-color:#22c55e;color:#06210f;border-radius:999px;box-shadow:0 6px 20px #22c55e66}
+#card-smartfill.min header{padding:12px 18px;font-size:15px}
+#card-smartfill.min .csf-body,#card-smartfill.min header small,#card-smartfill.min [data-x]{display:none}
 #card-smartfill header{display:flex;align-items:center;gap:8px;padding:10px 12px;cursor:pointer;font-weight:600}
 #card-smartfill header span{flex:1}
 #card-smartfill .csf-body{padding:0 12px 12px;display:grid;gap:8px}
@@ -221,7 +222,7 @@
     const box = document.createElement('div');
     box.id = 'card-smartfill';
     box.innerHTML = `
-      <header><span>✨ Smart fill</span><small>Gemini</small><button type="button" data-x title="Close">✕</button></header>
+      <header><span>✨ Smart fill</span><small>Gemini</small><button type="button" data-x title="Hide">–</button></header>
       <div class="csf-body">
         <div data-keyrow class="row">
           <input type="password" data-key placeholder="Gemini API key (aistudio.google.com)" autocomplete="off">
@@ -271,7 +272,7 @@
     });
 
     $('header').addEventListener('click', e => { if (!e.target.closest('[data-x]')) box.classList.toggle('min'); });
-    $('[data-x]').addEventListener('click', () => box.remove());
+    $('[data-x]').addEventListener('click', () => box.classList.add('min'));
     $('[data-forget]').addEventListener('click', () => {
       try { localStorage.removeItem(KEY_STORE); sessionStorage.removeItem(KEY_STORE); } catch {}
       keyIn.value = ''; showKeyRow(); say('<small>Key removed from this browser.</small>');
