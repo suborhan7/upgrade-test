@@ -73,6 +73,8 @@ Each maker also works on its own: open `tools/<name>/index.html` directly.
 **Smart fill (AI):** `smartfill/` holds an add-on that fills any card from a match report or an eFootball result
 screenshot with Gemini, and never invents teams or numbers. See `smartfill/README.md`.
 
+**Photo library:** `library/` holds the photo and logo library shared by all 13 cards. See `library/README.md`.
+
 ## Editing (every card)
 Every card loads `js/studio-edit.js` (the same file in each tool folder). Click any text block, panel or photo on the
 poster to select it, then:
@@ -97,6 +99,7 @@ default; then uploads own pictures into every file box, finger-drags on a phone-
 1. Put the new maker in `tools/<id>/` with its own `index.html`.
 2. In `index.html`, find `CARD_TYPES` and add one line:
    `{ id: "mvp", name: "MVP", src: "tools/mvp/index.html" },`
+3. In `library/photo-library.js`, find `SLOTS` and list the card's photo / logo inputs with their name boxes.
 
 ## Notes
 

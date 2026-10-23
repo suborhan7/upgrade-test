@@ -2,3 +2,4 @@ node_modules/
 smartfill/test/e2e-shot.png
 .env
 *.key
+library/test/out/
